@@ -1,0 +1,13 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "c:\\users\\jauma\\documents\\unreal projects\\mb_project\\intermediate\\build\\win64\\unrealeditor\\inc\\mb_project\\uht\\mb_project.init.gen.cpp",
+        "ProvidedModule": "",
+        "PCH": "c:\\users\\jauma\\documents\\unreal projects\\mb_project\\intermediate\\build\\win64\\x64\\mb_projecteditor\\development\\unrealed\\sharedpch.unrealed.project.valapi.cpp20.h.pch",
+        "Includes": [
+            "c:\\users\\jauma\\documents\\unreal projects\\mb_project\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\mb_project\\definitions.mb_project.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}
