@@ -1,8 +1,8 @@
 {
 	"SourceFiles": [
-		"C:\\Users\\jauma\\Documents\\Unreal Projects\\MB_Project\\Source\\MB_Project\\MB_Project.Build.cs",
-		"C:\\Users\\jauma\\Documents\\Unreal Projects\\MB_Project\\Source\\MB_Project.Target.cs",
-		"C:\\Users\\jauma\\Documents\\Unreal Projects\\MB_Project\\Source\\MB_ProjectEditor.Target.cs"
+		"C:\\Users\\jauma\\Documents\\GitHub\\MB_Project\\MB_Project\\Source\\MB_Project\\MB_Project.Build.cs",
+		"C:\\Users\\jauma\\Documents\\GitHub\\MB_Project\\MB_Project\\Source\\MB_Project.Target.cs",
+		"C:\\Users\\jauma\\Documents\\GitHub\\MB_Project\\MB_Project\\Source\\MB_ProjectEditor.Target.cs"
 	],
 	"EngineVersion": "5.5.1"
 }
