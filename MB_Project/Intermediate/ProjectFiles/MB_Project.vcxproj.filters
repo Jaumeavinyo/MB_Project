@@ -11,6 +11,7 @@
     <None Include="..\..\Source\MB_ProjectEditor.Target.cs">
       <Filter>Source</Filter>
     </None>
+    <None Include="..\..\.vsconfig" />
     <Filter Include="Config">
       <UniqueIdentifier>{FA535FFB-25E1-3D20-B416-52F9BE21E06E}</UniqueIdentifier>
     </Filter>
@@ -51,6 +52,12 @@
       <Filter>Source\MB_Project</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\MB_Project\MB_ProjectGameMode.h">
+      <Filter>Source\MB_Project</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\MB_Project\Metal.cpp">
+      <Filter>Source\MB_Project</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\MB_Project\Metal.h">
       <Filter>Source\MB_Project</Filter>
     </ClCompile>
   </ItemGroup>

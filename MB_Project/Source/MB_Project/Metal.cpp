@@ -1,0 +1,41 @@
+// Fill out your copyright notice in the Description page of Project Settings.
+
+
+#include "Metal.h"
+
+// Sets default values
+AMetal::AMetal()
+{
+ 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	PrimaryActorTick.bCanEverTick = true;
+
+
+	UStaticMeshComponent* MeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Metal Static Mesh component"));
+	RootComponent = MeshComponent;
+
+	if (StaticMesh) {
+		MeshComponent->SetStaticMesh(StaticMesh);
+	}
+	
+	
+}
+
+// Called when the game starts or when spawned
+void AMetal::BeginPlay()
+{
+	Super::BeginPlay();
+	
+}
+
+// Called every frame
+void AMetal::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+
+}
+
+void AMetal::ChangeMaterial(UMaterialInstanceDynamic* mat)
+{
+	usedMaterial = mat;
+}
+
