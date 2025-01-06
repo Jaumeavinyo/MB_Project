@@ -9,7 +9,7 @@
 #include "UObject/ScriptMacros.h"
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
-class UMaterialInstanceDynamic;
+class UMaterialInterface;
 #ifdef MB_PROJECT_Metal_generated_h
 #error "Metal.generated.h already included, missing '#pragma once' in Metal.h"
 #endif

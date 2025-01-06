@@ -10,8 +10,8 @@ UCLASS()
 class MB_PROJECT_API AMetal : public AActor
 {
 	GENERATED_BODY()
-	
-public:	
+
+public:
 	// Sets default values for this actor's properties
 	AMetal();
 
@@ -19,13 +19,16 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:	
+public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 public:
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Mesh")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Mesh", meta = (DisplayThumbnail = "true"))
 	UStaticMesh* StaticMesh;
+
+	UPROPERTY(BlueprintReadOnly, Category = "Mesh")
+	UStaticMeshComponent* MeshComponent;
 
 	// MATERIAL #############
 
@@ -34,15 +37,15 @@ public:
 	UMaterial* DefaultMaterial;
 
 	//Used if it is defined
-	UPROPERTY(EditInstanceOnly, BlueprintReadOnly, Category = "Material")
+	UPROPERTY(EditInstanceOnly, BlueprintReadOnly, Category = "Material", meta = (DisplayThumbnail = "true"))
 	UMaterialInstance* InstanceMaterial;
 
 	//Used for temporary materials, use "Blueprint callable ChangeMaterial(Umaterial mat);" to define and use this material.
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Material")
-	UMaterialInstanceDynamic* usedMaterial;
+	UPROPERTY(BlueprintReadOnly,Category = "Material")
+	UMaterialInterface* CurrentMeshMaterial;
 
 	UFUNCTION(BlueprintCallable, Category = "Material")
-	void ChangeMaterial(UMaterialInstanceDynamic* mat);
+	void ChangeMaterial(UMaterialInterface* mat);
 
 	UFUNCTION(BlueprintCallable, Category = "Material")
 	void ResetMaterial();

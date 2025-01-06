@@ -1,0 +1,13 @@
+{
+	"version": 1,
+	"changelists": [
+		{
+			"guid": "00000000000000000000000000000000",
+			"description": "Default Uncontrolled Changelist",
+			"files": [
+				"C:/Users/jauma/Documents/GitHub/MB_Project/MB_Project/Content/ThirdPerson/Blueprints/BP_Metal.uasset",
+				"C:/Users/jauma/Documents/GitHub/MB_Project/MB_Project/Content/__ExternalActors__/ThirdPerson/Maps/ThirdPersonMap/6/JY/I2KI2A6ITO7DFNQSEI5TG5.uasset"
+			]
+		}
+	]
+}

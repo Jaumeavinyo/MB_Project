@@ -13,8 +13,9 @@ void EmptyLinkFunctionForGeneratedCodeMetal() {}
 ENGINE_API UClass* Z_Construct_UClass_AActor();
 ENGINE_API UClass* Z_Construct_UClass_UMaterial_NoRegister();
 ENGINE_API UClass* Z_Construct_UClass_UMaterialInstance_NoRegister();
-ENGINE_API UClass* Z_Construct_UClass_UMaterialInstanceDynamic_NoRegister();
+ENGINE_API UClass* Z_Construct_UClass_UMaterialInterface_NoRegister();
 ENGINE_API UClass* Z_Construct_UClass_UStaticMesh_NoRegister();
+ENGINE_API UClass* Z_Construct_UClass_UStaticMeshComponent_NoRegister();
 MB_PROJECT_API UClass* Z_Construct_UClass_AMetal();
 MB_PROJECT_API UClass* Z_Construct_UClass_AMetal_NoRegister();
 UPackage* Z_Construct_UPackage__Script_MB_Project();
@@ -25,7 +26,7 @@ struct Z_Construct_UFunction_AMetal_ChangeMaterial_Statics
 {
 	struct Metal_eventChangeMaterial_Parms
 	{
-		UMaterialInstanceDynamic* mat;
+		UMaterialInterface* mat;
 	};
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
@@ -37,7 +38,7 @@ struct Z_Construct_UFunction_AMetal_ChangeMaterial_Statics
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static const UECodeGen_Private::FFunctionParams FuncParams;
 };
-const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_AMetal_ChangeMaterial_Statics::NewProp_mat = { "mat", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(Metal_eventChangeMaterial_Parms, mat), Z_Construct_UClass_UMaterialInstanceDynamic_NoRegister, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_AMetal_ChangeMaterial_Statics::NewProp_mat = { "mat", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(Metal_eventChangeMaterial_Parms, mat), Z_Construct_UClass_UMaterialInterface_NoRegister, METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AMetal_ChangeMaterial_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AMetal_ChangeMaterial_Statics::NewProp_mat,
 };
@@ -55,7 +56,7 @@ UFunction* Z_Construct_UFunction_AMetal_ChangeMaterial()
 }
 DEFINE_FUNCTION(AMetal::execChangeMaterial)
 {
-	P_GET_OBJECT(UMaterialInstanceDynamic,Z_Param_mat);
+	P_GET_OBJECT(UMaterialInterface,Z_Param_mat);
 	P_FINISH;
 	P_NATIVE_BEGIN;
 	P_THIS->ChangeMaterial(Z_Param_mat);
@@ -117,6 +118,12 @@ struct Z_Construct_UClass_AMetal_Statics
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_StaticMesh_MetaData[] = {
 		{ "Category", "Mesh" },
+		{ "DisplayThumbnail", "true" },
+		{ "ModuleRelativePath", "Metal.h" },
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_MeshComponent_MetaData[] = {
+		{ "Category", "Mesh" },
+		{ "EditInline", "true" },
 		{ "ModuleRelativePath", "Metal.h" },
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_DefaultMaterial_MetaData[] = {
@@ -134,12 +141,13 @@ struct Z_Construct_UClass_AMetal_Statics
 #if !UE_BUILD_SHIPPING
 		{ "Comment", "//Used if it is defined\n" },
 #endif
+		{ "DisplayThumbnail", "true" },
 		{ "ModuleRelativePath", "Metal.h" },
 #if !UE_BUILD_SHIPPING
 		{ "ToolTip", "Used if it is defined" },
 #endif
 	};
-	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_usedMaterial_MetaData[] = {
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_CurrentMeshMaterial_MetaData[] = {
 		{ "Category", "Material" },
 #if !UE_BUILD_SHIPPING
 		{ "Comment", "//Used for temporary materials, use \"Blueprint callable ChangeMaterial(Umaterial mat);\" to define and use this material.\n" },
@@ -151,13 +159,14 @@ struct Z_Construct_UClass_AMetal_Statics
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_StaticMesh;
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_MeshComponent;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_DefaultMaterial;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_InstanceMaterial;
-	static const UECodeGen_Private::FObjectPropertyParams NewProp_usedMaterial;
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_CurrentMeshMaterial;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
-		{ &Z_Construct_UFunction_AMetal_ChangeMaterial, "ChangeMaterial" }, // 3877976159
+		{ &Z_Construct_UFunction_AMetal_ChangeMaterial, "ChangeMaterial" }, // 3124520418
 		{ &Z_Construct_UFunction_AMetal_ResetMaterial, "ResetMaterial" }, // 3443863605
 	};
 	static_assert(UE_ARRAY_COUNT(FuncInfo) < 2048);
@@ -166,15 +175,17 @@ struct Z_Construct_UClass_AMetal_Statics
 	};
 	static const UECodeGen_Private::FClassParams ClassParams;
 };
-const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AMetal_Statics::NewProp_StaticMesh = { "StaticMesh", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AMetal, StaticMesh), Z_Construct_UClass_UStaticMesh_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_StaticMesh_MetaData), NewProp_StaticMesh_MetaData) };
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AMetal_Statics::NewProp_StaticMesh = { "StaticMesh", nullptr, (EPropertyFlags)0x0010000000010005, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AMetal, StaticMesh), Z_Construct_UClass_UStaticMesh_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_StaticMesh_MetaData), NewProp_StaticMesh_MetaData) };
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AMetal_Statics::NewProp_MeshComponent = { "MeshComponent", nullptr, (EPropertyFlags)0x001000000008001c, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AMetal, MeshComponent), Z_Construct_UClass_UStaticMeshComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_MeshComponent_MetaData), NewProp_MeshComponent_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AMetal_Statics::NewProp_DefaultMaterial = { "DefaultMaterial", nullptr, (EPropertyFlags)0x0010000000010015, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AMetal, DefaultMaterial), Z_Construct_UClass_UMaterial_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_DefaultMaterial_MetaData), NewProp_DefaultMaterial_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AMetal_Statics::NewProp_InstanceMaterial = { "InstanceMaterial", nullptr, (EPropertyFlags)0x0010000000000815, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AMetal, InstanceMaterial), Z_Construct_UClass_UMaterialInstance_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_InstanceMaterial_MetaData), NewProp_InstanceMaterial_MetaData) };
-const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AMetal_Statics::NewProp_usedMaterial = { "usedMaterial", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AMetal, usedMaterial), Z_Construct_UClass_UMaterialInstanceDynamic_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_usedMaterial_MetaData), NewProp_usedMaterial_MetaData) };
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AMetal_Statics::NewProp_CurrentMeshMaterial = { "CurrentMeshMaterial", nullptr, (EPropertyFlags)0x0010000000000014, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AMetal, CurrentMeshMaterial), Z_Construct_UClass_UMaterialInterface_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_CurrentMeshMaterial_MetaData), NewProp_CurrentMeshMaterial_MetaData) };
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AMetal_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMetal_Statics::NewProp_StaticMesh,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMetal_Statics::NewProp_MeshComponent,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMetal_Statics::NewProp_DefaultMaterial,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMetal_Statics::NewProp_InstanceMaterial,
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMetal_Statics::NewProp_usedMaterial,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMetal_Statics::NewProp_CurrentMeshMaterial,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_AMetal_Statics::PropPointers) < 2048);
 UObject* (*const Z_Construct_UClass_AMetal_Statics::DependentSingletons[])() = {
@@ -217,10 +228,10 @@ AMetal::~AMetal() {}
 struct Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MB_Project_MB_Project_Source_MB_Project_Metal_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_AMetal, AMetal::StaticClass, TEXT("AMetal"), &Z_Registration_Info_UClass_AMetal, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AMetal), 767386407U) },
+		{ Z_Construct_UClass_AMetal, AMetal::StaticClass, TEXT("AMetal"), &Z_Registration_Info_UClass_AMetal, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AMetal), 1117593388U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MB_Project_MB_Project_Source_MB_Project_Metal_h_212993117(TEXT("/Script/MB_Project"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MB_Project_MB_Project_Source_MB_Project_Metal_h_795477551(TEXT("/Script/MB_Project"),
 	Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MB_Project_MB_Project_Source_MB_Project_Metal_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MB_Project_MB_Project_Source_MB_Project_Metal_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

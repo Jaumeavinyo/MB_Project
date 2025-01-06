@@ -10,20 +10,31 @@ AMetal::AMetal()
 	PrimaryActorTick.bCanEverTick = true;
 
 
-	UStaticMeshComponent* MeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Metal Static Mesh component"));
+	MeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Metal Static Mesh component"));
 	RootComponent = MeshComponent;
-
-	if (StaticMesh) {
-		MeshComponent->SetStaticMesh(StaticMesh);
+	
+	if (InstanceMaterial && InstanceMaterial->IsValidLowLevel()) {
+		CurrentMeshMaterial = InstanceMaterial;
 	}
-	
-	
+	else if(DefaultMaterial && DefaultMaterial->IsValidLowLevel()) {
+		CurrentMeshMaterial = DefaultMaterial;
+	}
+	else {
+		UE_LOG(LogTemp, Error, TEXT(" Metal class constructor failed to assign 'CurrentMeshMaterial', InstanceMaterial and DefaultMaterial where nullptr"));
+	}
+
+
+
 }
 
 // Called when the game starts or when spawned
 void AMetal::BeginPlay()
 {
 	Super::BeginPlay();
+
+	if (StaticMesh) {
+		MeshComponent->SetStaticMesh(StaticMesh);
+	}
 	
 }
 
@@ -34,8 +45,18 @@ void AMetal::Tick(float DeltaTime)
 
 }
 
-void AMetal::ChangeMaterial(UMaterialInstanceDynamic* mat)
+void AMetal::ChangeMaterial(UMaterialInterface* mat)
 {
-	usedMaterial = mat;
+	CurrentMeshMaterial = mat;
+}
+
+void AMetal::ResetMaterial()
+{
+	if (InstanceMaterial) {
+		CurrentMeshMaterial = InstanceMaterial;
+	}
+	else if (DefaultMaterial) {
+		CurrentMeshMaterial = DefaultMaterial;
+	}
 }
 
