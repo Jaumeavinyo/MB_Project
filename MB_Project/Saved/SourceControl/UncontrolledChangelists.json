@@ -6,7 +6,9 @@
 			"description": "Default Uncontrolled Changelist",
 			"files": [
 				"C:/Users/jauma/Documents/GitHub/MB_Project/MB_Project/Content/ThirdPerson/Blueprints/BP_Metal.uasset",
-				"C:/Users/jauma/Documents/GitHub/MB_Project/MB_Project/Content/__ExternalActors__/ThirdPerson/Maps/ThirdPersonMap/6/JY/I2KI2A6ITO7DFNQSEI5TG5.uasset"
+				"C:/Users/jauma/Documents/GitHub/MB_Project/MB_Project/Content/__ExternalActors__/ThirdPerson/Maps/ThirdPersonMap/6/JY/I2KI2A6ITO7DFNQSEI5TG5.uasset",
+				"C:/Users/jauma/Documents/GitHub/MB_Project/MB_Project/Content/GameAssets/Materials/TestMaterial.uasset",
+				"C:/Users/jauma/Documents/GitHub/MB_Project/MB_Project/Content/__ExternalActors__/ThirdPerson/Maps/ThirdPersonMap/8/L1/46MVFLUH6Q3D14RHHWRYWF.uasset"
 			]
 		}
 	]

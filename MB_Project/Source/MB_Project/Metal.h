@@ -15,6 +15,8 @@ public:
 	// Sets default values for this actor's properties
 	AMetal();
 
+	virtual void OnConstruction(const FTransform& Transform) override;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -24,25 +26,32 @@ public:
 	virtual void Tick(float DeltaTime) override;
 public:
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Mesh", meta = (DisplayThumbnail = "true"))
-	UStaticMesh* StaticMesh;
+	// MESH		#############
 
-	UPROPERTY(BlueprintReadOnly, Category = "Mesh")
-	UStaticMeshComponent* MeshComponent;
+	//variables .............
 
-	// MATERIAL #############
+	UPROPERTY(VisibleAnywhere, Category = "Mesh")
+	UStaticMeshComponent* StaticMeshComponent;
+
+
+
+	// MATERIALS #############
+
+	// variables .............
 
 	//Always needs to be defined, if needed will be used, if not, instance or dinamic material will be used.
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Material")
 	UMaterial* DefaultMaterial;
 
 	//Used if it is defined
-	UPROPERTY(EditInstanceOnly, BlueprintReadOnly, Category = "Material", meta = (DisplayThumbnail = "true"))
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Material", meta = (DisplayThumbnail = "true"))
 	UMaterialInstance* InstanceMaterial;
 
 	//Used for temporary materials, use "Blueprint callable ChangeMaterial(Umaterial mat);" to define and use this material.
 	UPROPERTY(BlueprintReadOnly,Category = "Material")
 	UMaterialInterface* CurrentMeshMaterial;
+
+	//functions .............
 
 	UFUNCTION(BlueprintCallable, Category = "Material")
 	void ChangeMaterial(UMaterialInterface* mat);

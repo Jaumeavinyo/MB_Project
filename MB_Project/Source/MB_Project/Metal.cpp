@@ -10,21 +10,29 @@ AMetal::AMetal()
 	PrimaryActorTick.bCanEverTick = true;
 
 
-	MeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Metal Static Mesh component"));
-	RootComponent = MeshComponent;
-	
-	if (InstanceMaterial && InstanceMaterial->IsValidLowLevel()) {
-		CurrentMeshMaterial = InstanceMaterial;
+	StaticMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Static Mesh component"));
+
+	if (StaticMeshComponent) {
+		RootComponent = StaticMeshComponent;
 	}
-	else if(DefaultMaterial && DefaultMaterial->IsValidLowLevel()) {
-		CurrentMeshMaterial = DefaultMaterial;
+}
+//Called when editing class in UE editor
+void AMetal::OnConstruction(const FTransform& Transform)
+{
+
+	UMaterialInterface* MaterialToApply = nullptr;
+	if (InstanceMaterial && InstanceMaterial->IsValidLowLevel()) {
+		MaterialToApply = InstanceMaterial;
+	}
+	else if (DefaultMaterial && DefaultMaterial->IsValidLowLevel()) {
+		MaterialToApply = DefaultMaterial;
 	}
 	else {
 		UE_LOG(LogTemp, Error, TEXT(" Metal class constructor failed to assign 'CurrentMeshMaterial', InstanceMaterial and DefaultMaterial where nullptr"));
 	}
 
-
-
+	StaticMeshComponent->SetMaterial(0, MaterialToApply);
+	CurrentMeshMaterial = MaterialToApply;
 }
 
 // Called when the game starts or when spawned
@@ -32,9 +40,7 @@ void AMetal::BeginPlay()
 {
 	Super::BeginPlay();
 
-	if (StaticMesh) {
-		MeshComponent->SetStaticMesh(StaticMesh);
-	}
+	
 	
 }
 
@@ -47,7 +53,14 @@ void AMetal::Tick(float DeltaTime)
 
 void AMetal::ChangeMaterial(UMaterialInterface* mat)
 {
-	CurrentMeshMaterial = mat;
+	if (mat && mat->IsValidLowLevel()) {
+		CurrentMeshMaterial = mat;
+		StaticMeshComponent->SetMaterial(0,CurrentMeshMaterial);
+	}
+	else {
+		UE_LOG(LogTemp, Error, TEXT(" ChangeMaterial() function from Metal class failed to assign new material because function argument of type UMaterialInterface* is nullptr or non-valid."));
+	}
+	
 }
 
 void AMetal::ResetMaterial()
@@ -58,5 +71,17 @@ void AMetal::ResetMaterial()
 	else if (DefaultMaterial) {
 		CurrentMeshMaterial = DefaultMaterial;
 	}
+	else {
+		UE_LOG(LogTemp, Error, TEXT(" ResetMaterial() from Metal class  failed to assign 'CurrentMeshMaterial' to a default value because InstanceMaterial and DefaultMaterial where nullptr"));
+	}
+
+	if (CurrentMeshMaterial && CurrentMeshMaterial->IsValidLowLevel()) {
+		StaticMeshComponent->SetMaterial(0, CurrentMeshMaterial);
+	}
+	else {
+		UE_LOG(LogTemp, Error, TEXT(" ResetMaterial() from Metal class failed to assign 'CurrentMeshMaterial' to the static mesh because CurrentMeshMaterial is nullptr"));
+	}
+
+
 }
 
