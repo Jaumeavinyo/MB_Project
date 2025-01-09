@@ -10,6 +10,8 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "InputActionValue.h"
+#include "Kismet/GameplayStatics.h"
+#include "Metal.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
@@ -126,4 +128,26 @@ void AMB_ProjectCharacter::Look(const FInputActionValue& Value)
 		AddControllerYawInput(LookAxisVector.X);
 		AddControllerPitchInput(LookAxisVector.Y);
 	}
+}
+
+
+////////////////////////////////////////////////////////////////////////
+// Gameplay
+
+
+TArray<AMetal*> AMB_ProjectCharacter::GetSceneMetals()
+{
+	TArray<AMetal*> SceneMetals_;
+
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), AMetal::StaticClass(), reinterpret_cast<TArray<AActor*>&>(SceneMetals_));
+	return SceneMetals_;
+}
+
+void AMB_ProjectCharacter::SortMetals() {
+	
+	if (SceneMetals.Num() == 0) {
+		SceneMetals = GetSceneMetals();
+	}
+
+
 }

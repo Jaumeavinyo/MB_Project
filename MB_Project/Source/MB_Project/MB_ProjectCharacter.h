@@ -13,6 +13,8 @@ class UInputMappingContext;
 class UInputAction;
 struct FInputActionValue;
 
+class AMetal;
+
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
 
 UCLASS(config=Game)
@@ -68,5 +70,18 @@ public:
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 	/** Returns FollowCamera subobject **/
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
+
+
+public:
+	//GAMEPLAY VARS AND CODE
+
+	UPROPERTY(BlueprintReadOnly, Category = "Allomancy")
+	TArray<AMetal*> SceneMetals;
+
+	UFUNCTION(BlueprintCallable, Category = "Allomancy")
+	TArray<AMetal*> GetSceneMetals();
+
+	UFUNCTION(BlueprintCallable, Category = "Gameplay Logic")
+	void SortMetals();
 };
 

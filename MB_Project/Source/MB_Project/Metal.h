@@ -6,6 +6,7 @@
 #include "GameFramework/Actor.h"
 #include "Metal.generated.h"
 
+
 UCLASS()
 class MB_PROJECT_API AMetal : public AActor
 {
@@ -34,7 +35,6 @@ public:
 	UStaticMeshComponent* StaticMeshComponent;
 
 
-
 	// MATERIALS #############
 
 	// variables .............
@@ -58,5 +58,18 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Material")
 	void ResetMaterial();
+
+
+	// GAMEPLAY #############
+
+	// variables
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Gameplay", meta = (Tooltip = "A static metal won't move when affected by abilities."))
+	bool StaticMetal;
+
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Gameplay", meta = (EditCondition = "!StaticMetal", Tooltip = "Player weight is equal to 1. A value of 0.5 is half the player weight, this will affect gameplay habilities"))
+	float MetalWeight;
+
 
 };
