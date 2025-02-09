@@ -1,12 +1,12 @@
-"C:\Users\jauma\Documents\Unreal Projects\MB_Project\Source\MB_Project\MB_ProjectGameMode.cpp"
-/FI"C:\Users\jauma\Documents\Unreal Projects\MB_Project\Intermediate\Build\Win64\x64\MB_ProjectEditor\Development\UnrealEd\SharedPCH.UnrealEd.Project.ValApi.Cpp20.h"
-/FI"C:\Users\jauma\Documents\Unreal Projects\MB_Project\Intermediate\Build\Win64\x64\UnrealEditor\Development\MB_Project\Definitions.MB_Project.h"
-/Yu"C:\Users\jauma\Documents\Unreal Projects\MB_Project\Intermediate\Build\Win64\x64\MB_ProjectEditor\Development\UnrealEd\SharedPCH.UnrealEd.Project.ValApi.Cpp20.h"
-/Fp"C:\Users\jauma\Documents\Unreal Projects\MB_Project\Intermediate\Build\Win64\x64\MB_ProjectEditor\Development\UnrealEd\SharedPCH.UnrealEd.Project.ValApi.Cpp20.h.pch"
-/Fo"C:\Users\jauma\Documents\Unreal Projects\MB_Project\Intermediate\Build\Win64\x64\UnrealEditor\Development\MB_Project\MB_ProjectGameMode.cpp.obj"
-/experimental:log "C:\Users\jauma\Documents\Unreal Projects\MB_Project\Intermediate\Build\Win64\x64\UnrealEditor\Development\MB_Project\MB_ProjectGameMode.cpp.sarif"
-/sourceDependencies "C:\Users\jauma\Documents\Unreal Projects\MB_Project\Intermediate\Build\Win64\x64\UnrealEditor\Development\MB_Project\MB_ProjectGameMode.cpp.dep.json"
-@"C:\Users\jauma\Documents\Unreal Projects\MB_Project\Intermediate\Build\Win64\x64\UnrealEditor\Development\MB_Project\MB_Project.Shared.rsp"
+"C:\Users\jauma\Documents\GitHub\MB_Project\MB_Project\Source\MB_Project\MB_ProjectGameMode.cpp"
+/FI"C:\Users\jauma\Documents\GitHub\MB_Project\MB_Project\Intermediate\Build\Win64\x64\MB_ProjectEditor\Development\UnrealEd\SharedPCH.UnrealEd.Project.ValApi.Cpp20.h"
+/FI"C:\Users\jauma\Documents\GitHub\MB_Project\MB_Project\Intermediate\Build\Win64\x64\UnrealEditor\Development\MB_Project\Definitions.MB_Project.h"
+/Yu"C:\Users\jauma\Documents\GitHub\MB_Project\MB_Project\Intermediate\Build\Win64\x64\MB_ProjectEditor\Development\UnrealEd\SharedPCH.UnrealEd.Project.ValApi.Cpp20.h"
+/Fp"C:\Users\jauma\Documents\GitHub\MB_Project\MB_Project\Intermediate\Build\Win64\x64\MB_ProjectEditor\Development\UnrealEd\SharedPCH.UnrealEd.Project.ValApi.Cpp20.h.pch"
+/Fo"C:\Users\jauma\Documents\GitHub\MB_Project\MB_Project\Intermediate\Build\Win64\x64\UnrealEditor\Development\MB_Project\MB_ProjectGameMode.cpp.obj"
+/experimental:log "C:\Users\jauma\Documents\GitHub\MB_Project\MB_Project\Intermediate\Build\Win64\x64\UnrealEditor\Development\MB_Project\MB_ProjectGameMode.cpp.sarif"
+/sourceDependencies "C:\Users\jauma\Documents\GitHub\MB_Project\MB_Project\Intermediate\Build\Win64\x64\UnrealEditor\Development\MB_Project\MB_ProjectGameMode.cpp.dep.json"
+@"C:\Users\jauma\Documents\GitHub\MB_Project\MB_Project\Intermediate\Build\Win64\x64\UnrealEditor\Development\MB_Project\MB_Project.Shared.rsp"
 /d2ssa-cfg-question-
 /Zc:inline
 /nologo
