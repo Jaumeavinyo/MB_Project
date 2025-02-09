@@ -33,6 +33,12 @@
     <Filter Include="Source\MB_Project">
       <UniqueIdentifier>{25C55C5B-7A78-3239-AC81-02BC20B124C5}</UniqueIdentifier>
     </Filter>
+    <ClCompile Include="..\..\Source\MB_Project\AllomancyComponent.cpp">
+      <Filter>Source\MB_Project</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\MB_Project\AllomancyComponent.h">
+      <Filter>Source\MB_Project</Filter>
+    </ClCompile>
     <None Include="..\..\Source\MB_Project\MB_Project.Build.cs">
       <Filter>Source\MB_Project</Filter>
     </None>
@@ -58,6 +64,24 @@
       <Filter>Source\MB_Project</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\MB_Project\Metal.h">
+      <Filter>Source\MB_Project</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\MB_Project\Pewter.cpp">
+      <Filter>Source\MB_Project</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\MB_Project\Pewter.h">
+      <Filter>Source\MB_Project</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\MB_Project\UAllomanticAbility.cpp">
+      <Filter>Source\MB_Project</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\MB_Project\UAllomanticAbility.h">
+      <Filter>Source\MB_Project</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\MB_Project\UAllomanticMetal.cpp">
+      <Filter>Source\MB_Project</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\MB_Project\UAllomanticMetal.h">
       <Filter>Source\MB_Project</Filter>
     </ClCompile>
   </ItemGroup>
