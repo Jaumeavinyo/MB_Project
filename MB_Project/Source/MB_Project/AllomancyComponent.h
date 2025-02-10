@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
 #include "UAllomanticAbility.h"
+#include "UAllomanticMetal.h"
 #include "AllomancyComponent.generated.h"
 
 
@@ -35,11 +36,12 @@ protected:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Allomancy")
 	TMap<FString, UAllomanticAbility*> ActiveAbilities;
 	
-	TMap<TSubclassOf<TObjectPtr<UAllomanticMetal>>, int32> AllomanticMetals;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Allomancy")
+	TMap<UAllomanticMetal*, int32> AllomanticMetals;
 
 public:
 	UFUNCTION(BlueprintCallable,Category = "Allomancy")
 	void consumeAllomanticMetal(UAllomanticMetal *metal,int32 ammount, UEdGraph *consumptionGraph);
 
-	
+	void changeAllomanticMetalValue(UAllomanticMetal *metal, int32 ammount);
 };

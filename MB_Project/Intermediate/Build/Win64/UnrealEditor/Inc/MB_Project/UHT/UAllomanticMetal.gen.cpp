@@ -30,14 +30,8 @@ struct Z_Construct_UClass_UAllomanticMetal_Statics
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Class_MetaDataParams[] = {
 		{ "BlueprintType", "true" },
-#if !UE_BUILD_SHIPPING
-		{ "Comment", "//ALL ALLOMANTIC METALS THAT ACT AS MANA FOR HABILITIES HAVE THIS CLASS AS PARENT\n" },
-#endif
 		{ "IncludePath", "UAllomanticMetal.h" },
 		{ "ModuleRelativePath", "UAllomanticMetal.h" },
-#if !UE_BUILD_SHIPPING
-		{ "ToolTip", "ALL ALLOMANTIC METALS THAT ACT AS MANA FOR HABILITIES HAVE THIS CLASS AS PARENT" },
-#endif
 	};
 #endif // WITH_METADATA
 	static UObject* (*const DependentSingletons[])();
@@ -85,10 +79,10 @@ DEFINE_VTABLE_PTR_HELPER_CTOR(UAllomanticMetal);
 struct Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_UAllomanticMetal_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UAllomanticMetal, UAllomanticMetal::StaticClass, TEXT("UAllomanticMetal"), &Z_Registration_Info_UClass_UAllomanticMetal, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAllomanticMetal), 2749049995U) },
+		{ Z_Construct_UClass_UAllomanticMetal, UAllomanticMetal::StaticClass, TEXT("UAllomanticMetal"), &Z_Registration_Info_UClass_UAllomanticMetal, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAllomanticMetal), 3629714195U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_UAllomanticMetal_h_860641639(TEXT("/Script/MB_Project"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_UAllomanticMetal_h_232420252(TEXT("/Script/MB_Project"),
 	Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_UAllomanticMetal_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_UAllomanticMetal_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

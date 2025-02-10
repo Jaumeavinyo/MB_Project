@@ -5,8 +5,14 @@
 
 UAllomanticMetal::UAllomanticMetal()
 {
+	
 }
 
 UAllomanticMetal::~UAllomanticMetal()
 {
+}
+
+void UAllomanticMetal::Initialize(metalType type_)
+{
+	type = type_;
 }

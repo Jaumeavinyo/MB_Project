@@ -83,10 +83,10 @@ UPewter::~UPewter() {}
 struct Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_Pewter_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UPewter, UPewter::StaticClass, TEXT("UPewter"), &Z_Registration_Info_UClass_UPewter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UPewter), 1188842102U) },
+		{ Z_Construct_UClass_UPewter, UPewter::StaticClass, TEXT("UPewter"), &Z_Registration_Info_UClass_UPewter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UPewter), 1317865107U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_Pewter_h_3989863945(TEXT("/Script/MB_Project"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_Pewter_h_2060985961(TEXT("/Script/MB_Project"),
 	Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_Pewter_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_Pewter_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

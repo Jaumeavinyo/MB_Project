@@ -32,15 +32,31 @@ void UAllomancyComponent::TickComponent(float DeltaTime, ELevelTick TickType, FA
 	// ...
 }
 
-void UAllomancyComponent::consumeAllomanticMetal(UAllomanticMetal* metal, int32 ammount, UEdGraph* consumptionGraph)
+void UAllomancyComponent::consumeAllomanticMetal(UAllomanticMetal *metal, int32 ammount, UEdGraph* consumptionGraph)
 {
 	if (!metal || !consumptionGraph) {
 		UE_LOG(LogTemp,Warning, TEXT("metal or consumption graph in function: UAllomancyComponent::consumeAllomanticMetal are not valid"))
 	}
 
-
+//this should be called multiple times following the graph values
+	changeAllomanticMetalValue(metal, ammount);
 
 	
+
+}
+
+void UAllomancyComponent::changeAllomanticMetalValue(UAllomanticMetal *metal, int32 ammount)
+{
+	if (!metal) {
+		UE_LOG(LogTemp, Warning, TEXT("metal  in function: UAllomancyComponent::changeAllomanticMetalValue is not valid"))
+	}
+	else {
+		if (AllomanticMetals.Contains(metal))
+		{
+			AllomanticMetals[metal] += ammount; // Modify the amount
+			UE_LOG(LogTemp, Log, TEXT("Updated metal amount: %d"), AllomanticMetals[metal]);
+		}
+	}
 
 }
 
