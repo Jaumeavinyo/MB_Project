@@ -21,7 +21,7 @@ class MB_PROJECT_API UAllomancyComponent : public UActorComponent
 public:	
 	// Sets default values for this component's properties
 	UAllomancyComponent();
-
+	virtual void PostInitProperties() override;
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
@@ -36,12 +36,19 @@ protected:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Allomancy")
 	TMap<FString, UAllomanticAbility*> ActiveAbilities;
 	
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Allomancy")
+	UPROPERTY(EditAnywhere, Category = "Allomancy")
 	TMap<UAllomanticMetal*, int32> AllomanticMetals;
 
+	//Only for internal use, not for gameplay programming
+	void initAllomanticMetals();
+	//Only for internal use, not for gameplay programming
+	void changeAllomanticMetalValue(UAllomanticMetal* metal, int32 ammount);
+
 public:
+
+	//for blueprint calls, public use, gameplay programming
 	UFUNCTION(BlueprintCallable,Category = "Allomancy")
 	void consumeAllomanticMetal(UAllomanticMetal *metal,int32 ammount, UEdGraph *consumptionGraph);
 
-	void changeAllomanticMetalValue(UAllomanticMetal *metal, int32 ammount);
+	
 };

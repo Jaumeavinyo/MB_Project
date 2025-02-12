@@ -12,7 +12,7 @@ UAllomanticMetal::~UAllomanticMetal()
 {
 }
 
-void UAllomanticMetal::Initialize(metalType type_)
+void UAllomanticMetal::Initialize(EMetalType type_)
 {
 	type = type_;
 }

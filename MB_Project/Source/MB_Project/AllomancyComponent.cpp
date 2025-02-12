@@ -13,12 +13,21 @@ UAllomancyComponent::UAllomancyComponent()
 	// ...
 }
 
+void UAllomancyComponent::PostInitProperties()
+{
+	Super::PostInitProperties();
+
+	// Initialize metals when object is created in the editor
+	initAllomanticMetals();
+}
+
 
 // Called when the game starts
 void UAllomancyComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
+	
 	// ...
 	
 }
@@ -45,6 +54,25 @@ void UAllomancyComponent::consumeAllomanticMetal(UAllomanticMetal *metal, int32 
 
 }
 
+void UAllomancyComponent::initAllomanticMetals()
+{
+	AllomanticMetals.Empty();
+
+	UAllomanticMetal* PewterMetal = NewObject<UAllomanticMetal>(this);
+	PewterMetal->Initialize(EMetalType::PEWTER);
+	AllomanticMetals.Add(PewterMetal);
+
+	// Create and initialize Iron metal
+	UAllomanticMetal* IronMetal = NewObject<UAllomanticMetal>(this);
+	IronMetal->Initialize(EMetalType::IRON);
+	AllomanticMetals.Add(IronMetal);
+
+	// Create and initialize Steel metal
+	UAllomanticMetal* SteelMetal = NewObject<UAllomanticMetal>(this);
+	SteelMetal->Initialize(EMetalType::STEEL);
+	AllomanticMetals.Add(SteelMetal);
+}
+
 void UAllomancyComponent::changeAllomanticMetalValue(UAllomanticMetal *metal, int32 ammount)
 {
 	if (!metal) {
@@ -53,7 +81,7 @@ void UAllomancyComponent::changeAllomanticMetalValue(UAllomanticMetal *metal, in
 	else {
 		if (AllomanticMetals.Contains(metal))
 		{
-			AllomanticMetals[metal] += ammount; // Modify the amount
+			AllomanticMetals[metal] += ammount; 
 			UE_LOG(LogTemp, Log, TEXT("Updated metal amount: %d"), AllomanticMetals[metal]);
 		}
 	}

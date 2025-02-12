@@ -6,12 +6,13 @@
 #include "UAllomanticMetal.generated.h"
 //ALL ALLOMANTIC METALS THAT ACT AS MANA FOR HABILITIES HAVE THIS CLASS AS PARENT
 
-
-enum metalType {
-	NONE,
-	PEWTER,
-	IRON,
-	STEAL
+UENUM(BlueprintType)
+enum class EMetalType : uint8
+{
+	NONE   UMETA(DisplayName = "None"),
+	PEWTER UMETA(DisplayName = "Pewter"),
+	IRON   UMETA(DisplayName = "Iron"),
+	STEEL  UMETA(DisplayName = "Steel")
 };
 
 
@@ -24,10 +25,15 @@ public:
 	UAllomanticMetal();
 	~UAllomanticMetal();
 
-	void Initialize(metalType type_);
+	void Initialize(EMetalType type_);
 
 
 public:
-	metalType type;
+
+	UPROPERTY(EditAnywhere, Category = "AllomanticMetal")
+	EMetalType type;
+
+	UPROPERTY(BlueprintReadWrite, Category = "AllomanticMetal")
+	int32 metalReserves;
 
 };
