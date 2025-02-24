@@ -23,7 +23,7 @@ void UAllomancyComponent::PostInitProperties()
 
 void UAllomancyComponent::Initialize()
 {
-	MetalToBeConsumed = false;
+	bMetalToBeConsumed = false;
 }
 
 
@@ -73,31 +73,32 @@ void UAllomancyComponent::initAllomanticMetals()
 
 void UAllomancyComponent::processMetalConsumption(float DeltaTime)
 {
-	if (bIsConsumingMetal && ammountToBeConsumed > 0) {
+	//if (bIsConsumingMetal && ammountToBeConsumed > 0) {
 
-		TimeSinceLastConsumption += DeltaTime;
-		TimeSinceConsumptionCalled = FApp::GetCurrentTime() - TimeConsumptionStart;
-		//TimeSinceConsumptionStarted = tiempo actual menos tiempo cuando empezo a consumir
-		if (TimeSinceLastConsumption >= ConsumptionInterval) {
+	//	TimeSinceLastConsumption += DeltaTime;
+	//	TimeSinceConsumptionCalled = FApp::GetCurrentTime() - TimeConsumptionStart;
+	//	//TimeSinceConsumptionStarted = tiempo actual menos tiempo cuando empezo a consumir
+	//	if (TimeSinceLastConsumption >= ConsumptionInterval) {
 
-			int32 graphNumber = getGraphValue(currentConsumptionGraph, TimeSinceConsumptionCalled);
-			changeAllomanticMetalValue(selectedMetal, -graphNumber);
-			ammountToBeConsumed -= graphNumber;
+	//		int32 graphNumber = getGraphValue(currentConsumptionGraph, TimeSinceConsumptionCalled);
+	//		changeAllomanticMetalValue(selectedMetal, -graphNumber);
+	//		ammountToBeConsumed -= graphNumber;
 
-			TimeSinceLastConsumption = 0.0f;
-		}
-	}
+	//		TimeSinceLastConsumption = 0.0f;
+	//	}
+	//}
 
-	if (ammountToBeConsumed <= 0) {//posible bug de q en el grafico diga numeros de consumo actual en ese mom y no numeros de consumo en ese momento, que sea un sumatorio de lo anterior rompe esto
-		bIsConsumingMetal = false;
-		bMetalToBeConsumed = false;
-		TimeSinceConsumptionCalled = 0.0f;
-		//ammount to be consumed already being resseted ----------------------------------------------AQUI ME HE QUEDADO
-	}
+	//if (ammountToBeConsumed <= 0) {//posible bug de q en el grafico diga numeros de consumo actual en ese mom y no numeros de consumo en ese momento, que sea un sumatorio de lo anterior rompe esto
+	//	bIsConsumingMetal = false;
+	//	bMetalToBeConsumed = false;
+	//	TimeSinceConsumptionCalled = 0.0f;
+	//	//ammount to be consumed already being resseted ----------------------------------------------AQUI ME HE QUEDADO
+	//}
 }
 
 int32 getGraphValue(UEdGraph* currentConsumptionGraph,float TimeSinceConsumptionStarted) {
 	//time since consumption started is the time value to be used with the graph to get a number
+	return 0;
 }
 
 void UAllomancyComponent::consumeAllomanticMetal(UAllomanticMetal* metal, int32 ammount, UEdGraph* consumptionGraph)
@@ -137,14 +138,14 @@ void UAllomancyComponent::changeAllomanticMetalValue(UAllomanticMetal *metal, in
 
 
 UAllomanticMetal* UAllomancyComponent::getAllomanticMetal(EMetalType metalType_)
-{
+{/*
 	TArray<UAllomanticMetal*> array;
 	AllomanticMetals.GetKeys(array);
 	for (uint32 i = 0; i < array.Num(); i++) {
 		if (array[i] && array[i]->getMetalType() == metalType_) {
 			return array[i];
 		}
-	}
+	}*/
 
 	return nullptr;
 }
