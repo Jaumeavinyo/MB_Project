@@ -21,6 +21,11 @@ void UAllomancyComponent::PostInitProperties()
 	initAllomanticMetals();
 }
 
+void UAllomancyComponent::Initialize()
+{
+	MetalToBeConsumed = false;
+}
+
 
 // Called when the game starts
 void UAllomancyComponent::BeginPlay()
@@ -39,38 +44,80 @@ void UAllomancyComponent::TickComponent(float DeltaTime, ELevelTick TickType, FA
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	// ...
-}
 
-void UAllomancyComponent::consumeAllomanticMetal(UAllomanticMetal *metal, int32 ammount, UEdGraph* consumptionGraph)
-{
-	if (!metal || !consumptionGraph) {
-		UE_LOG(LogTemp,Warning, TEXT("metal or consumption graph in function: UAllomancyComponent::consumeAllomanticMetal are not valid"))
+
+	if (bMetalToBeConsumed) {
+		processMetalConsumption(DeltaTime);
 	}
-
-//this should be called multiple times following the graph values
-	changeAllomanticMetalValue(metal, ammount);
-
-	
-
 }
+
 
 void UAllomancyComponent::initAllomanticMetals()
 {
 	AllomanticMetals.Empty();
 
 	UAllomanticMetal* PewterMetal = NewObject<UAllomanticMetal>(this);
-	PewterMetal->Initialize(EMetalType::PEWTER);
+	PewterMetal->Initialize(EMetalType::PEWTER, 0);
 	AllomanticMetals.Add(PewterMetal);
 
 	// Create and initialize Iron metal
 	UAllomanticMetal* IronMetal = NewObject<UAllomanticMetal>(this);
-	IronMetal->Initialize(EMetalType::IRON);
+	IronMetal->Initialize(EMetalType::IRON, 0);
 	AllomanticMetals.Add(IronMetal);
 
 	// Create and initialize Steel metal
 	UAllomanticMetal* SteelMetal = NewObject<UAllomanticMetal>(this);
-	SteelMetal->Initialize(EMetalType::STEEL);
+	SteelMetal->Initialize(EMetalType::STEEL,0);
 	AllomanticMetals.Add(SteelMetal);
+}
+
+void UAllomancyComponent::processMetalConsumption(float DeltaTime)
+{
+	if (bIsConsumingMetal && ammountToBeConsumed > 0) {
+
+		TimeSinceLastConsumption += DeltaTime;
+		TimeSinceConsumptionCalled = FApp::GetCurrentTime() - TimeConsumptionStart;
+		//TimeSinceConsumptionStarted = tiempo actual menos tiempo cuando empezo a consumir
+		if (TimeSinceLastConsumption >= ConsumptionInterval) {
+
+			int32 graphNumber = getGraphValue(currentConsumptionGraph, TimeSinceConsumptionCalled);
+			changeAllomanticMetalValue(selectedMetal, -graphNumber);
+			ammountToBeConsumed -= graphNumber;
+
+			TimeSinceLastConsumption = 0.0f;
+		}
+	}
+
+	if (ammountToBeConsumed <= 0) {//posible bug de q en el grafico diga numeros de consumo actual en ese mom y no numeros de consumo en ese momento, que sea un sumatorio de lo anterior rompe esto
+		bIsConsumingMetal = false;
+		bMetalToBeConsumed = false;
+		TimeSinceConsumptionCalled = 0.0f;
+		//ammount to be consumed already being resseted ----------------------------------------------AQUI ME HE QUEDADO
+	}
+}
+
+int32 getGraphValue(UEdGraph* currentConsumptionGraph,float TimeSinceConsumptionStarted) {
+	//time since consumption started is the time value to be used with the graph to get a number
+}
+
+void UAllomancyComponent::consumeAllomanticMetal(UAllomanticMetal* metal, int32 ammount, UEdGraph* consumptionGraph)
+{
+	if (!metal || !consumptionGraph) {
+		UE_LOG(LogTemp, Warning, TEXT("metal or consumption graph in function: UAllomancyComponent::consumeAllomanticMetal are not valid"));
+		return;
+	}
+
+	if (AllomanticMetals.Contains(metal))
+	{
+		selectedMetal = metal;
+	}
+	//get consumption interval from graph?
+	bMetalToBeConsumed = true;
+	ammountToBeConsumed = ammount;
+	currentConsumptionGraph = consumptionGraph;
+	bIsConsumingMetal = true;
+	TimeConsumptionStart = FApp::GetCurrentTime();
+	
 }
 
 void UAllomancyComponent::changeAllomanticMetalValue(UAllomanticMetal *metal, int32 ammount)
@@ -87,6 +134,21 @@ void UAllomancyComponent::changeAllomanticMetalValue(UAllomanticMetal *metal, in
 	}
 
 }
+
+
+UAllomanticMetal* UAllomancyComponent::getAllomanticMetal(EMetalType metalType_)
+{
+	TArray<UAllomanticMetal*> array;
+	AllomanticMetals.GetKeys(array);
+	for (uint32 i = 0; i < array.Num(); i++) {
+		if (array[i] && array[i]->getMetalType() == metalType_) {
+			return array[i];
+		}
+	}
+
+	return nullptr;
+}
+
 
 
 

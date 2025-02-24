@@ -100,7 +100,7 @@ struct Z_Construct_UClass_UAllomanticMetal_Statics
 		{ "IncludePath", "UAllomanticMetal.h" },
 		{ "ModuleRelativePath", "UAllomanticMetal.h" },
 	};
-	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_type_MetaData[] = {
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_metalType_MetaData[] = {
 		{ "Category", "AllomanticMetal" },
 		{ "ModuleRelativePath", "UAllomanticMetal.h" },
 	};
@@ -109,8 +109,8 @@ struct Z_Construct_UClass_UAllomanticMetal_Statics
 		{ "ModuleRelativePath", "UAllomanticMetal.h" },
 	};
 #endif // WITH_METADATA
-	static const UECodeGen_Private::FBytePropertyParams NewProp_type_Underlying;
-	static const UECodeGen_Private::FEnumPropertyParams NewProp_type;
+	static const UECodeGen_Private::FBytePropertyParams NewProp_metalType_Underlying;
+	static const UECodeGen_Private::FEnumPropertyParams NewProp_metalType;
 	static const UECodeGen_Private::FIntPropertyParams NewProp_metalReserves;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
@@ -119,12 +119,12 @@ struct Z_Construct_UClass_UAllomanticMetal_Statics
 	};
 	static const UECodeGen_Private::FClassParams ClassParams;
 };
-const UECodeGen_Private::FBytePropertyParams Z_Construct_UClass_UAllomanticMetal_Statics::NewProp_type_Underlying = { "UnderlyingType", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, nullptr, METADATA_PARAMS(0, nullptr) };
-const UECodeGen_Private::FEnumPropertyParams Z_Construct_UClass_UAllomanticMetal_Statics::NewProp_type = { "type", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UAllomanticMetal, type), Z_Construct_UEnum_MB_Project_EMetalType, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_type_MetaData), NewProp_type_MetaData) }; // 2352039017
-const UECodeGen_Private::FIntPropertyParams Z_Construct_UClass_UAllomanticMetal_Statics::NewProp_metalReserves = { "metalReserves", nullptr, (EPropertyFlags)0x0010000000000004, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UAllomanticMetal, metalReserves), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_metalReserves_MetaData), NewProp_metalReserves_MetaData) };
+const UECodeGen_Private::FBytePropertyParams Z_Construct_UClass_UAllomanticMetal_Statics::NewProp_metalType_Underlying = { "UnderlyingType", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, nullptr, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FEnumPropertyParams Z_Construct_UClass_UAllomanticMetal_Statics::NewProp_metalType = { "metalType", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UAllomanticMetal, metalType), Z_Construct_UEnum_MB_Project_EMetalType, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_metalType_MetaData), NewProp_metalType_MetaData) }; // 2352039017
+const UECodeGen_Private::FIntPropertyParams Z_Construct_UClass_UAllomanticMetal_Statics::NewProp_metalReserves = { "metalReserves", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UAllomanticMetal, metalReserves), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_metalReserves_MetaData), NewProp_metalReserves_MetaData) };
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UAllomanticMetal_Statics::PropPointers[] = {
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAllomanticMetal_Statics::NewProp_type_Underlying,
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAllomanticMetal_Statics::NewProp_type,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAllomanticMetal_Statics::NewProp_metalType_Underlying,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAllomanticMetal_Statics::NewProp_metalType,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAllomanticMetal_Statics::NewProp_metalReserves,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_UAllomanticMetal_Statics::PropPointers) < 2048);
@@ -170,10 +170,10 @@ struct Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misbor
 		{ EMetalType_StaticEnum, TEXT("EMetalType"), &Z_Registration_Info_UEnum_EMetalType, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 2352039017U) },
 	};
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UAllomanticMetal, UAllomanticMetal::StaticClass, TEXT("UAllomanticMetal"), &Z_Registration_Info_UClass_UAllomanticMetal, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAllomanticMetal), 1863785276U) },
+		{ Z_Construct_UClass_UAllomanticMetal, UAllomanticMetal::StaticClass, TEXT("UAllomanticMetal"), &Z_Registration_Info_UClass_UAllomanticMetal, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAllomanticMetal), 3948252454U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_UAllomanticMetal_h_3966366056(TEXT("/Script/MB_Project"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_UAllomanticMetal_h_2347546878(TEXT("/Script/MB_Project"),
 	Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_UAllomanticMetal_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_UAllomanticMetal_h_Statics::ClassInfo),
 	nullptr, 0,
 	Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_UAllomanticMetal_h_Statics::EnumInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_UAllomanticMetal_h_Statics::EnumInfo));

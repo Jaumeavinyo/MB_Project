@@ -25,15 +25,19 @@ public:
 	UAllomanticMetal();
 	~UAllomanticMetal();
 
-	void Initialize(EMetalType type_);
+	void Initialize(EMetalType type_, int32 initialMetalReserves_);
 
 
 public:
 
 	UPROPERTY(EditAnywhere, Category = "AllomanticMetal")
-	EMetalType type;
+	EMetalType metalType;
 
-	UPROPERTY(BlueprintReadWrite, Category = "AllomanticMetal")
+	UPROPERTY(EditAnywhere, Category = "AllomanticMetal")
 	int32 metalReserves;
+
+public:
+
+	EMetalType getMetalType();
 
 };

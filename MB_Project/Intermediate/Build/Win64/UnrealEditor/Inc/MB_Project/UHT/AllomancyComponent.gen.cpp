@@ -16,6 +16,7 @@ MB_PROJECT_API UClass* Z_Construct_UClass_UAllomancyComponent();
 MB_PROJECT_API UClass* Z_Construct_UClass_UAllomancyComponent_NoRegister();
 MB_PROJECT_API UClass* Z_Construct_UClass_UAllomanticAbility_NoRegister();
 MB_PROJECT_API UClass* Z_Construct_UClass_UAllomanticMetal_NoRegister();
+MB_PROJECT_API UEnum* Z_Construct_UEnum_MB_Project_EMetalType();
 UPackage* Z_Construct_UPackage__Script_MB_Project();
 // End Cross Module References
 
@@ -78,12 +79,63 @@ DEFINE_FUNCTION(UAllomancyComponent::execconsumeAllomanticMetal)
 }
 // End Class UAllomancyComponent Function consumeAllomanticMetal
 
+// Begin Class UAllomancyComponent Function getAllomanticMetal
+struct Z_Construct_UFunction_UAllomancyComponent_getAllomanticMetal_Statics
+{
+	struct AllomancyComponent_eventgetAllomanticMetal_Parms
+	{
+		EMetalType metalType_;
+		UAllomanticMetal* ReturnValue;
+	};
+#if WITH_METADATA
+	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+		{ "Category", "Allomancy" },
+		{ "ModuleRelativePath", "AllomancyComponent.h" },
+	};
+#endif // WITH_METADATA
+	static const UECodeGen_Private::FBytePropertyParams NewProp_metalType__Underlying;
+	static const UECodeGen_Private::FEnumPropertyParams NewProp_metalType_;
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_ReturnValue;
+	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+	static const UECodeGen_Private::FFunctionParams FuncParams;
+};
+const UECodeGen_Private::FBytePropertyParams Z_Construct_UFunction_UAllomancyComponent_getAllomanticMetal_Statics::NewProp_metalType__Underlying = { "UnderlyingType", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, nullptr, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FEnumPropertyParams Z_Construct_UFunction_UAllomancyComponent_getAllomanticMetal_Statics::NewProp_metalType_ = { "metalType_", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AllomancyComponent_eventgetAllomanticMetal_Parms, metalType_), Z_Construct_UEnum_MB_Project_EMetalType, METADATA_PARAMS(0, nullptr) }; // 2352039017
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UAllomancyComponent_getAllomanticMetal_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AllomancyComponent_eventgetAllomanticMetal_Parms, ReturnValue), Z_Construct_UClass_UAllomanticMetal_NoRegister, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAllomancyComponent_getAllomanticMetal_Statics::PropPointers[] = {
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAllomancyComponent_getAllomanticMetal_Statics::NewProp_metalType__Underlying,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAllomancyComponent_getAllomanticMetal_Statics::NewProp_metalType_,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAllomancyComponent_getAllomanticMetal_Statics::NewProp_ReturnValue,
+};
+static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAllomancyComponent_getAllomanticMetal_Statics::PropPointers) < 2048);
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAllomancyComponent_getAllomanticMetal_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAllomancyComponent, nullptr, "getAllomanticMetal", nullptr, nullptr, Z_Construct_UFunction_UAllomancyComponent_getAllomanticMetal_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAllomancyComponent_getAllomanticMetal_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAllomancyComponent_getAllomanticMetal_Statics::AllomancyComponent_eventgetAllomanticMetal_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAllomancyComponent_getAllomanticMetal_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAllomancyComponent_getAllomanticMetal_Statics::Function_MetaDataParams) };
+static_assert(sizeof(Z_Construct_UFunction_UAllomancyComponent_getAllomanticMetal_Statics::AllomancyComponent_eventgetAllomanticMetal_Parms) < MAX_uint16);
+UFunction* Z_Construct_UFunction_UAllomancyComponent_getAllomanticMetal()
+{
+	static UFunction* ReturnFunction = nullptr;
+	if (!ReturnFunction)
+	{
+		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UAllomancyComponent_getAllomanticMetal_Statics::FuncParams);
+	}
+	return ReturnFunction;
+}
+DEFINE_FUNCTION(UAllomancyComponent::execgetAllomanticMetal)
+{
+	P_GET_ENUM(EMetalType,Z_Param_metalType_);
+	P_FINISH;
+	P_NATIVE_BEGIN;
+	*(UAllomanticMetal**)Z_Param__Result=P_THIS->getAllomanticMetal(EMetalType(Z_Param_metalType_));
+	P_NATIVE_END;
+}
+// End Class UAllomancyComponent Function getAllomanticMetal
+
 // Begin Class UAllomancyComponent
 void UAllomancyComponent::StaticRegisterNativesUAllomancyComponent()
 {
 	UClass* Class = UAllomancyComponent::StaticClass();
 	static const FNameNativePtrPair Funcs[] = {
 		{ "consumeAllomanticMetal", &UAllomancyComponent::execconsumeAllomanticMetal },
+		{ "getAllomanticMetal", &UAllomancyComponent::execgetAllomanticMetal },
 	};
 	FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
 }
@@ -120,6 +172,7 @@ struct Z_Construct_UClass_UAllomancyComponent_Statics
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
 		{ &Z_Construct_UFunction_UAllomancyComponent_consumeAllomanticMetal, "consumeAllomanticMetal" }, // 4280032080
+		{ &Z_Construct_UFunction_UAllomancyComponent_getAllomanticMetal, "getAllomanticMetal" }, // 2747587448
 	};
 	static_assert(UE_ARRAY_COUNT(FuncInfo) < 2048);
 	static constexpr FCppClassTypeInfoStatic StaticCppClassTypeInfo = {
@@ -182,10 +235,10 @@ UAllomancyComponent::~UAllomancyComponent() {}
 struct Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_AllomancyComponent_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UAllomancyComponent, UAllomancyComponent::StaticClass, TEXT("UAllomancyComponent"), &Z_Registration_Info_UClass_UAllomancyComponent, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAllomancyComponent), 4247345676U) },
+		{ Z_Construct_UClass_UAllomancyComponent, UAllomancyComponent::StaticClass, TEXT("UAllomancyComponent"), &Z_Registration_Info_UClass_UAllomancyComponent, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAllomancyComponent), 2841920253U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_AllomancyComponent_h_269463286(TEXT("/Script/MB_Project"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_AllomancyComponent_h_2015553695(TEXT("/Script/MB_Project"),
 	Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_AllomancyComponent_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_AllomancyComponent_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

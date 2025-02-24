@@ -12,7 +12,13 @@ UAllomanticMetal::~UAllomanticMetal()
 {
 }
 
-void UAllomanticMetal::Initialize(EMetalType type_)
+void UAllomanticMetal::Initialize(EMetalType type_, int32 initialMetalReserves_)
 {
-	type = type_;
+	metalType = type_;
+	metalReserves = initialMetalReserves_;
+}
+
+EMetalType UAllomanticMetal::getMetalType()
+{
+	return metalType;
 }
