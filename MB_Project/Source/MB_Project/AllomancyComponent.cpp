@@ -47,15 +47,17 @@ void UAllomancyComponent::TickComponent(float DeltaTime, ELevelTick TickType, FA
 
 
 	if (bMetalToBeConsumed) {
-		processMetalConsumption(DeltaTime);
-	}
+		if (CurrentConsumptionCurve) {
+			processMetalConsumption(DeltaTime);
+		}
+		}
 }
 
 
-void UAllomancyComponent::initAllomanticMetals()
+void UAllomancyComponent::initAllomanticMetals() //DONE
 {
 	AllomanticMetals.Empty();
-
+	
 	UAllomanticMetal* PewterMetal = NewObject<UAllomanticMetal>(this);
 	PewterMetal->Initialize(EMetalType::PEWTER, 0);
 	AllomanticMetals.Add(PewterMetal);
@@ -71,57 +73,55 @@ void UAllomancyComponent::initAllomanticMetals()
 	AllomanticMetals.Add(SteelMetal);
 }
 
-void UAllomancyComponent::processMetalConsumption(float DeltaTime)
-{
-	//if (bIsConsumingMetal && ammountToBeConsumed > 0) {
-
-	//	TimeSinceLastConsumption += DeltaTime;
-	//	TimeSinceConsumptionCalled = FApp::GetCurrentTime() - TimeConsumptionStart;
-	//	//TimeSinceConsumptionStarted = tiempo actual menos tiempo cuando empezo a consumir
-	//	if (TimeSinceLastConsumption >= ConsumptionInterval) {
-
-	//		int32 graphNumber = getGraphValue(currentConsumptionGraph, TimeSinceConsumptionCalled);
-	//		changeAllomanticMetalValue(selectedMetal, -graphNumber);
-	//		ammountToBeConsumed -= graphNumber;
-
-	//		TimeSinceLastConsumption = 0.0f;
-	//	}
+//void UAllomancyComponent::consumeAllomanticMetal(UAllomanticMetal* metal, int32 ammount, FFloatCurve* curve) //WIP
+//{
+	//if (!metal || !curve) {
+	//	UE_LOG(LogTemp, Warning, TEXT("metal or consumption graph in function: UAllomancyComponent::consumeAllomanticMetal are not valid"));
+	//	return;
 	//}
 
-	//if (ammountToBeConsumed <= 0) {//posible bug de q en el grafico diga numeros de consumo actual en ese mom y no numeros de consumo en ese momento, que sea un sumatorio de lo anterior rompe esto
-	//	bIsConsumingMetal = false;
-	//	bMetalToBeConsumed = false;
-	//	TimeSinceConsumptionCalled = 0.0f;
-	//	//ammount to be consumed already being resseted ----------------------------------------------AQUI ME HE QUEDADO
+	//if (AllomanticMetals.Contains(metal))
+	//{
+	//	selectedMetal = metal;
 	//}
-}
+	////get consumption interval from graph?
+	//bMetalToBeConsumed = true;
+	//bIsConsumingMetal = true;
+	//ammountToBeConsumed = ammount;
+	//CurrentConsumptionCurve = curve;
 
-int32 getGraphValue(UEdGraph* currentConsumptionGraph,float TimeSinceConsumptionStarted) {
-	//time since consumption started is the time value to be used with the graph to get a number
+	//TimeConsumptionStart = FApp::GetCurrentTime();
+
+//}
+
+int32 UAllomancyComponent::getConsumptionvalueFromCurve(FFloatCurve* ConsumptionCurve, float TimeSinceConsumptionStarted) {
+	
+
+	//if (!CurrentConsumptionCurve || ConsumptionDuration <= 0 || totalAmmountOfConsumption <= 0)
+	//{
+	//	UE_LOG(LogTemp, Warning, TEXT("Invalid curve, TimeToConsume, or totalAmmountOfConsumption!"));
+	//	return 0.0f;
+	//}
+
+	//// Convert elapsed time to normalized time (0 to 1 range)
+	//float NormalizedTime = FMath::Clamp(ElapsedTime / TimeToConsume, 0.0f, 1.0f);
+
+	//// Get percentage of total consumption from curve
+	//float CurveValue = consumptionCurve->GetFloatValue(NormalizedTime);
+
+	//// Convert to actual amount
+	//return CurveValue * totalAmmountOfConsumption;
+
+
 	return 0;
 }
 
-void UAllomancyComponent::consumeAllomanticMetal(UAllomanticMetal* metal, int32 ammount, UEdGraph* consumptionGraph)
+void UAllomancyComponent::processMetalConsumption(float DeltaTime)
 {
-	if (!metal || !consumptionGraph) {
-		UE_LOG(LogTemp, Warning, TEXT("metal or consumption graph in function: UAllomancyComponent::consumeAllomanticMetal are not valid"));
-		return;
-	}
-
-	if (AllomanticMetals.Contains(metal))
-	{
-		selectedMetal = metal;
-	}
-	//get consumption interval from graph?
-	bMetalToBeConsumed = true;
-	ammountToBeConsumed = ammount;
-	currentConsumptionGraph = consumptionGraph;
-	bIsConsumingMetal = true;
-	TimeConsumptionStart = FApp::GetCurrentTime();
 	
 }
 
-void UAllomancyComponent::changeAllomanticMetalValue(UAllomanticMetal *metal, int32 ammount)
+void UAllomancyComponent::changeAllomanticMetalValue(UAllomanticMetal *metal, int32 ammount) //DONE
 {
 	if (!metal) {
 		UE_LOG(LogTemp, Warning, TEXT("metal  in function: UAllomancyComponent::changeAllomanticMetalValue is not valid"))
@@ -137,15 +137,15 @@ void UAllomancyComponent::changeAllomanticMetalValue(UAllomanticMetal *metal, in
 }
 
 
-UAllomanticMetal* UAllomancyComponent::getAllomanticMetal(EMetalType metalType_)
-{/*
+UAllomanticMetal* UAllomancyComponent::getAllomanticMetal(EMetalType metalType_)  //DONE
+{
 	TArray<UAllomanticMetal*> array;
 	AllomanticMetals.GetKeys(array);
-	for (uint32 i = 0; i < array.Num(); i++) {
+	for (int32 i = 0; i < array.Num(); i++) {
 		if (array[i] && array[i]->getMetalType() == metalType_) {
 			return array[i];
 		}
-	}*/
+	}
 
 	return nullptr;
 }

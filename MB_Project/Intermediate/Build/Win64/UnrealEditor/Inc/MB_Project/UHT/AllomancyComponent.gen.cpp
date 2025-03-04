@@ -11,7 +11,6 @@ void EmptyLinkFunctionForGeneratedCodeAllomancyComponent() {}
 
 // Begin Cross Module References
 ENGINE_API UClass* Z_Construct_UClass_UActorComponent();
-ENGINE_API UClass* Z_Construct_UClass_UEdGraph_NoRegister();
 MB_PROJECT_API UClass* Z_Construct_UClass_UAllomancyComponent();
 MB_PROJECT_API UClass* Z_Construct_UClass_UAllomancyComponent_NoRegister();
 MB_PROJECT_API UClass* Z_Construct_UClass_UAllomanticAbility_NoRegister();
@@ -19,65 +18,6 @@ MB_PROJECT_API UClass* Z_Construct_UClass_UAllomanticMetal_NoRegister();
 MB_PROJECT_API UEnum* Z_Construct_UEnum_MB_Project_EMetalType();
 UPackage* Z_Construct_UPackage__Script_MB_Project();
 // End Cross Module References
-
-// Begin Class UAllomancyComponent Function consumeAllomanticMetal
-struct Z_Construct_UFunction_UAllomancyComponent_consumeAllomanticMetal_Statics
-{
-	struct AllomancyComponent_eventconsumeAllomanticMetal_Parms
-	{
-		UAllomanticMetal* metal;
-		int32 ammount;
-		UEdGraph* consumptionGraph;
-	};
-#if WITH_METADATA
-	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
-		{ "Category", "Allomancy" },
-#if !UE_BUILD_SHIPPING
-		{ "Comment", "//for blueprint calls, public use, gameplay programming\n" },
-#endif
-		{ "ModuleRelativePath", "AllomancyComponent.h" },
-#if !UE_BUILD_SHIPPING
-		{ "ToolTip", "for blueprint calls, public use, gameplay programming" },
-#endif
-	};
-#endif // WITH_METADATA
-	static const UECodeGen_Private::FObjectPropertyParams NewProp_metal;
-	static const UECodeGen_Private::FIntPropertyParams NewProp_ammount;
-	static const UECodeGen_Private::FObjectPropertyParams NewProp_consumptionGraph;
-	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
-	static const UECodeGen_Private::FFunctionParams FuncParams;
-};
-const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UAllomancyComponent_consumeAllomanticMetal_Statics::NewProp_metal = { "metal", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AllomancyComponent_eventconsumeAllomanticMetal_Parms, metal), Z_Construct_UClass_UAllomanticMetal_NoRegister, METADATA_PARAMS(0, nullptr) };
-const UECodeGen_Private::FIntPropertyParams Z_Construct_UFunction_UAllomancyComponent_consumeAllomanticMetal_Statics::NewProp_ammount = { "ammount", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AllomancyComponent_eventconsumeAllomanticMetal_Parms, ammount), METADATA_PARAMS(0, nullptr) };
-const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UAllomancyComponent_consumeAllomanticMetal_Statics::NewProp_consumptionGraph = { "consumptionGraph", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AllomancyComponent_eventconsumeAllomanticMetal_Parms, consumptionGraph), Z_Construct_UClass_UEdGraph_NoRegister, METADATA_PARAMS(0, nullptr) };
-const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAllomancyComponent_consumeAllomanticMetal_Statics::PropPointers[] = {
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAllomancyComponent_consumeAllomanticMetal_Statics::NewProp_metal,
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAllomancyComponent_consumeAllomanticMetal_Statics::NewProp_ammount,
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAllomancyComponent_consumeAllomanticMetal_Statics::NewProp_consumptionGraph,
-};
-static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAllomancyComponent_consumeAllomanticMetal_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAllomancyComponent_consumeAllomanticMetal_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAllomancyComponent, nullptr, "consumeAllomanticMetal", nullptr, nullptr, Z_Construct_UFunction_UAllomancyComponent_consumeAllomanticMetal_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAllomancyComponent_consumeAllomanticMetal_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAllomancyComponent_consumeAllomanticMetal_Statics::AllomancyComponent_eventconsumeAllomanticMetal_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAllomancyComponent_consumeAllomanticMetal_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAllomancyComponent_consumeAllomanticMetal_Statics::Function_MetaDataParams) };
-static_assert(sizeof(Z_Construct_UFunction_UAllomancyComponent_consumeAllomanticMetal_Statics::AllomancyComponent_eventconsumeAllomanticMetal_Parms) < MAX_uint16);
-UFunction* Z_Construct_UFunction_UAllomancyComponent_consumeAllomanticMetal()
-{
-	static UFunction* ReturnFunction = nullptr;
-	if (!ReturnFunction)
-	{
-		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UAllomancyComponent_consumeAllomanticMetal_Statics::FuncParams);
-	}
-	return ReturnFunction;
-}
-DEFINE_FUNCTION(UAllomancyComponent::execconsumeAllomanticMetal)
-{
-	P_GET_OBJECT(UAllomanticMetal,Z_Param_metal);
-	P_GET_PROPERTY(FIntProperty,Z_Param_ammount);
-	P_GET_OBJECT(UEdGraph,Z_Param_consumptionGraph);
-	P_FINISH;
-	P_NATIVE_BEGIN;
-	P_THIS->consumeAllomanticMetal(Z_Param_metal,Z_Param_ammount,Z_Param_consumptionGraph);
-	P_NATIVE_END;
-}
-// End Class UAllomancyComponent Function consumeAllomanticMetal
 
 // Begin Class UAllomancyComponent Function getAllomanticMetal
 struct Z_Construct_UFunction_UAllomancyComponent_getAllomanticMetal_Statics
@@ -90,7 +30,13 @@ struct Z_Construct_UFunction_UAllomancyComponent_getAllomanticMetal_Statics
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
 		{ "Category", "Allomancy" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "//for blueprint calls, public use, gameplay programming\n//UFUNCTION(BlueprintCallable,Category = \"Allomancy\")\n//void consumeAllomanticMetal(UAllomanticMetal *metal,int32 ammount, FFloatCurve* curve);\n" },
+#endif
 		{ "ModuleRelativePath", "AllomancyComponent.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "for blueprint calls, public use, gameplay programming\nUFUNCTION(BlueprintCallable,Category = \"Allomancy\")\nvoid consumeAllomanticMetal(UAllomanticMetal *metal,int32 ammount, FFloatCurve* curve);" },
+#endif
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FBytePropertyParams NewProp_metalType__Underlying;
@@ -134,7 +80,6 @@ void UAllomancyComponent::StaticRegisterNativesUAllomancyComponent()
 {
 	UClass* Class = UAllomancyComponent::StaticClass();
 	static const FNameNativePtrPair Funcs[] = {
-		{ "consumeAllomanticMetal", &UAllomancyComponent::execconsumeAllomanticMetal },
 		{ "getAllomanticMetal", &UAllomancyComponent::execgetAllomanticMetal },
 	};
 	FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
@@ -171,8 +116,7 @@ struct Z_Construct_UClass_UAllomancyComponent_Statics
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
-		{ &Z_Construct_UFunction_UAllomancyComponent_consumeAllomanticMetal, "consumeAllomanticMetal" }, // 4280032080
-		{ &Z_Construct_UFunction_UAllomancyComponent_getAllomanticMetal, "getAllomanticMetal" }, // 2747587448
+		{ &Z_Construct_UFunction_UAllomancyComponent_getAllomanticMetal, "getAllomanticMetal" }, // 863019672
 	};
 	static_assert(UE_ARRAY_COUNT(FuncInfo) < 2048);
 	static constexpr FCppClassTypeInfoStatic StaticCppClassTypeInfo = {
@@ -235,10 +179,10 @@ UAllomancyComponent::~UAllomancyComponent() {}
 struct Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_AllomancyComponent_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UAllomancyComponent, UAllomancyComponent::StaticClass, TEXT("UAllomancyComponent"), &Z_Registration_Info_UClass_UAllomancyComponent, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAllomancyComponent), 2841920253U) },
+		{ Z_Construct_UClass_UAllomancyComponent, UAllomancyComponent::StaticClass, TEXT("UAllomancyComponent"), &Z_Registration_Info_UClass_UAllomancyComponent, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAllomancyComponent), 2910386706U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_AllomancyComponent_h_2015553695(TEXT("/Script/MB_Project"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_AllomancyComponent_h_2581011040(TEXT("/Script/MB_Project"),
 	Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_AllomancyComponent_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_AllomancyComponent_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

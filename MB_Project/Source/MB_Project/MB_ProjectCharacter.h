@@ -75,7 +75,7 @@ public:
 public:
 	//GAMEPLAY VARS AND CODE
 
-	UPROPERTY(BlueprintReadOnly, Category = "Allomancy")
+	UPROPERTY(BlueprintReadWrite, Category = "Allomancy")
 	TArray<AMetal*> SceneMetals;
 
 	UFUNCTION(BlueprintCallable, Category = "Allomancy")

@@ -38,12 +38,14 @@ public:
 	bool bMetalToBeConsumed;
 	bool bIsConsumingMetal = true;
 	int32 ammountToBeConsumed;
-	UEdGraph* currentConsumptionGraph;
+	FFloatCurve* CurrentConsumptionCurve;
 	float TimeSinceLastConsumption = 0.0f;
 	float TimeSinceConsumptionCalled = 0.0f;
-	float TimeConsumptionStart = 0.0f;
-	float ConsumptionInterval = 1.0f;
+	
+	
 
+	float ConsumptionDuration = 0.0f;
+	float TimeConsumptionStart = 0.0f;
 
 protected:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Allomancy")
@@ -54,16 +56,23 @@ protected:
 
 	//Only for internal use, not for gameplay programming
 	void initAllomanticMetals();
+
 	//Only for internal use, not for gameplay programming
 	void processMetalConsumption(float DeltaTime);
+
 	//Only for internal use, not for gameplay programming
 	void changeAllomanticMetalValue(UAllomanticMetal* metal, int32 ammount);
 
+	//Only for internal use, not for gameplay programming
+	//Based on the time in the "FFloatCurve* ConsumptionCurve" retrieve a value of consumption for that time. 
+	//If curve goes from 0 to 1, if the time is 0.5 and the consumption value "CV" is 0.3%: value to consume will be:
+	//consumedMetalSofar - (CV*totalAmmountToConsume)
+	int32 getConsumptionvalueFromCurve(FFloatCurve* ConsumptionCurve, float TimeSinceConsumptionStarted);
 public:
 
 	//for blueprint calls, public use, gameplay programming
-	UFUNCTION(BlueprintCallable,Category = "Allomancy")
-	void consumeAllomanticMetal(UAllomanticMetal *metal,int32 ammount, UEdGraph *consumptionGraph);
+	//UFUNCTION(BlueprintCallable,Category = "Allomancy")
+	//void consumeAllomanticMetal(UAllomanticMetal *metal,int32 ammount, FFloatCurve* curve);
 
 	UFUNCTION(BlueprintCallable,Category = "Allomancy")
 	UAllomanticMetal* getAllomanticMetal(EMetalType metalType_);

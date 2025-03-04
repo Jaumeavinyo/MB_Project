@@ -10,7 +10,6 @@
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 class UAllomanticMetal;
-class UEdGraph;
 enum class EMetalType : uint8;
 #ifdef MB_PROJECT_AllomancyComponent_generated_h
 #error "AllomancyComponent.generated.h already included, missing '#pragma once' in AllomancyComponent.h"
@@ -18,8 +17,7 @@ enum class EMetalType : uint8;
 #define MB_PROJECT_AllomancyComponent_generated_h
 
 #define FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_AllomancyComponent_h_19_RPC_WRAPPERS_NO_PURE_DECLS \
-	DECLARE_FUNCTION(execgetAllomanticMetal); \
-	DECLARE_FUNCTION(execconsumeAllomanticMetal);
+	DECLARE_FUNCTION(execgetAllomanticMetal);
 
 
 #define FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_AllomancyComponent_h_19_INCLASS_NO_PURE_DECLS \

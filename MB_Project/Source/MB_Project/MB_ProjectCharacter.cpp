@@ -87,6 +87,9 @@ void AMB_ProjectCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInpu
 
 		// Looking
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AMB_ProjectCharacter::Look);
+
+		// Pull Metal
+		//EnhancedInputComponent->BindAction(PullAction, ETriggerEvent::Triggered,this, &AMB_ProjectCharacter::Pull)
 	}
 	else
 	{
@@ -131,6 +134,7 @@ void AMB_ProjectCharacter::Look(const FInputActionValue& Value)
 }
 
 
+
 ////////////////////////////////////////////////////////////////////////
 // Gameplay
 
@@ -143,6 +147,7 @@ TArray<AMetal*> AMB_ProjectCharacter::GetSceneMetals()
 	return SceneMetals_;
 }
 
+//If SceneMetals array exists: sort it, else, GetSceneMetals() and sort it
 void AMB_ProjectCharacter::SortMetals() {
 	
 	if (SceneMetals.Num() == 0) {

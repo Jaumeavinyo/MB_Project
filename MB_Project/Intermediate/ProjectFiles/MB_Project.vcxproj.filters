@@ -39,6 +39,12 @@
     <ClCompile Include="..\..\Source\MB_Project\AllomancyComponent.h">
       <Filter>Source\MB_Project</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\MB_Project\ConsumptionDataAsset.cpp">
+      <Filter>Source\MB_Project</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\MB_Project\ConsumptionDataAsset.h">
+      <Filter>Source\MB_Project</Filter>
+    </ClCompile>
     <None Include="..\..\Source\MB_Project\MB_Project.Build.cs">
       <Filter>Source\MB_Project</Filter>
     </None>
