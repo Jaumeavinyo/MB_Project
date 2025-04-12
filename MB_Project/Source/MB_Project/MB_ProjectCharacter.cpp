@@ -84,10 +84,10 @@ void AMB_ProjectCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInpu
 		//EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Completed, this, &ACharacter::Jump);
 
 		// Moving
-		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AMB_ProjectCharacter::Move);
+		//EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AMB_ProjectCharacter::Move);
 
 		// Looking
-		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AMB_ProjectCharacter::Look);
+		//EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AMB_ProjectCharacter::Look);
 
 		// Pull Metal
 		//EnhancedInputComponent->BindAction(PullAction, ETriggerEvent::Triggered,this, &AMB_ProjectCharacter::Pull)
