@@ -5,6 +5,18 @@
 			"guid": "00000000000000000000000000000000",
 			"description": "Default Uncontrolled Changelist",
 			"files": [
+				"D:/GitHub/MB_Project/MB_Project/Content/LevelPrototyping/Maps/Proto1/Alpha_Proto1_GMP.umap",
+				"D:/GitHub/MB_Project/MB_Project/Content/LevelPrototyping/Maps/Proto1/Alpha_Proto1_WBX.umap",
+				"D:/GitHub/MB_Project/MB_Project/Content/LevelPrototyping/Maps/Proto1/_GENERATED/Nacho/CubeGridToolOutput_188F4ADA.uasset",
+				"D:/GitHub/MB_Project/MB_Project/Content/LevelPrototyping/Maps/Proto1/_GENERATED/Nacho/Box_1x1.uasset",
+				"D:/GitHub/MB_Project/MB_Project/Content/LevelPrototyping/Maps/Proto1/_GENERATED/Nacho/CubeGridToolOutput_DAFCF695.uasset",
+				"D:/GitHub/MB_Project/MB_Project/Content/LevelPrototyping/Maps/Proto1/_GENERATED/Nacho/CubeGridToolOutput_EFFCBC00.uasset",
+				"D:/GitHub/MB_Project/MB_Project/Content/LevelPrototyping/Maps/Proto1/_GENERATED/Nacho/Box_8E33326E.uasset",
+				"D:/GitHub/MB_Project/MB_Project/Content/LevelPrototyping/Maps/Proto1/_GENERATED/Nacho/CubeGrid_500x200.uasset",
+				"D:/GitHub/MB_Project/MB_Project/Content/LevelPrototyping/Maps/Proto1/_GENERATED/Nacho/Cone_254F2E05.uasset",
+				"D:/GitHub/MB_Project/MB_Project/Content/LevelPrototyping/Maps/Proto1/_GENERATED/Nacho/Extrude_E8227241.uasset",
+				"D:/GitHub/MB_Project/MB_Project/Content/ThirdPerson/Maps/Levels/WBX3.umap",
+				"D:/GitHub/MB_Project/MB_Project/Content/ThirdPerson/Maps/Levels/Persistent.umap",
 				"C:/Users/jauma/Documents/GitHub/MistBornUE5/Misborn_Prototype/MB_Project/MB_Project/Content/GameAssets/DataAssets/CF_SpeedMultiplyer.uasset",
 				"C:/Users/jauma/Documents/GitHub/MistBornUE5/Misborn_Prototype/MB_Project/MB_Project/Content/ThirdPerson/Blueprints/BP_MB_ProjectCharacter.uasset",
 				"C:/Users/jauma/Documents/GitHub/MistBornUE5/Misborn_Prototype/MB_Project/MB_Project/Content/GameAssets/DataAssets/CF_SpeedDeAccelerationMultiplyer.uasset",
@@ -473,17 +485,7 @@
 				"C:/Users/jauma/Documents/GitHub/MistBornUE5/Misborn_Prototype/MB_Project/MB_Project/Content/__ExternalActors__/ThirdPerson/Maps/PlayGround/0/2U/OAMFCV0RM7BRS47KM3ZEEW.uasset",
 				"C:/Users/jauma/Documents/GitHub/MistBornUE5/Misborn_Prototype/MB_Project/MB_Project/Content/__ExternalActors__/ThirdPerson/Maps/PlayGround/C/EA/VDDUAA9NFA27Q3CL2KMFSB.uasset",
 				"C:/Users/jauma/Documents/GitHub/MistBornUE5/Misborn_Prototype/MB_Project/MB_Project/Content/__ExternalActors__/ThirdPerson/Maps/PlayGround/1/EX/X7OZOMIK7N7HCS9NFOHGQ0.uasset",
-				"D:/GitHub/MB_Project/MB_Project/Content/LevelPrototyping/Maps/Proto1/Alpha_Proto1_GMP.umap",
-				"D:/GitHub/MB_Project/MB_Project/Content/LevelPrototyping/Maps/Proto1/Alpha_Proto1_WBX.umap",
-				"D:/GitHub/MB_Project/MB_Project/Content/LevelPrototyping/Maps/Proto1/_GENERATED/Nacho/CubeGridToolOutput_188F4ADA.uasset",
-				"D:/GitHub/MB_Project/MB_Project/Content/LevelPrototyping/Maps/Proto1/_GENERATED/Nacho/Box_1x1.uasset",
-				"D:/GitHub/MB_Project/MB_Project/Content/LevelPrototyping/Maps/Proto1/_GENERATED/Nacho/Box_F6F89AD5.uasset",
-				"D:/GitHub/MB_Project/MB_Project/Content/LevelPrototyping/Maps/Proto1/_GENERATED/Nacho/CubeGridToolOutput_DAFCF695.uasset",
-				"D:/GitHub/MB_Project/MB_Project/Content/LevelPrototyping/Maps/Proto1/_GENERATED/Nacho/CubeGridToolOutput_EFFCBC00.uasset",
-				"D:/GitHub/MB_Project/MB_Project/Content/LevelPrototyping/Maps/Proto1/_GENERATED/Nacho/Box_8E33326E.uasset",
-				"D:/GitHub/MB_Project/MB_Project/Content/LevelPrototyping/Maps/Proto1/_GENERATED/Nacho/CubeGrid_500x200.uasset",
-				"D:/GitHub/MB_Project/MB_Project/Content/LevelPrototyping/Maps/Proto1/_GENERATED/Nacho/Cone_254F2E05.uasset",
-				"D:/GitHub/MB_Project/MB_Project/Content/LevelPrototyping/Maps/Proto1/_GENERATED/Nacho/Extrude_E8227241.uasset"
+				"D:/GitHub/MB_Project/MB_Project/Content/LevelPrototyping/Maps/Proto1/_GENERATED/Nacho/Box_F6F89AD5.uasset"
 			]
 		}
 	]
