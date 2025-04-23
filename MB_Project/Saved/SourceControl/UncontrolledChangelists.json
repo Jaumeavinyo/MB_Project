@@ -5,6 +5,12 @@
 			"guid": "00000000000000000000000000000000",
 			"description": "Default Uncontrolled Changelist",
 			"files": [
+				"C:/Users/Husband/Documents/GitHub/MB_Project/MB_Project/Content/ThirdPerson/Maps/Levels/LV_Lighting.umap",
+				"C:/Users/Husband/Documents/GitHub/MB_Project/MB_Project/Content/ThirdPerson/Maps/Levels/Persistent.umap",
+				"C:/Users/Husband/Documents/GitHub/MB_Project/MB_Project/Content/ThirdPerson/Maps/Levels/WBX.umap",
+				"C:/Users/Husband/Documents/GitHub/MB_Project/MB_Project/Content/ThirdPerson/Blueprints/BP_LightSphere.uasset",
+				"C:/Users/Husband/Documents/GitHub/MB_Project/MB_Project/Content/GameAssets/Materials/M_Light.uasset",
+				"C:/Users/Husband/Documents/GitHub/MB_Project/MB_Project/Content/ThirdPerson/Blueprints/BP_LightingSphere.uasset",
 				"C:/Users/jauma/Documents/GitHub/MistBornUE5/Misborn_Prototype/MB_Project/MB_Project/Content/GameAssets/DataAssets/CF_SpeedMultiplyer.uasset",
 				"C:/Users/jauma/Documents/GitHub/MistBornUE5/Misborn_Prototype/MB_Project/MB_Project/Content/ThirdPerson/Blueprints/BP_MB_ProjectCharacter.uasset",
 				"C:/Users/jauma/Documents/GitHub/MistBornUE5/Misborn_Prototype/MB_Project/MB_Project/Content/GameAssets/DataAssets/CF_SpeedDeAccelerationMultiplyer.uasset",
