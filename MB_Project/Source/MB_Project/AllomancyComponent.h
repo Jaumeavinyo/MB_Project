@@ -6,6 +6,9 @@
 #include "Components/ActorComponent.h"
 #include "UAllomanticAbility.h"
 #include "UAllomanticMetal.h"
+#include "Metal.h"
+#include "MB_ProjectCharacter.h"
+#include "Camera/CameraComponent.h"
 #include "AllomancyComponent.generated.h"
 
 
@@ -13,12 +16,12 @@
 
 class UAllomanticMetal;
 
-UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
+UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
 class MB_PROJECT_API UAllomancyComponent : public UActorComponent
 {
 	GENERATED_BODY()
 
-public:	
+public:
 	// Sets default values for this component's properties
 	UAllomancyComponent();
 	virtual void PostInitProperties() override;
@@ -29,28 +32,38 @@ protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
-public:	
+public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 	//CHANGE ALLOMANTIC METAL VALUE OVER TIME
-	UAllomanticMetal* selectedMetal;
+	UAllomanticMetal* selectedAllomanticMetal;
 	bool bMetalToBeConsumed;
 	bool bIsConsumingMetal = true;
 	int32 ammountToBeConsumed;
 	FFloatCurve* CurrentConsumptionCurve;
 	float TimeSinceLastConsumption = 0.0f;
 	float TimeSinceConsumptionCalled = 0.0f;
-	
-	
-
 	float ConsumptionDuration = 0.0f;
 	float TimeConsumptionStart = 0.0f;
+
+
+
+
+	// metal list (normally from scene)
+	TArray<AMetal*> DetectedSceneMetals;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "PULL", meta = (DisplayThumbnail = "true"))
+	float MetalSelectionCameraAngle;
+
+	//Pull vars
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "PULL", meta = (DisplayThumbnail = "true"))
+	float metalInteractDistance;
 
 protected:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Allomancy")
 	TMap<FString, UAllomanticAbility*> ActiveAbilities;
-	
+
 	UPROPERTY(EditAnywhere, Category = "Allomancy")
 	TMap<UAllomanticMetal*, int32> AllomanticMetals;
 
@@ -74,7 +87,9 @@ public:
 	//UFUNCTION(BlueprintCallable,Category = "Allomancy")
 	//void consumeAllomanticMetal(UAllomanticMetal *metal,int32 ammount, FFloatCurve* curve);
 
-	UFUNCTION(BlueprintCallable,Category = "Allomancy")
+	UFUNCTION(BlueprintCallable, Category = "Allomancy")
 	UAllomanticMetal* getAllomanticMetal(EMetalType metalType_);
-	
+
+	UFUNCTION(BlueprintCallable, Category = "Allomancy")
+	TArray<AMetal*> sortSceneMetals(TArray<AMetal*>& Metals);
 };

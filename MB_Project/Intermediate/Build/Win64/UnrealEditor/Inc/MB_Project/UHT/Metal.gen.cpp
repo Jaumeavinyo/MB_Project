@@ -163,6 +163,28 @@ struct Z_Construct_UClass_AMetal_Statics
 		{ "ToolTip", "Used for temporary materials, use \"Blueprint callable ChangeMaterial(Umaterial mat);\" to define and use this material." },
 #endif
 	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_M_InteractuableMat_MetaData[] = {
+		{ "Category", "Material" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "//Next materials store the different debug materials for metals when being interactuated with\n" },
+#endif
+		{ "ModuleRelativePath", "Metal.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "Next materials store the different debug materials for metals when being interactuated with" },
+#endif
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_M_SelectableMat_MetaData[] = {
+		{ "Category", "Material" },
+		{ "ModuleRelativePath", "Metal.h" },
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_M_NonInteractuableMat_MetaData[] = {
+		{ "Category", "Material" },
+		{ "ModuleRelativePath", "Metal.h" },
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_M_SelectedMat_MetaData[] = {
+		{ "Category", "Material" },
+		{ "ModuleRelativePath", "Metal.h" },
+	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_StaticMetal_MetaData[] = {
 		{ "Category", "Gameplay" },
 		{ "ModuleRelativePath", "Metal.h" },
@@ -183,6 +205,10 @@ struct Z_Construct_UClass_AMetal_Statics
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_DefaultMaterial;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_InstanceMaterial;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_CurrentMeshMaterial;
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_M_InteractuableMat;
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_M_SelectableMat;
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_M_NonInteractuableMat;
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_M_SelectedMat;
 	static void NewProp_StaticMetal_SetBit(void* Obj);
 	static const UECodeGen_Private::FBoolPropertyParams NewProp_StaticMetal;
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_MetalWeight;
@@ -202,6 +228,10 @@ const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AMetal_Statics
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AMetal_Statics::NewProp_DefaultMaterial = { "DefaultMaterial", nullptr, (EPropertyFlags)0x0010000000010015, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AMetal, DefaultMaterial), Z_Construct_UClass_UMaterial_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_DefaultMaterial_MetaData), NewProp_DefaultMaterial_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AMetal_Statics::NewProp_InstanceMaterial = { "InstanceMaterial", nullptr, (EPropertyFlags)0x0010000000000015, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AMetal, InstanceMaterial), Z_Construct_UClass_UMaterialInstance_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_InstanceMaterial_MetaData), NewProp_InstanceMaterial_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AMetal_Statics::NewProp_CurrentMeshMaterial = { "CurrentMeshMaterial", nullptr, (EPropertyFlags)0x0010000000000014, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AMetal, CurrentMeshMaterial), Z_Construct_UClass_UMaterialInterface_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_CurrentMeshMaterial_MetaData), NewProp_CurrentMeshMaterial_MetaData) };
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AMetal_Statics::NewProp_M_InteractuableMat = { "M_InteractuableMat", nullptr, (EPropertyFlags)0x0010000000010015, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AMetal, M_InteractuableMat), Z_Construct_UClass_UMaterial_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_M_InteractuableMat_MetaData), NewProp_M_InteractuableMat_MetaData) };
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AMetal_Statics::NewProp_M_SelectableMat = { "M_SelectableMat", nullptr, (EPropertyFlags)0x0010000000010015, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AMetal, M_SelectableMat), Z_Construct_UClass_UMaterial_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_M_SelectableMat_MetaData), NewProp_M_SelectableMat_MetaData) };
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AMetal_Statics::NewProp_M_NonInteractuableMat = { "M_NonInteractuableMat", nullptr, (EPropertyFlags)0x0010000000010015, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AMetal, M_NonInteractuableMat), Z_Construct_UClass_UMaterial_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_M_NonInteractuableMat_MetaData), NewProp_M_NonInteractuableMat_MetaData) };
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AMetal_Statics::NewProp_M_SelectedMat = { "M_SelectedMat", nullptr, (EPropertyFlags)0x0010000000010015, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AMetal, M_SelectedMat), Z_Construct_UClass_UMaterial_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_M_SelectedMat_MetaData), NewProp_M_SelectedMat_MetaData) };
 void Z_Construct_UClass_AMetal_Statics::NewProp_StaticMetal_SetBit(void* Obj)
 {
 	((AMetal*)Obj)->StaticMetal = 1;
@@ -213,6 +243,10 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AMetal_St
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMetal_Statics::NewProp_DefaultMaterial,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMetal_Statics::NewProp_InstanceMaterial,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMetal_Statics::NewProp_CurrentMeshMaterial,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMetal_Statics::NewProp_M_InteractuableMat,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMetal_Statics::NewProp_M_SelectableMat,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMetal_Statics::NewProp_M_NonInteractuableMat,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMetal_Statics::NewProp_M_SelectedMat,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMetal_Statics::NewProp_StaticMetal,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMetal_Statics::NewProp_MetalWeight,
 };
@@ -257,10 +291,10 @@ AMetal::~AMetal() {}
 struct Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_Metal_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_AMetal, AMetal::StaticClass, TEXT("AMetal"), &Z_Registration_Info_UClass_AMetal, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AMetal), 1983308330U) },
+		{ Z_Construct_UClass_AMetal, AMetal::StaticClass, TEXT("AMetal"), &Z_Registration_Info_UClass_AMetal, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AMetal), 1833821981U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_Metal_h_899428640(TEXT("/Script/MB_Project"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_Metal_h_309835603(TEXT("/Script/MB_Project"),
 	Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_Metal_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_Metal_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);
