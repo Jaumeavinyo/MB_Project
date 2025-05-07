@@ -73,6 +73,7 @@ public:
 
 
 public:
+
 	//GAMEPLAY VARS AND CODE
 
 	UPROPERTY(BlueprintReadWrite, Category = "Allomancy")
