@@ -6,9 +6,6 @@
 #include "Components/ActorComponent.h"
 #include "UAllomanticAbility.h"
 #include "UAllomanticMetal.h"
-#include "Metal.h"
-#include "MB_ProjectCharacter.h"
-#include "Camera/CameraComponent.h"
 #include "AllomancyComponent.generated.h"
 
 
@@ -37,28 +34,18 @@ public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 	//CHANGE ALLOMANTIC METAL VALUE OVER TIME
-	UAllomanticMetal* selectedAllomanticMetal;
+	UAllomanticMetal* selectedMetal;
 	bool bMetalToBeConsumed;
 	bool bIsConsumingMetal = true;
 	int32 ammountToBeConsumed;
 	FFloatCurve* CurrentConsumptionCurve;
 	float TimeSinceLastConsumption = 0.0f;
 	float TimeSinceConsumptionCalled = 0.0f;
-	float ConsumptionDuration = 0.0f;
-	float TimeConsumptionStart = 0.0f;
-
-
+	
 	
 
-	// metal list (normally from scene)
-	TArray<AMetal*> DetectedSceneMetals;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "PULL", meta = (DisplayThumbnail = "true"))
-	float MetalSelectionCameraAngle;
-
-	//Pull vars
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "PULL", meta = (DisplayThumbnail = "true"))
-	float metalInteractDistance;
+	float ConsumptionDuration = 0.0f;
+	float TimeConsumptionStart = 0.0f;
 
 protected:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Allomancy")
@@ -90,6 +77,4 @@ public:
 	UFUNCTION(BlueprintCallable,Category = "Allomancy")
 	UAllomanticMetal* getAllomanticMetal(EMetalType metalType_);
 	
-	UFUNCTION(BlueprintCallable, Category = "Allomancy")
-	TArray<AMetal*> sortSceneMetals(TArray<AMetal*>& Metals);
 };
