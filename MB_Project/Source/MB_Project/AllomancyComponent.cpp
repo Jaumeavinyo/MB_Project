@@ -150,7 +150,7 @@ UAllomanticMetal* UAllomancyComponent::getAllomanticMetal(EMetalType metalType_)
 	return nullptr;
 }
 
-TArray<AMetal*> UAllomancyComponent::sortSceneMetals(TArray<AMetal*>& Metals)   //THIS FUNCTION FILLS UP SELECTABLE METALS SO WE CAN SORT THAT LIST WHEN TRIGGERING PULL AND TAKE THE MOST CENTERED BETWEEN 10 AND NOT 300 METALS EVERY FRAME
+TArray<AMetal*> UAllomancyComponent::sortSceneMetals(const TArray<AMetal*>& Metals)   //THIS FUNCTION FILLS UP SELECTABLE METALS SO WE CAN SORT THAT LIST WHEN TRIGGERING PULL AND TAKE THE MOST CENTERED BETWEEN 10 AND NOT 300 METALS EVERY FRAME
 {
 
 	TArray<AMetal*> selectableMetals;

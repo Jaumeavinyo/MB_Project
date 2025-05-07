@@ -91,5 +91,5 @@ public:
 	UAllomanticMetal* getAllomanticMetal(EMetalType metalType_);
 
 	UFUNCTION(BlueprintCallable, Category = "Allomancy")
-	TArray<AMetal*> sortSceneMetals(TArray<AMetal*>& Metals);
+	TArray<AMetal*> sortSceneMetals(const TArray<AMetal*>& Metals);
 };
