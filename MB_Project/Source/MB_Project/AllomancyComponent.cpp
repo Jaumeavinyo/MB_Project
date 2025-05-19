@@ -44,15 +44,52 @@ void UAllomancyComponent::TickComponent(float DeltaTime, ELevelTick TickType, FA
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	// ...
-
-
 	if (bMetalToBeConsumed) {
 		if (CurrentConsumptionCurve) {
 			processMetalConsumption(DeltaTime);
 		}
 	}
+
+	for (UAllomanticAbilityBase* Ability: Abilities)
+	{
+		if (Ability && Ability->bIsActive)
+		{
+			Ability->PreUpdate(DeltaTime);
+			Ability->Update(DeltaTime);
+			Ability->PostUpdate(DeltaTime);
+		}
+	}
+
+	
 }
 
+
+void UAllomancyComponent::ActivateAbility(TSubclassOf<UAllomanticAbilityBase> AbilityClass)
+{
+	UAllomanticAbilityBase** Exists = Abilities.FindByPredicate([&](UAllomanticAbilityBase* A)
+	{
+		return A && A->IsA(AbilityClass);
+	});
+
+	UAllomanticAbilityBase* Ability = nullptr;
+	
+	if (Exists)
+	{
+		Ability = *Exists;
+	}else
+	{
+		Ability = NewObject<UAllomanticAbilityBase>(this, AbilityClass);
+		if (Ability)
+		{
+			Abilities.Add(Ability);
+		}
+	}
+	if (Ability)
+	{
+		Ability->Activate();
+		Ability->Start();
+	}
+}
 
 void UAllomancyComponent::initAllomanticMetals() //DONE
 {
@@ -61,7 +98,7 @@ void UAllomancyComponent::initAllomanticMetals() //DONE
 	UAllomanticMetal* PewterMetal = NewObject<UAllomanticMetal>(this);
 	PewterMetal->Initialize(EMetalType::PEWTER, 0);
 	AllomanticMetals.Add(PewterMetal);
-
+	
 	// Create and initialize Iron metal
 	UAllomanticMetal* IronMetal = NewObject<UAllomanticMetal>(this);
 	IronMetal->Initialize(EMetalType::IRON, 0);
@@ -177,14 +214,18 @@ TArray<AMetal*> UAllomancyComponent::sortSceneMetals(const TArray<AMetal*>& Meta
 				Player_Metal_Vec.Normalize();
 
 				FVector cameraForwardVec = player->GetFollowCamera()->GetForwardVector();
+				//float angleWithCameraView = FMath::RadiansToDegrees(acos(Player_Metal_Vec.Dot(cameraForwardVec)));
 
-				float angleWithCameraView = acos(Player_Metal_Vec.Dot(cameraForwardVec));
+				float dot = FVector::DotProduct(Player_Metal_Vec, cameraForwardVec);
+				dot = FMath::Clamp(dot, -1.0f, 1.0f); // Prevent acos from crashing
 
+				float angleWithCameraView = FMath::RadiansToDegrees(acos(dot));
+				
 				//Dot product order matters, this order is vec metal-player projection on cameraforward vec (all normalized)
 				if (angleWithCameraView <= MetalSelectionCameraAngle) {
 
 					Metal->ChangeMaterial(Metal->M_SelectableMat);
-					Metal->AngleFromCameraViewCenter = angleWithCameraView;
+					Metal->AngleFromCameraViewCenter = FMath::RadiansToDegrees(acos(Player_Metal_Vec.Dot(cameraForwardVec)));
 
 					if (!selectableMetals.Contains(Metal)) {
 						selectableMetals.Add(Metal);
@@ -193,7 +234,7 @@ TArray<AMetal*> UAllomancyComponent::sortSceneMetals(const TArray<AMetal*>& Meta
 				else {
 
 					Metal->ChangeMaterial(Metal->M_InteractuableMat);
-					if (!selectableMetals.Contains(Metal)) {
+					if (selectableMetals.Contains(Metal)) {
 						selectableMetals.Remove(Metal);
 					}
 				}
@@ -201,15 +242,16 @@ TArray<AMetal*> UAllomancyComponent::sortSceneMetals(const TArray<AMetal*>& Meta
 			else {
 
 				Metal->ChangeMaterial(Metal->M_NonInteractuableMat);
-				if (!selectableMetals.Contains(Metal)) {
+				if (selectableMetals.Contains(Metal)) {
 					selectableMetals.Remove(Metal);
 				}
 			}
 		}
 		else {
 			//Was this metal selectable before not being visible?(before not being rendered)
-			int found = selectableMetals.Find(Metal);
-			if (found == INDEX_NONE) {
+			Metal->ChangeMaterial(Metal->M_NonInteractuableMat);
+			if (selectableMetals.Contains(Metal))
+			{
 				selectableMetals.Remove(Metal);
 			}
 		}

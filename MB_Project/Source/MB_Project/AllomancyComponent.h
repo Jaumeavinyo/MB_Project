@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
-#include "UAllomanticAbility.h"
+#include "UAllomanticAbilityBase.h"
 #include "UAllomanticMetal.h"
 #include "Metal.h"
 #include "MB_ProjectCharacter.h"
@@ -37,6 +37,7 @@ public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 	//CHANGE ALLOMANTIC METAL VALUE OVER TIME
+	
 	UAllomanticMetal* selectedAllomanticMetal;
 	bool bMetalToBeConsumed;
 	bool bIsConsumingMetal = true;
@@ -47,23 +48,29 @@ public:
 	float ConsumptionDuration = 0.0f;
 	float TimeConsumptionStart = 0.0f;
 
+	
 
-
-
+protected:
 	// metal list (normally from scene)
 	TArray<AMetal*> DetectedSceneMetals;
 
+	//GAMEPLAY VARS
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "PULL", meta = (DisplayThumbnail = "true"))
 	float MetalSelectionCameraAngle;
-
-	//Pull vars
+	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "PULL", meta = (DisplayThumbnail = "true"))
 	float metalInteractDistance;
+	
+	UPROPERTY(BlueprintReadOnly, Category = "Allomancy")
+	TArray<UAllomanticAbilityBase*> Abilities;
+	
+	//GAMEPLAY FUNCTIONS
+	
+	UFUNCTION(BlueprintCallable, Category = "Allomancy")
+	void ActivateAbility(TSubclassOf<UAllomanticAbilityBase> AbilityClass);
 
-protected:
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Allomancy")
-	TMap<FString, UAllomanticAbility*> ActiveAbilities;
 
+	
 	UPROPERTY(EditAnywhere, Category = "Allomancy")
 	TMap<UAllomanticMetal*, int32> AllomanticMetals;
 

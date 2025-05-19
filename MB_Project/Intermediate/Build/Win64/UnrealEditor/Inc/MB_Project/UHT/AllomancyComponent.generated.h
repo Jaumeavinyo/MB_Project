@@ -10,6 +10,7 @@
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 class AMetal;
+class UAllomanticAbilityBase;
 class UAllomanticMetal;
 enum class EMetalType : uint8;
 #ifdef MB_PROJECT_AllomancyComponent_generated_h
@@ -19,7 +20,8 @@ enum class EMetalType : uint8;
 
 #define FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_AllomancyComponent_h_22_RPC_WRAPPERS_NO_PURE_DECLS \
 	DECLARE_FUNCTION(execsortSceneMetals); \
-	DECLARE_FUNCTION(execgetAllomanticMetal);
+	DECLARE_FUNCTION(execgetAllomanticMetal); \
+	DECLARE_FUNCTION(execActivateAbility);
 
 
 #define FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_AllomancyComponent_h_22_INCLASS_NO_PURE_DECLS \
