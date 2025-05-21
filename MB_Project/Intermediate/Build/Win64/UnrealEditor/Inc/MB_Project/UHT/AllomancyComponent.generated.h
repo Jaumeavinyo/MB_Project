@@ -19,6 +19,7 @@ enum class EMetalType : uint8;
 #define MB_PROJECT_AllomancyComponent_generated_h
 
 #define FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_AllomancyComponent_h_22_RPC_WRAPPERS_NO_PURE_DECLS \
+	DECLARE_FUNCTION(execSelectMetal); \
 	DECLARE_FUNCTION(execsortSceneMetals); \
 	DECLARE_FUNCTION(execgetAllomanticMetal); \
 	DECLARE_FUNCTION(execActivateAbility);

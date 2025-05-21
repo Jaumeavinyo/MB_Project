@@ -64,7 +64,7 @@ void UAllomancyComponent::TickComponent(float DeltaTime, ELevelTick TickType, FA
 }
 
 
-void UAllomancyComponent::ActivateAbility(TSubclassOf<UAllomanticAbilityBase> AbilityClass)
+void UAllomancyComponent::ActivateAbility(TSubclassOf<UAllomanticAbilityBase> AbilityClass, TSubclassOf<AActor> target)
 {
 	UAllomanticAbilityBase** Exists = Abilities.FindByPredicate([&](UAllomanticAbilityBase* A)
 	{
@@ -225,7 +225,7 @@ TArray<AMetal*> UAllomancyComponent::sortSceneMetals(const TArray<AMetal*>& Meta
 				if (angleWithCameraView <= MetalSelectionCameraAngle) {
 
 					Metal->ChangeMaterial(Metal->M_SelectableMat);
-					Metal->AngleFromCameraViewCenter = FMath::RadiansToDegrees(acos(Player_Metal_Vec.Dot(cameraForwardVec)));
+					Metal->AngleFromCameraViewCenter = angleWithCameraView;//FMath::RadiansToDegrees(acos(Player_Metal_Vec.Dot(cameraForwardVec)));
 
 					if (!selectableMetals.Contains(Metal)) {
 						selectableMetals.Add(Metal);
@@ -257,6 +257,27 @@ TArray<AMetal*> UAllomancyComponent::sortSceneMetals(const TArray<AMetal*>& Meta
 		}
 	}
 	return selectableMetals;
+}
+
+void UAllomancyComponent::SelectMetal()
+{
+	for (AMetal* Metal : SelectableMetals)
+	{
+		if (CenteredMetal)
+		{
+			if (Metal->AngleFromCameraViewCenter < CenteredMetal->AngleFromCameraViewCenter)
+			{
+				CenteredMetal = Metal;
+			}
+		}
+		{
+			CenteredMetal = Metal;
+		}
+		
+	}
+
+	SelectedMetal = CenteredMetal;
+	SelectedMetal->ChangeMaterial(SelectedMetal->M_SelectedMat);
 }
 
 

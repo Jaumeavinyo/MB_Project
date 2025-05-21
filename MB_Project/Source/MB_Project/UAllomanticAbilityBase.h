@@ -16,8 +16,8 @@ public:
 	UAllomanticAbilityBase();
 	~UAllomanticAbilityBase();
 
-	 void Activate();
-	 void DeActivate();
+	 virtual void Activate(TSubclassOf<AActor> target = nullptr);
+	 virtual void DeActivate();
 	
 	virtual void Start();
 	virtual void PreUpdate(float DeltaTime);

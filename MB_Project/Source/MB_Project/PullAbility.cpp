@@ -3,6 +3,20 @@
 
 #include "PullAbility.h"
 
+void UPullAbility::Activate(TSubclassOf<AActor> target)
+{
+	Super::Activate();
+	if (target)
+	{
+		PullTarget = target;
+	}
+}
+
+void UPullAbility::DeActivate()
+{
+	Super::DeActivate();
+}
+
 void UPullAbility::Start()
 {
 	Super::Start();

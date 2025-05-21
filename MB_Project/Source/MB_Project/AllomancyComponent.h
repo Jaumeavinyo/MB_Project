@@ -51,8 +51,9 @@ public:
 	
 
 protected:
-	// metal list (normally from scene)
-	TArray<AMetal*> DetectedSceneMetals;
+	
+	
+	
 
 	//GAMEPLAY VARS
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "PULL", meta = (DisplayThumbnail = "true"))
@@ -63,17 +64,32 @@ protected:
 	
 	UPROPERTY(BlueprintReadOnly, Category = "Allomancy")
 	TArray<UAllomanticAbilityBase*> Abilities;
+
+	UPROPERTY(EditAnywhere, Category = "Allomancy")
+	TMap<UAllomanticMetal*, int32> AllomanticMetals;
+
+	UPROPERTY(BlueprintReadWrite,Category="Allomancy")
+	TArray<AMetal*> SelectableMetals;
+	
+	//the valid most centered metal that is valid
+	UPROPERTY(BlueprintReadWrite, Category = "Allomancy")
+	AMetal* CenteredMetal;
+	
+	//the valid most centered metal that is selected by player input
+	UPROPERTY(BlueprintReadWrite, Category = "Allomancy")
+	AMetal* SelectedMetal;
+
 	
 	//GAMEPLAY FUNCTIONS
 	
 	UFUNCTION(BlueprintCallable, Category = "Allomancy")
-	void ActivateAbility(TSubclassOf<UAllomanticAbilityBase> AbilityClass);
+	void ActivateAbility(TSubclassOf<UAllomanticAbilityBase> AbilityClass,TSubclassOf<AActor> target = nullptr);
 
 
 	
-	UPROPERTY(EditAnywhere, Category = "Allomancy")
-	TMap<UAllomanticMetal*, int32> AllomanticMetals;
-
+	
+	//ALLOMANTIC COMPONENT INTERNAL FUNCTIONS
+	
 	//Only for internal use, not for gameplay programming
 	void initAllomanticMetals();
 
@@ -99,4 +115,7 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Allomancy")
 	TArray<AMetal*> sortSceneMetals(const TArray<AMetal*>& Metals);
+
+	UFUNCTION(BlueprintCallable,Category = "Allomancy")
+	void SelectMetal();
 };
