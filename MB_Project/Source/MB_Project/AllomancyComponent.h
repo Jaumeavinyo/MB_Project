@@ -51,7 +51,8 @@ public:
 	
 
 protected:
-	
+	//const vars
+	ACharacter* ComponentOwner;
 	
 	
 
@@ -83,10 +84,12 @@ protected:
 	//GAMEPLAY FUNCTIONS
 	
 	UFUNCTION(BlueprintCallable, Category = "Allomancy")
-	void ActivateAbility(TSubclassOf<UAllomanticAbilityBase> AbilityClass,TSubclassOf<AActor> target = nullptr);
+	void ActivateAbility(TSubclassOf<UAllomanticAbilityBase> AbilityClass,TSubclassOf<AActor> target = nullptr,TSubclassOf<ACharacter> AbilityOwner = nullptr);
 
 
-	
+	//ABILITY INPUT HANDLING
+	UFUNCTION(BlueprintCallable, Category = "Pull")
+	void PullTriggerInput(bool triggered, float value);
 	
 	//ALLOMANTIC COMPONENT INTERNAL FUNCTIONS
 	

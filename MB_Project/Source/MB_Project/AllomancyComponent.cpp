@@ -3,6 +3,8 @@
 
 #include "AllomancyComponent.h"
 
+#include "PullAbility.h"
+
 // Sets default values for this component's properties
 UAllomancyComponent::UAllomancyComponent()
 {
@@ -16,7 +18,7 @@ UAllomancyComponent::UAllomancyComponent()
 void UAllomancyComponent::PostInitProperties()
 {
 	Super::PostInitProperties();
-
+	ComponentOwner = Cast<ACharacter>(GetOwner());
 	// Initialize metals when object is created in the editor
 	initAllomanticMetals();
 }
@@ -59,12 +61,10 @@ void UAllomancyComponent::TickComponent(float DeltaTime, ELevelTick TickType, FA
 			Ability->PostUpdate(DeltaTime);
 		}
 	}
-
-	
 }
 
 
-void UAllomancyComponent::ActivateAbility(TSubclassOf<UAllomanticAbilityBase> AbilityClass, TSubclassOf<AActor> target)
+void UAllomancyComponent::ActivateAbility(TSubclassOf<UAllomanticAbilityBase> AbilityClass, TSubclassOf<AActor> target, TSubclassOf<ACharacter> AbilityOwner)
 {
 	UAllomanticAbilityBase** Exists = Abilities.FindByPredicate([&](UAllomanticAbilityBase* A)
 	{
@@ -86,8 +86,28 @@ void UAllomancyComponent::ActivateAbility(TSubclassOf<UAllomanticAbilityBase> Ab
 	}
 	if (Ability)
 	{
-		Ability->Activate();
+		Ability->Activate(SelectedMetal, ComponentOwner);
 		Ability->Start();
+		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, TEXT("ActivateAbility"));
+	}
+}
+
+void UAllomancyComponent::PullTriggerInput(bool triggered, float value)
+{
+	for (UAllomanticAbilityBase* Ability: Abilities)
+	{
+		if (Ability)
+		{
+			UPullAbility* PullAbility = Cast<UPullAbility>(Ability);
+			if (PullAbility)
+			{
+				PullAbility->bIsTriggered = triggered;
+				PullAbility->TriggerValue = value;
+			}
+		}else
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, TEXT("PullTriggerIput function called without activating PullAbility"));
+		}
 	}
 }
 

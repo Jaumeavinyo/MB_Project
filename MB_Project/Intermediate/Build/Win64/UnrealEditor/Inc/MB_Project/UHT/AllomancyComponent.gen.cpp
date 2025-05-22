@@ -11,6 +11,8 @@ void EmptyLinkFunctionForGeneratedCodeAllomancyComponent() {}
 
 // Begin Cross Module References
 COREUOBJECT_API UClass* Z_Construct_UClass_UClass();
+ENGINE_API UClass* Z_Construct_UClass_AActor_NoRegister();
+ENGINE_API UClass* Z_Construct_UClass_ACharacter_NoRegister();
 ENGINE_API UClass* Z_Construct_UClass_UActorComponent();
 MB_PROJECT_API UClass* Z_Construct_UClass_AMetal_NoRegister();
 MB_PROJECT_API UClass* Z_Construct_UClass_UAllomancyComponent();
@@ -27,6 +29,8 @@ struct Z_Construct_UFunction_UAllomancyComponent_ActivateAbility_Statics
 	struct AllomancyComponent_eventActivateAbility_Parms
 	{
 		TSubclassOf<UAllomanticAbilityBase> AbilityClass;
+		TSubclassOf<AActor> target;
+		TSubclassOf<ACharacter> AbilityOwner;
 	};
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
@@ -34,6 +38,8 @@ struct Z_Construct_UFunction_UAllomancyComponent_ActivateAbility_Statics
 #if !UE_BUILD_SHIPPING
 		{ "Comment", "//GAMEPLAY FUNCTIONS\n" },
 #endif
+		{ "CPP_Default_AbilityOwner", "None" },
+		{ "CPP_Default_target", "None" },
 		{ "ModuleRelativePath", "AllomancyComponent.h" },
 #if !UE_BUILD_SHIPPING
 		{ "ToolTip", "GAMEPLAY FUNCTIONS" },
@@ -41,12 +47,18 @@ struct Z_Construct_UFunction_UAllomancyComponent_ActivateAbility_Statics
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FClassPropertyParams NewProp_AbilityClass;
+	static const UECodeGen_Private::FClassPropertyParams NewProp_target;
+	static const UECodeGen_Private::FClassPropertyParams NewProp_AbilityOwner;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static const UECodeGen_Private::FFunctionParams FuncParams;
 };
 const UECodeGen_Private::FClassPropertyParams Z_Construct_UFunction_UAllomancyComponent_ActivateAbility_Statics::NewProp_AbilityClass = { "AbilityClass", nullptr, (EPropertyFlags)0x0014000000000080, UECodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AllomancyComponent_eventActivateAbility_Parms, AbilityClass), Z_Construct_UClass_UClass, Z_Construct_UClass_UAllomanticAbilityBase_NoRegister, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FClassPropertyParams Z_Construct_UFunction_UAllomancyComponent_ActivateAbility_Statics::NewProp_target = { "target", nullptr, (EPropertyFlags)0x0014000000000080, UECodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AllomancyComponent_eventActivateAbility_Parms, target), Z_Construct_UClass_UClass, Z_Construct_UClass_AActor_NoRegister, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FClassPropertyParams Z_Construct_UFunction_UAllomancyComponent_ActivateAbility_Statics::NewProp_AbilityOwner = { "AbilityOwner", nullptr, (EPropertyFlags)0x0014000000000080, UECodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AllomancyComponent_eventActivateAbility_Parms, AbilityOwner), Z_Construct_UClass_UClass, Z_Construct_UClass_ACharacter_NoRegister, METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAllomancyComponent_ActivateAbility_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAllomancyComponent_ActivateAbility_Statics::NewProp_AbilityClass,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAllomancyComponent_ActivateAbility_Statics::NewProp_target,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAllomancyComponent_ActivateAbility_Statics::NewProp_AbilityOwner,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAllomancyComponent_ActivateAbility_Statics::PropPointers) < 2048);
 const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAllomancyComponent_ActivateAbility_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAllomancyComponent, nullptr, "ActivateAbility", nullptr, nullptr, Z_Construct_UFunction_UAllomancyComponent_ActivateAbility_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAllomancyComponent_ActivateAbility_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAllomancyComponent_ActivateAbility_Statics::AllomancyComponent_eventActivateAbility_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04080401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAllomancyComponent_ActivateAbility_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAllomancyComponent_ActivateAbility_Statics::Function_MetaDataParams) };
@@ -63,9 +75,11 @@ UFunction* Z_Construct_UFunction_UAllomancyComponent_ActivateAbility()
 DEFINE_FUNCTION(UAllomancyComponent::execActivateAbility)
 {
 	P_GET_OBJECT(UClass,Z_Param_AbilityClass);
+	P_GET_OBJECT(UClass,Z_Param_target);
+	P_GET_OBJECT(UClass,Z_Param_AbilityOwner);
 	P_FINISH;
 	P_NATIVE_BEGIN;
-	P_THIS->ActivateAbility(Z_Param_AbilityClass);
+	P_THIS->ActivateAbility(Z_Param_AbilityClass,Z_Param_target,Z_Param_AbilityOwner);
 	P_NATIVE_END;
 }
 // End Class UAllomancyComponent Function ActivateAbility
@@ -125,6 +139,65 @@ DEFINE_FUNCTION(UAllomancyComponent::execgetAllomanticMetal)
 	P_NATIVE_END;
 }
 // End Class UAllomancyComponent Function getAllomanticMetal
+
+// Begin Class UAllomancyComponent Function PullTriggerInput
+struct Z_Construct_UFunction_UAllomancyComponent_PullTriggerInput_Statics
+{
+	struct AllomancyComponent_eventPullTriggerInput_Parms
+	{
+		bool triggered;
+		float value;
+	};
+#if WITH_METADATA
+	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+		{ "Category", "Pull" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "//ABILITY INPUT HANDLING\n" },
+#endif
+		{ "ModuleRelativePath", "AllomancyComponent.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "ABILITY INPUT HANDLING" },
+#endif
+	};
+#endif // WITH_METADATA
+	static void NewProp_triggered_SetBit(void* Obj);
+	static const UECodeGen_Private::FBoolPropertyParams NewProp_triggered;
+	static const UECodeGen_Private::FFloatPropertyParams NewProp_value;
+	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+	static const UECodeGen_Private::FFunctionParams FuncParams;
+};
+void Z_Construct_UFunction_UAllomancyComponent_PullTriggerInput_Statics::NewProp_triggered_SetBit(void* Obj)
+{
+	((AllomancyComponent_eventPullTriggerInput_Parms*)Obj)->triggered = 1;
+}
+const UECodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_UAllomancyComponent_PullTriggerInput_Statics::NewProp_triggered = { "triggered", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(AllomancyComponent_eventPullTriggerInput_Parms), &Z_Construct_UFunction_UAllomancyComponent_PullTriggerInput_Statics::NewProp_triggered_SetBit, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FFloatPropertyParams Z_Construct_UFunction_UAllomancyComponent_PullTriggerInput_Statics::NewProp_value = { "value", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AllomancyComponent_eventPullTriggerInput_Parms, value), METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAllomancyComponent_PullTriggerInput_Statics::PropPointers[] = {
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAllomancyComponent_PullTriggerInput_Statics::NewProp_triggered,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAllomancyComponent_PullTriggerInput_Statics::NewProp_value,
+};
+static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAllomancyComponent_PullTriggerInput_Statics::PropPointers) < 2048);
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAllomancyComponent_PullTriggerInput_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAllomancyComponent, nullptr, "PullTriggerInput", nullptr, nullptr, Z_Construct_UFunction_UAllomancyComponent_PullTriggerInput_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAllomancyComponent_PullTriggerInput_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAllomancyComponent_PullTriggerInput_Statics::AllomancyComponent_eventPullTriggerInput_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04080401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAllomancyComponent_PullTriggerInput_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAllomancyComponent_PullTriggerInput_Statics::Function_MetaDataParams) };
+static_assert(sizeof(Z_Construct_UFunction_UAllomancyComponent_PullTriggerInput_Statics::AllomancyComponent_eventPullTriggerInput_Parms) < MAX_uint16);
+UFunction* Z_Construct_UFunction_UAllomancyComponent_PullTriggerInput()
+{
+	static UFunction* ReturnFunction = nullptr;
+	if (!ReturnFunction)
+	{
+		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UAllomancyComponent_PullTriggerInput_Statics::FuncParams);
+	}
+	return ReturnFunction;
+}
+DEFINE_FUNCTION(UAllomancyComponent::execPullTriggerInput)
+{
+	P_GET_UBOOL(Z_Param_triggered);
+	P_GET_PROPERTY(FFloatProperty,Z_Param_value);
+	P_FINISH;
+	P_NATIVE_BEGIN;
+	P_THIS->PullTriggerInput(Z_Param_triggered,Z_Param_value);
+	P_NATIVE_END;
+}
+// End Class UAllomancyComponent Function PullTriggerInput
 
 // Begin Class UAllomancyComponent Function SelectMetal
 struct Z_Construct_UFunction_UAllomancyComponent_SelectMetal_Statics
@@ -219,6 +292,7 @@ void UAllomancyComponent::StaticRegisterNativesUAllomancyComponent()
 	static const FNameNativePtrPair Funcs[] = {
 		{ "ActivateAbility", &UAllomancyComponent::execActivateAbility },
 		{ "getAllomanticMetal", &UAllomancyComponent::execgetAllomanticMetal },
+		{ "PullTriggerInput", &UAllomancyComponent::execPullTriggerInput },
 		{ "SelectMetal", &UAllomancyComponent::execSelectMetal },
 		{ "sortSceneMetals", &UAllomancyComponent::execsortSceneMetals },
 	};
@@ -301,8 +375,9 @@ struct Z_Construct_UClass_UAllomancyComponent_Statics
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
-		{ &Z_Construct_UFunction_UAllomancyComponent_ActivateAbility, "ActivateAbility" }, // 207738991
+		{ &Z_Construct_UFunction_UAllomancyComponent_ActivateAbility, "ActivateAbility" }, // 4069059661
 		{ &Z_Construct_UFunction_UAllomancyComponent_getAllomanticMetal, "getAllomanticMetal" }, // 863019672
+		{ &Z_Construct_UFunction_UAllomancyComponent_PullTriggerInput, "PullTriggerInput" }, // 1161360026
 		{ &Z_Construct_UFunction_UAllomancyComponent_SelectMetal, "SelectMetal" }, // 3957438487
 		{ &Z_Construct_UFunction_UAllomancyComponent_sortSceneMetals, "sortSceneMetals" }, // 3250050832
 	};
@@ -377,10 +452,10 @@ UAllomancyComponent::~UAllomancyComponent() {}
 struct Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_AllomancyComponent_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UAllomancyComponent, UAllomancyComponent::StaticClass, TEXT("UAllomancyComponent"), &Z_Registration_Info_UClass_UAllomancyComponent, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAllomancyComponent), 2035727159U) },
+		{ Z_Construct_UClass_UAllomancyComponent, UAllomancyComponent::StaticClass, TEXT("UAllomancyComponent"), &Z_Registration_Info_UClass_UAllomancyComponent, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAllomancyComponent), 4129995717U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_AllomancyComponent_h_438875360(TEXT("/Script/MB_Project"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_AllomancyComponent_h_3073354366(TEXT("/Script/MB_Project"),
 	Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_AllomancyComponent_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_AllomancyComponent_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

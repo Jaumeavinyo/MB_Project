@@ -16,7 +16,7 @@ public:
 	UAllomanticAbilityBase();
 	~UAllomanticAbilityBase();
 
-	 virtual void Activate(TSubclassOf<AActor> target = nullptr);
+	 virtual void Activate(AActor* target = nullptr, ACharacter* AbilityOwner = nullptr);
 	 virtual void DeActivate();
 	
 	virtual void Start();

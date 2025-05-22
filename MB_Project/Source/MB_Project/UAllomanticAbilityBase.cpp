@@ -12,7 +12,7 @@ UAllomanticAbilityBase::~UAllomanticAbilityBase()
 {
 }
 
-void UAllomanticAbilityBase::Activate(TSubclassOf<AActor> target)
+void UAllomanticAbilityBase::Activate(AActor* target ,ACharacter* AbilityOwner)
 {
 	bIsActive = true;
 }

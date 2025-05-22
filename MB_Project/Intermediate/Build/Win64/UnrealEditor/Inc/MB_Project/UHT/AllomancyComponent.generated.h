@@ -9,6 +9,8 @@
 #include "UObject/ScriptMacros.h"
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
+class AActor;
+class ACharacter;
 class AMetal;
 class UAllomanticAbilityBase;
 class UAllomanticMetal;
@@ -22,6 +24,7 @@ enum class EMetalType : uint8;
 	DECLARE_FUNCTION(execSelectMetal); \
 	DECLARE_FUNCTION(execsortSceneMetals); \
 	DECLARE_FUNCTION(execgetAllomanticMetal); \
+	DECLARE_FUNCTION(execPullTriggerInput); \
 	DECLARE_FUNCTION(execActivateAbility);
 
 
