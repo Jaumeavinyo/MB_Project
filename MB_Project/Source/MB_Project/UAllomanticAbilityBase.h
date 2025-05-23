@@ -8,7 +8,7 @@
 /**
  * 
  */
-UCLASS(BlueprintType)
+UCLASS(Blueprintable)
 class MB_PROJECT_API UAllomanticAbilityBase : public UObject
 {
 	GENERATED_BODY()

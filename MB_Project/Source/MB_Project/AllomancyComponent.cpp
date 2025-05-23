@@ -57,7 +57,23 @@ void UAllomancyComponent::TickComponent(float DeltaTime, ELevelTick TickType, FA
 		if (Ability && Ability->bIsActive)
 		{
 			Ability->PreUpdate(DeltaTime);
+			
+		}
+	}
+	for (UAllomanticAbilityBase* Ability: Abilities)
+	{
+		if (Ability && Ability->bIsActive)
+		{
+			
 			Ability->Update(DeltaTime);
+			
+		}
+	}
+	for (UAllomanticAbilityBase* Ability: Abilities)
+	{
+		if (Ability && Ability->bIsActive)
+		{
+			
 			Ability->PostUpdate(DeltaTime);
 		}
 	}
@@ -86,9 +102,10 @@ void UAllomancyComponent::ActivateAbility(TSubclassOf<UAllomanticAbilityBase> Ab
 	}
 	if (Ability)
 	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, TEXT("ActivateAbility"));
 		Ability->Activate(SelectedMetal, ComponentOwner);
 		Ability->Start();
-		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, TEXT("ActivateAbility"));
+		
 	}
 }
 
@@ -103,6 +120,10 @@ void UAllomancyComponent::PullTriggerInput(bool triggered, float value)
 			{
 				PullAbility->bIsTriggered = triggered;
 				PullAbility->TriggerValue = value;
+				if (triggered == false)
+				{
+					SelectedMetal = nullptr;
+				}
 			}
 		}else
 		{

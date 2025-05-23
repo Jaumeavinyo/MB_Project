@@ -29,7 +29,13 @@ public:
 	AActor* PullTarget;
 
 	UPROPERTY()
+	float initialDistance;
+	UPROPERTY()
+	float currDistance;
+	
+	UPROPERTY()
 	FVector MetalPos;
+	
 	UPROPERTY()
 	FVector CharPos;
 	
@@ -40,13 +46,25 @@ public:
 	bool bIsTriggered;
 	UPROPERTY()
 	float TriggerValue;
+
+
 	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Pull Ability")
+	UCurveFloat* PullForceCurve;
+
+	// Curve controlling lift or arc over time
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Pull Ability")
+	UCurveFloat* ArcAdjustmentCurve;
+
+
+
 	
-	
+	UPROPERTY(EditDefaultsOnly, Category="Pull")
+	float MaxPullForce = 100000.f;
 
 	UPROPERTY(EditDefaultsOnly, Category="Pull")
-	float PullForce = 100000.f;
-
+	float CurrPullForce;
+	
 	UPROPERTY(EditDefaultsOnly, Category="Pull")
 	float MinDistance = 100.f;
 

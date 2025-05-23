@@ -34,6 +34,7 @@ struct Z_Construct_UClass_UAllomanticAbilityBase_Statics
 		{ "Comment", "/**\n * \n */" },
 #endif
 		{ "IncludePath", "UAllomanticAbilityBase.h" },
+		{ "IsBlueprintBase", "true" },
 		{ "ModuleRelativePath", "UAllomanticAbilityBase.h" },
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_bIsActive_MetaData[] = {
@@ -98,10 +99,10 @@ DEFINE_VTABLE_PTR_HELPER_CTOR(UAllomanticAbilityBase);
 struct Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_UAllomanticAbilityBase_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UAllomanticAbilityBase, UAllomanticAbilityBase::StaticClass, TEXT("UAllomanticAbilityBase"), &Z_Registration_Info_UClass_UAllomanticAbilityBase, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAllomanticAbilityBase), 82003938U) },
+		{ Z_Construct_UClass_UAllomanticAbilityBase, UAllomanticAbilityBase::StaticClass, TEXT("UAllomanticAbilityBase"), &Z_Registration_Info_UClass_UAllomanticAbilityBase, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAllomanticAbilityBase), 1820737682U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_UAllomanticAbilityBase_h_2677388477(TEXT("/Script/MB_Project"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_UAllomanticAbilityBase_h_4283050669(TEXT("/Script/MB_Project"),
 	Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_UAllomanticAbilityBase_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_UAllomanticAbilityBase_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);
