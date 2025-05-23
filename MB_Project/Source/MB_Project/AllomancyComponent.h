@@ -4,8 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
-#include "UAllomanticAbility.h"
+#include "UAllomanticAbilityBase.h"
 #include "UAllomanticMetal.h"
+#include "Metal.h"
+#include "MB_ProjectCharacter.h"
+#include "Camera/CameraComponent.h"
 #include "AllomancyComponent.generated.h"
 
 
@@ -13,12 +16,12 @@
 
 class UAllomanticMetal;
 
-UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
+UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
 class MB_PROJECT_API UAllomancyComponent : public UActorComponent
 {
 	GENERATED_BODY()
 
-public:	
+public:
 	// Sets default values for this component's properties
 	UAllomancyComponent();
 	virtual void PostInitProperties() override;
@@ -29,31 +32,67 @@ protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
-public:	
+public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 	//CHANGE ALLOMANTIC METAL VALUE OVER TIME
-	UAllomanticMetal* selectedMetal;
+	
+	UAllomanticMetal* selectedAllomanticMetal;
 	bool bMetalToBeConsumed;
 	bool bIsConsumingMetal = true;
 	int32 ammountToBeConsumed;
 	FFloatCurve* CurrentConsumptionCurve;
 	float TimeSinceLastConsumption = 0.0f;
 	float TimeSinceConsumptionCalled = 0.0f;
-	
-	
-
 	float ConsumptionDuration = 0.0f;
 	float TimeConsumptionStart = 0.0f;
 
-protected:
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Allomancy")
-	TMap<FString, UAllomanticAbility*> ActiveAbilities;
 	
+
+protected:
+	//const vars
+	ACharacter* ComponentOwner;
+	
+	
+
+	//GAMEPLAY VARS
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "PULL", meta = (DisplayThumbnail = "true"))
+	float MetalSelectionCameraAngle;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "PULL", meta = (DisplayThumbnail = "true"))
+	float metalInteractDistance;
+	
+	UPROPERTY(BlueprintReadOnly, Category = "Allomancy")
+	TArray<UAllomanticAbilityBase*> Abilities;
+
 	UPROPERTY(EditAnywhere, Category = "Allomancy")
 	TMap<UAllomanticMetal*, int32> AllomanticMetals;
 
+	UPROPERTY(BlueprintReadWrite,Category="Allomancy")
+	TArray<AMetal*> SelectableMetals;
+	
+	//the valid most centered metal that is valid
+	UPROPERTY(BlueprintReadWrite, Category = "Allomancy")
+	AMetal* CenteredMetal;
+	
+	//the valid most centered metal that is selected by player input
+	UPROPERTY(BlueprintReadWrite, Category = "Allomancy")
+	AMetal* SelectedMetal;
+
+	
+	//GAMEPLAY FUNCTIONS
+	
+	UFUNCTION(BlueprintCallable, Category = "Allomancy")
+	void ActivateAbility(TSubclassOf<UAllomanticAbilityBase> AbilityClass,TSubclassOf<AActor> target = nullptr,TSubclassOf<ACharacter> AbilityOwner = nullptr);
+
+
+	//ABILITY INPUT HANDLING
+	UFUNCTION(BlueprintCallable, Category = "Pull")
+	void PullTriggerInput(bool triggered, float value);
+	
+	//ALLOMANTIC COMPONENT INTERNAL FUNCTIONS
+	
 	//Only for internal use, not for gameplay programming
 	void initAllomanticMetals();
 
@@ -74,7 +113,12 @@ public:
 	//UFUNCTION(BlueprintCallable,Category = "Allomancy")
 	//void consumeAllomanticMetal(UAllomanticMetal *metal,int32 ammount, FFloatCurve* curve);
 
-	UFUNCTION(BlueprintCallable,Category = "Allomancy")
+	UFUNCTION(BlueprintCallable, Category = "Allomancy")
 	UAllomanticMetal* getAllomanticMetal(EMetalType metalType_);
-	
+
+	UFUNCTION(BlueprintCallable, Category = "Allomancy")
+	TArray<AMetal*> sortSceneMetals(const TArray<AMetal*>& Metals);
+
+	UFUNCTION(BlueprintCallable,Category = "Allomancy")
+	bool SelectMetal();
 };

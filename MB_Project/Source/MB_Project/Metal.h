@@ -34,6 +34,12 @@ public:
 	UPROPERTY(VisibleAnywhere, Category = "Mesh")
 	UStaticMeshComponent* StaticMeshComponent;
 
+	// GAMEPLAY #############
+
+	// variables .............
+
+	float AngleFromCameraViewCenter;
+
 
 	// MATERIALS #############
 
@@ -48,9 +54,21 @@ public:
 	UMaterialInstance* InstanceMaterial;
 
 	//Used for temporary materials, use "Blueprint callable ChangeMaterial(Umaterial mat);" to define and use this material.
-	UPROPERTY(BlueprintReadOnly,Category = "Material")
+	UPROPERTY(BlueprintReadOnly, Category = "Material")
 	UMaterialInterface* CurrentMeshMaterial;
 
+	//Next materials store the different debug materials for metals when being interactuated with
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Material")
+	UMaterial* M_InteractuableMat;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Material")
+	UMaterial* M_SelectableMat;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Material")
+	UMaterial* M_NonInteractuableMat;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Material")
+	UMaterial* M_SelectedMat;
 	//functions .............
 
 	UFUNCTION(BlueprintCallable, Category = "Material")

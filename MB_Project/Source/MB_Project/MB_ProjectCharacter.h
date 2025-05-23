@@ -17,7 +17,7 @@ class AMetal;
 
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
 
-UCLASS(config=Game)
+UCLASS(config = Game)
 class AMB_ProjectCharacter : public ACharacter
 {
 	GENERATED_BODY()
@@ -29,7 +29,7 @@ class AMB_ProjectCharacter : public ACharacter
 	/** Follow camera */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	UCameraComponent* FollowCamera;
-	
+
 	/** MappingContext */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputMappingContext* DefaultMappingContext;
@@ -48,7 +48,7 @@ class AMB_ProjectCharacter : public ACharacter
 
 public:
 	AMB_ProjectCharacter();
-	
+
 
 protected:
 
@@ -57,7 +57,7 @@ protected:
 
 	/** Called for looking input */
 	void Look(const FInputActionValue& Value);
-			
+
 
 protected:
 
@@ -73,6 +73,7 @@ public:
 
 
 public:
+
 	//GAMEPLAY VARS AND CODE
 
 	UPROPERTY(BlueprintReadWrite, Category = "Allomancy")
