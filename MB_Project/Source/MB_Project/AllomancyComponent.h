@@ -120,5 +120,5 @@ public:
 	TArray<AMetal*> sortSceneMetals(const TArray<AMetal*>& Metals);
 
 	UFUNCTION(BlueprintCallable,Category = "Allomancy")
-	void SelectMetal();
+	bool SelectMetal();
 };

@@ -300,25 +300,29 @@ TArray<AMetal*> UAllomancyComponent::sortSceneMetals(const TArray<AMetal*>& Meta
 	return selectableMetals;
 }
 
-void UAllomancyComponent::SelectMetal()
+bool UAllomancyComponent::SelectMetal()
 {
-	for (AMetal* Metal : SelectableMetals)
+	if (SelectableMetals.Num() > 1)
 	{
-		if (CenteredMetal)
+		for (AMetal* Metal : SelectableMetals)
 		{
-			if (Metal->AngleFromCameraViewCenter < CenteredMetal->AngleFromCameraViewCenter)
+			if (CenteredMetal)
+			{
+				if (Metal->AngleFromCameraViewCenter < CenteredMetal->AngleFromCameraViewCenter)
+				{
+					CenteredMetal = Metal;
+				}
+			}
 			{
 				CenteredMetal = Metal;
 			}
 		}
-		{
-			CenteredMetal = Metal;
-		}
-		
+		SelectedMetal = CenteredMetal;
+		SelectedMetal->ChangeMaterial(SelectedMetal->M_SelectedMat);
+		return true;
 	}
-
-	SelectedMetal = CenteredMetal;
-	SelectedMetal->ChangeMaterial(SelectedMetal->M_SelectedMat);
+	return false;
+	
 }
 
 

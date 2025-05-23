@@ -202,15 +202,32 @@ DEFINE_FUNCTION(UAllomancyComponent::execPullTriggerInput)
 // Begin Class UAllomancyComponent Function SelectMetal
 struct Z_Construct_UFunction_UAllomancyComponent_SelectMetal_Statics
 {
+	struct AllomancyComponent_eventSelectMetal_Parms
+	{
+		bool ReturnValue;
+	};
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
 		{ "Category", "Allomancy" },
 		{ "ModuleRelativePath", "AllomancyComponent.h" },
 	};
 #endif // WITH_METADATA
+	static void NewProp_ReturnValue_SetBit(void* Obj);
+	static const UECodeGen_Private::FBoolPropertyParams NewProp_ReturnValue;
+	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static const UECodeGen_Private::FFunctionParams FuncParams;
 };
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAllomancyComponent_SelectMetal_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAllomancyComponent, nullptr, "SelectMetal", nullptr, nullptr, nullptr, 0, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAllomancyComponent_SelectMetal_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAllomancyComponent_SelectMetal_Statics::Function_MetaDataParams) };
+void Z_Construct_UFunction_UAllomancyComponent_SelectMetal_Statics::NewProp_ReturnValue_SetBit(void* Obj)
+{
+	((AllomancyComponent_eventSelectMetal_Parms*)Obj)->ReturnValue = 1;
+}
+const UECodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_UAllomancyComponent_SelectMetal_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(AllomancyComponent_eventSelectMetal_Parms), &Z_Construct_UFunction_UAllomancyComponent_SelectMetal_Statics::NewProp_ReturnValue_SetBit, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAllomancyComponent_SelectMetal_Statics::PropPointers[] = {
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAllomancyComponent_SelectMetal_Statics::NewProp_ReturnValue,
+};
+static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAllomancyComponent_SelectMetal_Statics::PropPointers) < 2048);
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAllomancyComponent_SelectMetal_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAllomancyComponent, nullptr, "SelectMetal", nullptr, nullptr, Z_Construct_UFunction_UAllomancyComponent_SelectMetal_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAllomancyComponent_SelectMetal_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAllomancyComponent_SelectMetal_Statics::AllomancyComponent_eventSelectMetal_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAllomancyComponent_SelectMetal_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAllomancyComponent_SelectMetal_Statics::Function_MetaDataParams) };
+static_assert(sizeof(Z_Construct_UFunction_UAllomancyComponent_SelectMetal_Statics::AllomancyComponent_eventSelectMetal_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_UAllomancyComponent_SelectMetal()
 {
 	static UFunction* ReturnFunction = nullptr;
@@ -224,7 +241,7 @@ DEFINE_FUNCTION(UAllomancyComponent::execSelectMetal)
 {
 	P_FINISH;
 	P_NATIVE_BEGIN;
-	P_THIS->SelectMetal();
+	*(bool*)Z_Param__Result=P_THIS->SelectMetal();
 	P_NATIVE_END;
 }
 // End Class UAllomancyComponent Function SelectMetal
@@ -378,7 +395,7 @@ struct Z_Construct_UClass_UAllomancyComponent_Statics
 		{ &Z_Construct_UFunction_UAllomancyComponent_ActivateAbility, "ActivateAbility" }, // 4069059661
 		{ &Z_Construct_UFunction_UAllomancyComponent_getAllomanticMetal, "getAllomanticMetal" }, // 863019672
 		{ &Z_Construct_UFunction_UAllomancyComponent_PullTriggerInput, "PullTriggerInput" }, // 1161360026
-		{ &Z_Construct_UFunction_UAllomancyComponent_SelectMetal, "SelectMetal" }, // 3957438487
+		{ &Z_Construct_UFunction_UAllomancyComponent_SelectMetal, "SelectMetal" }, // 2173922290
 		{ &Z_Construct_UFunction_UAllomancyComponent_sortSceneMetals, "sortSceneMetals" }, // 3250050832
 	};
 	static_assert(UE_ARRAY_COUNT(FuncInfo) < 2048);
@@ -452,10 +469,10 @@ UAllomancyComponent::~UAllomancyComponent() {}
 struct Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_AllomancyComponent_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UAllomancyComponent, UAllomancyComponent::StaticClass, TEXT("UAllomancyComponent"), &Z_Registration_Info_UClass_UAllomancyComponent, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAllomancyComponent), 4129995717U) },
+		{ Z_Construct_UClass_UAllomancyComponent, UAllomancyComponent::StaticClass, TEXT("UAllomancyComponent"), &Z_Registration_Info_UClass_UAllomancyComponent, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAllomancyComponent), 3067717883U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_AllomancyComponent_h_3073354366(TEXT("/Script/MB_Project"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_AllomancyComponent_h_2593446975(TEXT("/Script/MB_Project"),
 	Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_AllomancyComponent_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_AllomancyComponent_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);
