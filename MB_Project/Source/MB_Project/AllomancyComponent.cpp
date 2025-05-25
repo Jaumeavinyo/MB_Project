@@ -122,7 +122,7 @@ void UAllomancyComponent::PullTriggerInput(bool triggered, float value)
 				PullAbility->TriggerValue = value;
 				if (triggered == false)
 				{
-					SelectedMetal = nullptr;
+					UnSelectMetal();
 				}
 			}
 		}else
@@ -151,26 +151,7 @@ void UAllomancyComponent::initAllomanticMetals() //DONE
 	AllomanticMetals.Add(SteelMetal);
 }
 
-//void UAllomancyComponent::consumeAllomanticMetal(UAllomanticMetal* metal, int32 ammount, FFloatCurve* curve) //WIP
-//{
-	//if (!metal || !curve) {
-	//	UE_LOG(LogTemp, Warning, TEXT("metal or consumption graph in function: UAllomancyComponent::consumeAllomanticMetal are not valid"));
-	//	return;
-	//}
 
-	//if (AllomanticMetals.Contains(metal))
-	//{
-	//	selectedMetal = metal;
-	//}
-	////get consumption interval from graph?
-	//bMetalToBeConsumed = true;
-	//bIsConsumingMetal = true;
-	//ammountToBeConsumed = ammount;
-	//CurrentConsumptionCurve = curve;
-
-	//TimeConsumptionStart = FApp::GetCurrentTime();
-
-//}
 
 int32 UAllomancyComponent::getConsumptionvalueFromCurve(FFloatCurve* ConsumptionCurve, float TimeSinceConsumptionStarted) {
 
@@ -235,65 +216,67 @@ TArray<AMetal*> UAllomancyComponent::sortSceneMetals(const TArray<AMetal*>& Meta
 
 
 	for (AMetal* Metal : Metals) {
+		if (Metal != SelectedMetal)
+		{
+			//Check if metal object is visible (being rendered)
+			if (Metal && Metal->WasRecentlyRendered()) {
 
-		//Check if metal object is visible (being rendered)
-		if (Metal && Metal->WasRecentlyRendered()) {
+				//Check if metal is within interaction distance
+				FVector MetalWorldPosition = Metal->GetActorTransform().GetLocation();
+				FVector playerPosition = GetOwner()->GetActorLocation();
+				float distanceToPlayer = FVector::Dist(MetalWorldPosition, playerPosition);
 
-			//Check if metal is within interaction distance
-			FVector MetalWorldPosition = Metal->GetActorTransform().GetLocation();
-			FVector playerPosition = GetOwner()->GetActorLocation();
-			float distanceToPlayer = FVector::Dist(MetalWorldPosition, playerPosition);
+				if (distanceToPlayer <= metalInteractDistance) {
 
-			if (distanceToPlayer <= metalInteractDistance) {
+					Metal->ChangeMaterial(Metal->M_InteractuableMat);
 
-				Metal->ChangeMaterial(Metal->M_InteractuableMat);
+					//Is inside selectable angle of camera view?
+					AMB_ProjectCharacter* player = Cast<AMB_ProjectCharacter>(GetOwner());
 
-				//Is inside selectable angle of camera view?
-				AMB_ProjectCharacter* player = Cast<AMB_ProjectCharacter>(GetOwner());
+					FVector Player_Metal_Vec = MetalWorldPosition - playerPosition;
+					Player_Metal_Vec.Normalize();
 
-				FVector Player_Metal_Vec = MetalWorldPosition - playerPosition;
-				Player_Metal_Vec.Normalize();
+					FVector cameraForwardVec = player->GetFollowCamera()->GetForwardVector();
+					//float angleWithCameraView = FMath::RadiansToDegrees(acos(Player_Metal_Vec.Dot(cameraForwardVec)));
 
-				FVector cameraForwardVec = player->GetFollowCamera()->GetForwardVector();
-				//float angleWithCameraView = FMath::RadiansToDegrees(acos(Player_Metal_Vec.Dot(cameraForwardVec)));
+					float dot = FVector::DotProduct(Player_Metal_Vec, cameraForwardVec);
+					dot = FMath::Clamp(dot, -1.0f, 1.0f); // Prevent acos from crashing
 
-				float dot = FVector::DotProduct(Player_Metal_Vec, cameraForwardVec);
-				dot = FMath::Clamp(dot, -1.0f, 1.0f); // Prevent acos from crashing
-
-				float angleWithCameraView = FMath::RadiansToDegrees(acos(dot));
+					float angleWithCameraView = FMath::RadiansToDegrees(acos(dot));
 				
-				//Dot product order matters, this order is vec metal-player projection on cameraforward vec (all normalized)
-				if (angleWithCameraView <= MetalSelectionCameraAngle) {
+					//Dot product order matters, this order is vec metal-player projection on cameraforward vec (all normalized)
+					if (angleWithCameraView <= MetalSelectionCameraAngle) {
 
-					Metal->ChangeMaterial(Metal->M_SelectableMat);
-					Metal->AngleFromCameraViewCenter = angleWithCameraView;//FMath::RadiansToDegrees(acos(Player_Metal_Vec.Dot(cameraForwardVec)));
+						Metal->ChangeMaterial(Metal->M_SelectableMat);
+						Metal->AngleFromCameraViewCenter = angleWithCameraView;//FMath::RadiansToDegrees(acos(Player_Metal_Vec.Dot(cameraForwardVec)));
 
-					if (!selectableMetals.Contains(Metal)) {
-						selectableMetals.Add(Metal);
+						if (!selectableMetals.Contains(Metal)) {
+							selectableMetals.Add(Metal);
+						}
+					}
+					else {
+
+						Metal->ChangeMaterial(Metal->M_InteractuableMat);
+						if (selectableMetals.Contains(Metal)) {
+							selectableMetals.Remove(Metal);
+						}
 					}
 				}
 				else {
 
-					Metal->ChangeMaterial(Metal->M_InteractuableMat);
+					Metal->ChangeMaterial(Metal->M_NonInteractuableMat);
 					if (selectableMetals.Contains(Metal)) {
 						selectableMetals.Remove(Metal);
 					}
 				}
 			}
 			else {
-
+				//Was this metal selectable before not being visible?(before not being rendered)
 				Metal->ChangeMaterial(Metal->M_NonInteractuableMat);
-				if (selectableMetals.Contains(Metal)) {
+				if (selectableMetals.Contains(Metal))
+				{
 					selectableMetals.Remove(Metal);
 				}
-			}
-		}
-		else {
-			//Was this metal selectable before not being visible?(before not being rendered)
-			Metal->ChangeMaterial(Metal->M_NonInteractuableMat);
-			if (selectableMetals.Contains(Metal))
-			{
-				selectableMetals.Remove(Metal);
 			}
 		}
 	}
@@ -304,6 +287,7 @@ bool UAllomancyComponent::SelectMetal()
 {
 	if (SelectableMetals.Num() > 1)
 	{
+		//Look for all selectable metals and compare wich one is more centered
 		for (AMetal* Metal : SelectableMetals)
 		{
 			if (CenteredMetal)
@@ -312,10 +296,11 @@ bool UAllomancyComponent::SelectMetal()
 				{
 					CenteredMetal = Metal;
 				}
-			}
-			{
+			//is centered metal does not exist yet, make the first metal of the
+			//list the most centered to start comparing it with other selectable metals	
+			}else{
 				CenteredMetal = Metal;
-			}
+			}		
 		}
 		SelectedMetal = CenteredMetal;
 		SelectedMetal->ChangeMaterial(SelectedMetal->M_SelectedMat);
@@ -323,6 +308,11 @@ bool UAllomancyComponent::SelectMetal()
 	}
 	return false;
 	
+}
+
+void UAllomancyComponent::UnSelectMetal()
+{
+	SelectedMetal = nullptr;
 }
 
 
