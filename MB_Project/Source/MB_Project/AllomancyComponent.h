@@ -121,4 +121,5 @@ public:
 
 	UFUNCTION(BlueprintCallable,Category = "Allomancy")
 	bool SelectMetal();
+	void UnSelectMetal();
 };

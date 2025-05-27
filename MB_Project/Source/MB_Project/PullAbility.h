@@ -22,39 +22,73 @@ public:
 	virtual void Update(float DeltaTime) override;
 	virtual void PostUpdate(float DeltaTime) override;
 	virtual void Stop() override;
+	
+	UPROPERTY()
+    ACharacter* OwnerCharacter = nullptr;
+
+	//CHARACTER AND METAL WORLD POS AND DIRECTION
+	UPROPERTY()
+    FVector MetalPos;
+    	
+    UPROPERTY()
+    FVector CharPos;
+	
 	UPROPERTY(BlueprintReadOnly, Category = "Pull")
 	FVector PullDir;
 
 	UPROPERTY(BlueprintReadOnly, Category = "Pull")
 	AActor* PullTarget;
 
+	//AIR DRIFTING AND MOVEMENT
+	UPROPERTY(BlueprintReadOnly,Category = "Pull" )
+	FVector PullForce;
+	UPROPERTY(BlueprintReadOnly,Category = "Pull" )
+	FVector DesiredPullForce;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Pull Ability")
+	float Drag; //0.98 or less than 1 this would slow speed and give inertia feel
+	
+	
+	
 	UPROPERTY()
 	float initialDistance;
 	UPROPERTY()
 	float currDistance;
-	
-	UPROPERTY()
-	FVector MetalPos;
-	
-	UPROPERTY()
-	FVector CharPos;
-	
-	UPROPERTY()
-	ACharacter* OwnerCharacter = nullptr;
+
 
 	UPROPERTY()
 	bool bIsTriggered;
+	
 	UPROPERTY()
 	float TriggerValue;
+	
+	UPROPERTY()
+	bool bCanPull;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Pull Ability")
+	float InitialLaunchForce;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Pull Ability")
+	float InitialLaunchDirAngle;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Pull Ability")
+	float InitialLaunchTimeDuration = 1.0f;
 
+	UPROPERTY()
+	float AbilityStartTime;
+	UPROPERTY()
+	float AbilityCurrentDuration;
 
+	
+	int32 FrameCounter = 0;//debug purposes
+	
 	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Pull Ability")
 	UCurveFloat* PullForceCurve;
 
 	// Curve controlling lift or arc over time
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Pull Ability")
-	UCurveFloat* ArcAdjustmentCurve;
+	UCurveFloat* TurnRateCurve;
 
 
 

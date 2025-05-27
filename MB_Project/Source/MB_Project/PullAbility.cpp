@@ -3,6 +3,8 @@
 
 #include "PullAbility.h"
 #include "MB_ProjectCharacter.h"
+#include "VectorTypes.h"
+#include "Chaos/Utilities.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
 void UPullAbility::Activate(AActor* target,ACharacter* AbilityOwner)
@@ -14,6 +16,15 @@ void UPullAbility::Activate(AActor* target,ACharacter* AbilityOwner)
 	}
 
 	OwnerCharacter = AbilityOwner;
+	if (OwnerCharacter->GetCharacterMovement()->MovementMode == MOVE_Walking)
+	{
+		bCanPull = false;
+	}else
+	{
+		bCanPull = true;
+	}
+
+	
 }
 
 void UPullAbility::DeActivate()
@@ -25,69 +36,106 @@ void UPullAbility::Start()
 {
 	Super::Start();
 
+	AbilityStartTime = GetWorld()->GetTimeSeconds();
+	
 	MetalPos = PullTarget->GetActorLocation();
 	CharPos = OwnerCharacter->GetActorLocation();
 
 	initialDistance = FVector::Dist(MetalPos, CharPos);
 	currDistance = initialDistance;
-	//GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, TEXT("Pull Start()"));
+
+	if (bCanPull == false)
+	{
+		FVector Forward = OwnerCharacter->GetActorForwardVector();
+		FVector RotationAxis = FVector::CrossProduct(Forward, FVector::UpVector); // Character's local right
+		RotationAxis.Normalize();
+		
+		FVector LaunchDirection = Forward.RotateAngleAxis(InitialLaunchDirAngle, RotationAxis); // Negative to pitch upward
+		FVector LaunchVelocity = LaunchDirection * InitialLaunchForce;
+		OwnerCharacter->LaunchCharacter(LaunchVelocity, true, true);
+	}
+	
 }
 
 void UPullAbility::PreUpdate(float DeltaTime)
 {
 	Super::PreUpdate(DeltaTime);
-
-	if (FVector::Dist(MetalPos,CharPos)<=400.0f)
+	
+	if (bCanPull)
 	{
-		FString Message = FString::Printf(TEXT("ZERO VECTOR"));
-		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, Message);
-		OwnerCharacter->GetCharacterMovement()->Velocity = FVector::ZeroVector;
-		OwnerCharacter->GetCharacterMovement()->StopMovementImmediately();
-		//OwnerCharacter->GetCharacterMovement()->SetMovementMode(MOVE_Walking);
-		
-		Stop();
+		if (FVector::Dist(MetalPos,CharPos)<=150.0f)
+		{
+			OwnerCharacter->GetCharacterMovement()->Velocity = FVector::ZeroVector;
+			OwnerCharacter->GetCharacterMovement()->StopMovementImmediately();
+			Stop();
+		}
+	
+		if (bIsTriggered && TriggerValue > 0)
+		{
+			//target Direction
+			MetalPos = PullTarget->GetActorLocation();
+			CharPos = OwnerCharacter->GetActorLocation();
+			PullDir = (MetalPos - CharPos).GetSafeNormal();
+
+			//Force calculation based on distance
+			currDistance = initialDistance - (FVector::Dist(MetalPos, CharPos));
+			float PullForceCurvePoint = currDistance/initialDistance;
+			DesiredPullForce = MaxPullForce * PullForceCurve->GetFloatValue(PullForceCurvePoint) * PullDir /** DeltaTime*/;
+
+			//Curve of inertia depending on dir vs desiredDir angle
+			float TurnrateCurvePoint = FVector::DotProduct(PullDir,OwnerCharacter->GetVelocity().GetSafeNormal());
+			float TurnRateValue = TurnRateCurve->GetFloatValue(TurnrateCurvePoint);
+			PullForce = FMath::VInterpTo(OwnerCharacter->GetVelocity(), DesiredPullForce, DeltaTime, TurnRateValue);
+			PullForce *= Drag;
+		}else
+		{
+			Stop();
+		}
 	}
 	
-	if (bIsTriggered && TriggerValue > 0)
-	{
-		
-		//Direction
-		MetalPos = PullTarget->GetActorLocation();
-		CharPos = OwnerCharacter->GetActorLocation();
-
-		PullDir = (MetalPos - CharPos).GetSafeNormal();
-		
-		//Pull force curve: calculate 0-1 in wich point of rthe curve we are
-		currDistance = initialDistance - (FVector::Dist(MetalPos, CharPos));
-		float curvePoint = currDistance/initialDistance;
-		CurrPullForce = MaxPullForce * PullForceCurve->GetFloatValue(curvePoint);
-		
-		//FString Message = FString::Printf(TEXT("initialdistance: %f currDistance: %f currPullForce: %f curve point: %f"),initialDistance,currDistance, CurrPullForce, curvePoint);
-		//GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, Message);
-	}else
-	{
-		
-		Stop();
-	}
+	
 }
 
 void UPullAbility::Update(float DeltaTime)
 {
 	Super::Update(DeltaTime);
+	if (bCanPull)
+	{
+		FrameCounter++;
+		OwnerCharacter->SetActorRotation(FRotator(0.f,PullDir.Rotation().Yaw,0.f));
+		if (FrameCounter % 2 == 0)
+		{
+			DrawDebugDirectionalArrow(GetWorld(), OwnerCharacter->GetActorLocation(), OwnerCharacter->GetActorLocation()+PullForce, 200.0f, FColor::Red, false, 20.0f, 0, 3.0f);
+			DrawDebugDirectionalArrow(GetWorld(), OwnerCharacter->GetActorLocation(), OwnerCharacter->GetActorLocation()+OwnerCharacter->GetVelocity().GetSafeNormal(), 20.0f, FColor::Green, false, 50.0f, 0, 3.0f);
+		}
+		if (OwnerCharacter->GetCharacterMovement()->MovementMode == MOVE_Walking)
+		{
+			OwnerCharacter->GetCharacterMovement()->SetMovementMode(MOVE_Falling);
+		}
 	
-	FVector PullVelocity = PullDir * CurrPullForce * DeltaTime;
-	OwnerCharacter->LaunchCharacter(PullVelocity, true, true);
+		OwnerCharacter->GetCharacterMovement()->Velocity = PullForce;
+		//OwnerCharacter->LaunchCharacter(PullForce, true, true);
+	}
+	
 }
 
 void UPullAbility::PostUpdate(float DeltaTime)
 {
 	Super::PostUpdate(DeltaTime);
+	if (!bCanPull)
+	{
+		AbilityCurrentDuration = GetWorld()->GetTimeSeconds()-AbilityStartTime;
+		if (AbilityCurrentDuration >= InitialLaunchTimeDuration)
+		{
+			bCanPull = true;
+		}
+	}
 	
 }
 
 void UPullAbility::Stop()
 {
 	Super::Stop();
-	
+	bCanPull = false;
 	DeActivate();
 }
