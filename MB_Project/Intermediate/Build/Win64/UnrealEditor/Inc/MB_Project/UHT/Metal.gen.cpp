@@ -181,6 +181,10 @@ struct Z_Construct_UClass_AMetal_Statics
 		{ "Category", "Material" },
 		{ "ModuleRelativePath", "Metal.h" },
 	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_M_MostCenteredMat_MetaData[] = {
+		{ "Category", "Material" },
+		{ "ModuleRelativePath", "Metal.h" },
+	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_M_SelectedMat_MetaData[] = {
 		{ "Category", "Material" },
 		{ "ModuleRelativePath", "Metal.h" },
@@ -208,6 +212,7 @@ struct Z_Construct_UClass_AMetal_Statics
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_M_InteractuableMat;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_M_SelectableMat;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_M_NonInteractuableMat;
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_M_MostCenteredMat;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_M_SelectedMat;
 	static void NewProp_StaticMetal_SetBit(void* Obj);
 	static const UECodeGen_Private::FBoolPropertyParams NewProp_StaticMetal;
@@ -231,6 +236,7 @@ const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AMetal_Statics
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AMetal_Statics::NewProp_M_InteractuableMat = { "M_InteractuableMat", nullptr, (EPropertyFlags)0x0010000000010015, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AMetal, M_InteractuableMat), Z_Construct_UClass_UMaterial_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_M_InteractuableMat_MetaData), NewProp_M_InteractuableMat_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AMetal_Statics::NewProp_M_SelectableMat = { "M_SelectableMat", nullptr, (EPropertyFlags)0x0010000000010015, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AMetal, M_SelectableMat), Z_Construct_UClass_UMaterial_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_M_SelectableMat_MetaData), NewProp_M_SelectableMat_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AMetal_Statics::NewProp_M_NonInteractuableMat = { "M_NonInteractuableMat", nullptr, (EPropertyFlags)0x0010000000010015, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AMetal, M_NonInteractuableMat), Z_Construct_UClass_UMaterial_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_M_NonInteractuableMat_MetaData), NewProp_M_NonInteractuableMat_MetaData) };
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AMetal_Statics::NewProp_M_MostCenteredMat = { "M_MostCenteredMat", nullptr, (EPropertyFlags)0x0010000000010015, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AMetal, M_MostCenteredMat), Z_Construct_UClass_UMaterial_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_M_MostCenteredMat_MetaData), NewProp_M_MostCenteredMat_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AMetal_Statics::NewProp_M_SelectedMat = { "M_SelectedMat", nullptr, (EPropertyFlags)0x0010000000010015, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AMetal, M_SelectedMat), Z_Construct_UClass_UMaterial_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_M_SelectedMat_MetaData), NewProp_M_SelectedMat_MetaData) };
 void Z_Construct_UClass_AMetal_Statics::NewProp_StaticMetal_SetBit(void* Obj)
 {
@@ -246,6 +252,7 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AMetal_St
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMetal_Statics::NewProp_M_InteractuableMat,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMetal_Statics::NewProp_M_SelectableMat,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMetal_Statics::NewProp_M_NonInteractuableMat,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMetal_Statics::NewProp_M_MostCenteredMat,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMetal_Statics::NewProp_M_SelectedMat,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMetal_Statics::NewProp_StaticMetal,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMetal_Statics::NewProp_MetalWeight,
@@ -291,10 +298,10 @@ AMetal::~AMetal() {}
 struct Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_Metal_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_AMetal, AMetal::StaticClass, TEXT("AMetal"), &Z_Registration_Info_UClass_AMetal, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AMetal), 1833821981U) },
+		{ Z_Construct_UClass_AMetal, AMetal::StaticClass, TEXT("AMetal"), &Z_Registration_Info_UClass_AMetal, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AMetal), 1847109908U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_Metal_h_309835603(TEXT("/Script/MB_Project"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_Metal_h_1524824360(TEXT("/Script/MB_Project"),
 	Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_Metal_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_Metal_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

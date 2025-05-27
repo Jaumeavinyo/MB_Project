@@ -66,7 +66,10 @@ public:
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Material")
 	UMaterial* M_NonInteractuableMat;
-
+	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Material")
+	UMaterial* M_MostCenteredMat;
+	
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Material")
 	UMaterial* M_SelectedMat;
 	//functions .............

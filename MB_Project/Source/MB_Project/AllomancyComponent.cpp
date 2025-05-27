@@ -102,7 +102,6 @@ void UAllomancyComponent::ActivateAbility(TSubclassOf<UAllomanticAbilityBase> Ab
 	}
 	if (Ability)
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, TEXT("ActivateAbility"));
 		Ability->Activate(SelectedMetal, ComponentOwner);
 		Ability->Start();
 		
@@ -151,8 +150,6 @@ void UAllomancyComponent::initAllomanticMetals() //DONE
 	AllomanticMetals.Add(SteelMetal);
 }
 
-
-
 int32 UAllomancyComponent::getConsumptionvalueFromCurve(FFloatCurve* ConsumptionCurve, float TimeSinceConsumptionStarted) {
 
 
@@ -194,7 +191,6 @@ void UAllomancyComponent::changeAllomanticMetalValue(UAllomanticMetal* metal, in
 	}
 
 }
-
 
 UAllomanticMetal* UAllomancyComponent::getAllomanticMetal(EMetalType metalType_)  //DONE
 {
@@ -285,7 +281,7 @@ TArray<AMetal*> UAllomancyComponent::sortSceneMetals(const TArray<AMetal*>& Meta
 
 bool UAllomancyComponent::SelectMetal()
 {
-	if (SelectableMetals.Num() > 1)
+	if (SelectableMetals.Num() > 0)
 	{
 		//Look for all selectable metals and compare wich one is more centered
 		for (AMetal* Metal : SelectableMetals)
@@ -312,7 +308,10 @@ bool UAllomancyComponent::SelectMetal()
 
 void UAllomancyComponent::UnSelectMetal()
 {
+	FString MetalName = SelectedMetal->GetName(); // Or a custom method like GetMetalName()
+	CenteredMetal = nullptr;
 	SelectedMetal = nullptr;
+	
 }
 
 

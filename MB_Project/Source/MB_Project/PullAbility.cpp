@@ -39,8 +39,8 @@ void UPullAbility::PreUpdate(float DeltaTime)
 
 	if (FVector::Dist(MetalPos,CharPos)<=400.0f)
 	{
-		FString Message = FString::Printf(TEXT("ZERO VECTOR"));
-		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, Message);
+		//FString Message = FString::Printf(TEXT("ZERO VECTOR"));
+		//GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, Message);
 		OwnerCharacter->GetCharacterMovement()->Velocity = FVector::ZeroVector;
 		OwnerCharacter->GetCharacterMovement()->StopMovementImmediately();
 		//OwnerCharacter->GetCharacterMovement()->SetMovementMode(MOVE_Walking);
