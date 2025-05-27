@@ -44,7 +44,9 @@ void UAllomancyComponent::BeginPlay()
 void UAllomancyComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
+	float FPS = 1.0f / GetWorld()->GetDeltaSeconds();
+	FString FPSString = FString::Printf(TEXT("FPS: %.1f"), FPS);
+	GEngine->AddOnScreenDebugMessage(1, 0.f, FColor::Green, FPSString);
 	// ...
 	if (bMetalToBeConsumed) {
 		if (CurrentConsumptionCurve) {

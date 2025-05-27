@@ -42,13 +42,12 @@ public:
 	//AIR DRIFTING AND MOVEMENT
 	UPROPERTY(BlueprintReadOnly,Category = "Pull" )
 	FVector PullForce;
+	UPROPERTY(BlueprintReadOnly,Category = "Pull" )
+	FVector DesiredPullForce;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Pull Ability")
-	float Drag; //0.98 or less than 1 this would slow speed, don't know if should use
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Pull Ability")
-	float SteerAngle;
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Pull Ability")
-	float Traction;
+	float Drag; //0.98 or less than 1 this would slow speed and give inertia feel
+	
 	
 	
 	UPROPERTY()
@@ -59,17 +58,37 @@ public:
 
 	UPROPERTY()
 	bool bIsTriggered;
+	
 	UPROPERTY()
 	float TriggerValue;
+	
+	UPROPERTY()
+	bool bCanPull;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Pull Ability")
+	float InitialLaunchForce;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Pull Ability")
+	float InitialLaunchDirAngle;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Pull Ability")
+	float InitialLaunchTimeDuration = 1.0f;
 
+	UPROPERTY()
+	float AbilityStartTime;
+	UPROPERTY()
+	float AbilityCurrentDuration;
 
+	
+	int32 FrameCounter = 0;//debug purposes
+	
 	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Pull Ability")
 	UCurveFloat* PullForceCurve;
 
 	// Curve controlling lift or arc over time
-	//UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Pull Ability")
-	//UCurveFloat* ArcAdjustmentCurve;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Pull Ability")
+	UCurveFloat* TurnRateCurve;
 
 
 
