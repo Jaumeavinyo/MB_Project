@@ -39,34 +39,26 @@ void UPullAbility::PreUpdate(float DeltaTime)
 
 	if (FVector::Dist(MetalPos,CharPos)<=400.0f)
 	{
-		//FString Message = FString::Printf(TEXT("ZERO VECTOR"));
-		//GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, Message);
 		OwnerCharacter->GetCharacterMovement()->Velocity = FVector::ZeroVector;
 		OwnerCharacter->GetCharacterMovement()->StopMovementImmediately();
-		//OwnerCharacter->GetCharacterMovement()->SetMovementMode(MOVE_Walking);
-		
 		Stop();
 	}
 	
 	if (bIsTriggered && TriggerValue > 0)
 	{
-		
 		//Direction
 		MetalPos = PullTarget->GetActorLocation();
 		CharPos = OwnerCharacter->GetActorLocation();
-
 		PullDir = (MetalPos - CharPos).GetSafeNormal();
+
 		
-		//Pull force curve: calculate 0-1 in wich point of rthe curve we are
+		
 		currDistance = initialDistance - (FVector::Dist(MetalPos, CharPos));
 		float curvePoint = currDistance/initialDistance;
-		CurrPullForce = MaxPullForce * PullForceCurve->GetFloatValue(curvePoint);
+		PullForce = MaxPullForce * PullForceCurve->GetFloatValue(curvePoint) * PullDir * DeltaTime;
 		
-		//FString Message = FString::Printf(TEXT("initialdistance: %f currDistance: %f currPullForce: %f curve point: %f"),initialDistance,currDistance, CurrPullForce, curvePoint);
-		//GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, Message);
 	}else
 	{
-		
 		Stop();
 	}
 }
@@ -75,8 +67,8 @@ void UPullAbility::Update(float DeltaTime)
 {
 	Super::Update(DeltaTime);
 	
-	FVector PullVelocity = PullDir * CurrPullForce * DeltaTime;
-	OwnerCharacter->LaunchCharacter(PullVelocity, true, true);
+	//FVector PullVelocity = PullDir * CurrPullForce * DeltaTime;
+	OwnerCharacter->LaunchCharacter(PullForce, true, true);
 }
 
 void UPullAbility::PostUpdate(float DeltaTime)

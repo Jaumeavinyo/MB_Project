@@ -22,25 +22,40 @@ public:
 	virtual void Update(float DeltaTime) override;
 	virtual void PostUpdate(float DeltaTime) override;
 	virtual void Stop() override;
+	
+	UPROPERTY()
+    ACharacter* OwnerCharacter = nullptr;
+
+	//CHARACTER AND METAL WORLD POS AND DIRECTION
+	UPROPERTY()
+    FVector MetalPos;
+    	
+    UPROPERTY()
+    FVector CharPos;
+	
 	UPROPERTY(BlueprintReadOnly, Category = "Pull")
 	FVector PullDir;
 
 	UPROPERTY(BlueprintReadOnly, Category = "Pull")
 	AActor* PullTarget;
 
+	//AIR DRIFTING AND MOVEMENT
+	UPROPERTY(BlueprintReadOnly,Category = "Pull" )
+	FVector PullForce;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Pull Ability")
+	float Drag; //0.98 or less than 1 this would slow speed, don't know if should use
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Pull Ability")
+	float SteerAngle;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Pull Ability")
+	float Traction;
+	
+	
 	UPROPERTY()
 	float initialDistance;
 	UPROPERTY()
 	float currDistance;
-	
-	UPROPERTY()
-	FVector MetalPos;
-	
-	UPROPERTY()
-	FVector CharPos;
-	
-	UPROPERTY()
-	ACharacter* OwnerCharacter = nullptr;
+
 
 	UPROPERTY()
 	bool bIsTriggered;
@@ -53,8 +68,8 @@ public:
 	UCurveFloat* PullForceCurve;
 
 	// Curve controlling lift or arc over time
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Pull Ability")
-	UCurveFloat* ArcAdjustmentCurve;
+	//UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Pull Ability")
+	//UCurveFloat* ArcAdjustmentCurve;
 
 
 
