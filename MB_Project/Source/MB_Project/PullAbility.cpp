@@ -92,11 +92,10 @@ void UPullAbility::PreUpdate(float DeltaTime)
 			float TurnRateValue = TurnRateCurve->GetFloatValue(TurnrateCurvePoint);
 			PullForce = FMath::VInterpTo(OwnerCharacter->GetVelocity(), DesiredPullForce, DeltaTime, TurnRateValue);
 			PullForce *= Drag;
-
-			
 			
 		}else
 		{
+			OwnerCharacter->LaunchCharacter(PullForce*EndLaunchForceMultiplyer, true, true);
 			Stop();
 		}
 	}
@@ -165,5 +164,6 @@ void UPullAbility::DebugLines()
 	{
 		DrawDebugDirectionalArrow(GetWorld(), OwnerCharacter->GetActorLocation(), OwnerCharacter->GetActorLocation()+PullForce, 200.0f, FColor::Red, false, 20.0f, 0, 3.0f);
 		DrawDebugDirectionalArrow(GetWorld(), OwnerCharacter->GetActorLocation(), OwnerCharacter->GetActorLocation()+OwnerCharacter->GetVelocity().GetSafeNormal(), 20.0f, FColor::Green, false, 50.0f, 0, 3.0f);
+		//DrawDebugDirectionalArrow(GetWorld(), OwnerCharacter->GetActorLocation(), OwnerCharacter->GetActorLocation()+JoystickValue.Length()*AirControlMultiplyer*10, 20.0f, FColor::Yellow, false, 50.0f, 0, 3.0f);
 	}
 }

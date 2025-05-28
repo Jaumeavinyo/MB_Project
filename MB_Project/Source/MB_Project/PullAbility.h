@@ -78,6 +78,9 @@ public:
 	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Pull Ability")//jump before bCanPull
 	float InitialLaunchForce;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Pull Ability")//LauchforceMultiplyer*PullForce the las frame of the Ability
+	float EndLaunchForceMultiplyer;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Pull Ability")
 	float InitialLaunchDirAngle;

@@ -147,6 +147,16 @@ struct Z_Construct_UClass_UPullAbility_Statics
 		{ "ToolTip", "Pull after InitialLaunchForce\njump before bCanPull" },
 #endif
 	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_EndLaunchForceMultiplyer_MetaData[] = {
+		{ "Category", "Pull Ability" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "//LauchforceMultiplyer*PullForce the las frame of the Ability\n" },
+#endif
+		{ "ModuleRelativePath", "PullAbility.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "LauchforceMultiplyer*PullForce the las frame of the Ability" },
+#endif
+	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_InitialLaunchDirAngle_MetaData[] = {
 		{ "Category", "Pull Ability" },
 		{ "ModuleRelativePath", "PullAbility.h" },
@@ -223,6 +233,7 @@ struct Z_Construct_UClass_UPullAbility_Statics
 	static void NewProp_bCanPull_SetBit(void* Obj);
 	static const UECodeGen_Private::FBoolPropertyParams NewProp_bCanPull;
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_InitialLaunchForce;
+	static const UECodeGen_Private::FFloatPropertyParams NewProp_EndLaunchForceMultiplyer;
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_InitialLaunchDirAngle;
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_InitialLaunchTimeDuration;
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_AbilityStartTime;
@@ -265,6 +276,7 @@ void Z_Construct_UClass_UPullAbility_Statics::NewProp_bCanPull_SetBit(void* Obj)
 }
 const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_UPullAbility_Statics::NewProp_bCanPull = { "bCanPull", nullptr, (EPropertyFlags)0x0010000000000000, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(UPullAbility), &Z_Construct_UClass_UPullAbility_Statics::NewProp_bCanPull_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_bCanPull_MetaData), NewProp_bCanPull_MetaData) };
 const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_UPullAbility_Statics::NewProp_InitialLaunchForce = { "InitialLaunchForce", nullptr, (EPropertyFlags)0x0010000000000015, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UPullAbility, InitialLaunchForce), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_InitialLaunchForce_MetaData), NewProp_InitialLaunchForce_MetaData) };
+const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_UPullAbility_Statics::NewProp_EndLaunchForceMultiplyer = { "EndLaunchForceMultiplyer", nullptr, (EPropertyFlags)0x0010000000000015, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UPullAbility, EndLaunchForceMultiplyer), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_EndLaunchForceMultiplyer_MetaData), NewProp_EndLaunchForceMultiplyer_MetaData) };
 const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_UPullAbility_Statics::NewProp_InitialLaunchDirAngle = { "InitialLaunchDirAngle", nullptr, (EPropertyFlags)0x0010000000000015, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UPullAbility, InitialLaunchDirAngle), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_InitialLaunchDirAngle_MetaData), NewProp_InitialLaunchDirAngle_MetaData) };
 const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_UPullAbility_Statics::NewProp_InitialLaunchTimeDuration = { "InitialLaunchTimeDuration", nullptr, (EPropertyFlags)0x0010000000000015, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UPullAbility, InitialLaunchTimeDuration), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_InitialLaunchTimeDuration_MetaData), NewProp_InitialLaunchTimeDuration_MetaData) };
 const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_UPullAbility_Statics::NewProp_AbilityStartTime = { "AbilityStartTime", nullptr, (EPropertyFlags)0x0010000000000000, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UPullAbility, AbilityStartTime), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_AbilityStartTime_MetaData), NewProp_AbilityStartTime_MetaData) };
@@ -293,6 +305,7 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UPullAbil
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UPullAbility_Statics::NewProp_JoystickValue,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UPullAbility_Statics::NewProp_bCanPull,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UPullAbility_Statics::NewProp_InitialLaunchForce,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UPullAbility_Statics::NewProp_EndLaunchForceMultiplyer,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UPullAbility_Statics::NewProp_InitialLaunchDirAngle,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UPullAbility_Statics::NewProp_InitialLaunchTimeDuration,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UPullAbility_Statics::NewProp_AbilityStartTime,
@@ -346,10 +359,10 @@ UPullAbility::~UPullAbility() {}
 struct Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_PullAbility_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UPullAbility, UPullAbility::StaticClass, TEXT("UPullAbility"), &Z_Registration_Info_UClass_UPullAbility, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UPullAbility), 1366539849U) },
+		{ Z_Construct_UClass_UPullAbility, UPullAbility::StaticClass, TEXT("UPullAbility"), &Z_Registration_Info_UClass_UPullAbility, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UPullAbility), 1758634194U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_PullAbility_h_202847065(TEXT("/Script/MB_Project"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_PullAbility_h_815705872(TEXT("/Script/MB_Project"),
 	Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_PullAbility_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_PullAbility_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);
