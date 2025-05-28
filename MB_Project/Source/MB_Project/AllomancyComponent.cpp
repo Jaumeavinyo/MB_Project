@@ -2,7 +2,9 @@
 
 
 #include "AllomancyComponent.h"
-
+#include "Kismet/GameplayStatics.h"
+#include "GameFramework/PlayerController.h"
+#include "Engine/World.h"
 #include "PullAbility.h"
 
 // Sets default values for this component's properties
@@ -226,7 +228,7 @@ TArray<AMetal*> UAllomancyComponent::sortSceneMetals(const TArray<AMetal*>& Meta
 				float distanceToPlayer = FVector::Dist(MetalWorldPosition, playerPosition);
 
 				if (distanceToPlayer <= metalInteractDistance) {
-
+					/*
 					Metal->ChangeMaterial(Metal->M_InteractuableMat);
 
 					//Is inside selectable angle of camera view?
@@ -259,7 +261,42 @@ TArray<AMetal*> UAllomancyComponent::sortSceneMetals(const TArray<AMetal*>& Meta
 						if (selectableMetals.Contains(Metal)) {
 							selectableMetals.Remove(Metal);
 						}
-					}
+					}*/
+					APlayerController* PC = UGameplayStatics::GetPlayerController(GetWorld(), 0);
+					int32 ScreenWidth, ScreenHeight;
+					PC->GetViewportSize(ScreenWidth, ScreenHeight);
+					Metal->ChangeMaterial(Metal->M_InteractuableMat);
+					
+					FVector ScreenWorldOrigin, ScreenWorldDirection;
+					if (PC->DeprojectScreenPositionToWorld(ScreenWidth / 2.0f, ScreenHeight / 2.0f, ScreenWorldOrigin, ScreenWorldDirection))
+					{
+						ScreenWorldDirection.Normalize();
+
+						FVector ToMetal = MetalWorldPosition - ScreenWorldOrigin;
+						ToMetal.Normalize();
+
+						float Dot = FVector::DotProduct(ScreenWorldDirection, ToMetal);
+						Dot = FMath::Clamp(Dot, -1.0f, 1.0f);
+						float Angle = FMath::RadiansToDegrees(FMath::Acos(Dot));
+
+						//Metal->ChangeMaterial(Metal->M_InteractuableMat);
+
+						if (Angle <= MetalSelectionCameraAngle)
+						{
+							Metal->ChangeMaterial(Metal->M_SelectableMat);
+							Metal->AngleFromCameraViewCenter = Angle;
+
+							if (!selectableMetals.Contains(Metal)) {
+								selectableMetals.Add(Metal);
+							}
+						}
+						else
+						{
+							if (selectableMetals.Contains(Metal)) {
+								selectableMetals.Remove(Metal);
+							}
+						}
+					}//cpy end
 				}
 				else {
 

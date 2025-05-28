@@ -142,18 +142,17 @@ void UPullAbility::Stop()
 
 FVector UPullAbility::calculateAirControlVector()
 {
-	float ForwardInput = JoystickValue.Y;
+	float UpInput = JoystickValue.Y;
 	float RightInput = JoystickValue.X;
 
-	FVector CharacterForward = OwnerCharacter->GetActorForwardVector();
+	FVector CharacterUp = OwnerCharacter->GetActorUpVector();
 	FVector CharacterRight = OwnerCharacter->GetActorRightVector();
-	CharacterForward.Z = 0.0f;
-	CharacterRight.Z = 0.0f;
+	
 
-	CharacterForward.Normalize();
+	CharacterUp.Normalize();
 	CharacterRight.Normalize();
 
-	return (CharacterForward * ForwardInput + CharacterRight * RightInput).GetSafeNormal();
+	return (CharacterUp * UpInput + CharacterRight * RightInput).GetSafeNormal();
 }
 
 void UPullAbility::DebugLines()
@@ -162,8 +161,8 @@ void UPullAbility::DebugLines()
 	OwnerCharacter->SetActorRotation(FRotator(0.f,PullDir.Rotation().Yaw,0.f));
 	if (FrameCounter % 2 == 0)
 	{
-		DrawDebugDirectionalArrow(GetWorld(), OwnerCharacter->GetActorLocation(), OwnerCharacter->GetActorLocation()+PullForce, 200.0f, FColor::Red, false, 20.0f, 0, 3.0f);
-		DrawDebugDirectionalArrow(GetWorld(), OwnerCharacter->GetActorLocation(), OwnerCharacter->GetActorLocation()+OwnerCharacter->GetVelocity().GetSafeNormal(), 20.0f, FColor::Green, false, 50.0f, 0, 3.0f);
+		//DrawDebugDirectionalArrow(GetWorld(), OwnerCharacter->GetActorLocation(), OwnerCharacter->GetActorLocation()+PullForce, 200.0f, FColor::Red, false, 20.0f, 0, 3.0f);
+		//DrawDebugDirectionalArrow(GetWorld(), OwnerCharacter->GetActorLocation(), OwnerCharacter->GetActorLocation()+OwnerCharacter->GetVelocity().GetSafeNormal(), 20.0f, FColor::Green, false, 50.0f, 0, 3.0f);
 		//DrawDebugDirectionalArrow(GetWorld(), OwnerCharacter->GetActorLocation(), OwnerCharacter->GetActorLocation()+JoystickValue.Length()*AirControlMultiplyer*10, 20.0f, FColor::Yellow, false, 50.0f, 0, 3.0f);
 	}
 }
