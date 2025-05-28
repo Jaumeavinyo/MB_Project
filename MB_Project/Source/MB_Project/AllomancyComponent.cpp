@@ -110,7 +110,7 @@ void UAllomancyComponent::ActivateAbility(TSubclassOf<UAllomanticAbilityBase> Ab
 	}
 }
 
-void UAllomancyComponent::PullTriggerInput(bool triggered, float value)
+void UAllomancyComponent::PullTriggerInput(FGameplayInput GInput)
 {
 	for (UAllomanticAbilityBase* Ability: Abilities)
 	{
@@ -119,9 +119,10 @@ void UAllomancyComponent::PullTriggerInput(bool triggered, float value)
 			UPullAbility* PullAbility = Cast<UPullAbility>(Ability);
 			if (PullAbility)
 			{
-				PullAbility->bIsTriggered = triggered;
-				PullAbility->TriggerValue = value;
-				if (triggered == false)
+				PullAbility->bIsTriggered = GInput.bIsTriggered;
+				PullAbility->TriggerValue = GInput.TriggerValue;
+				PullAbility->JoystickValue = GInput.JoystickValue.GetSafeNormal();
+				if (GInput.bIsTriggered == false)
 				{
 					UnSelectMetal();
 				}

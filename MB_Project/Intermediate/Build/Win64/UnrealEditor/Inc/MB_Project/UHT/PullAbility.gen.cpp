@@ -11,6 +11,7 @@ void EmptyLinkFunctionForGeneratedCodePullAbility() {}
 
 // Begin Cross Module References
 COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FVector();
+COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FVector2D();
 ENGINE_API UClass* Z_Construct_UClass_AActor_NoRegister();
 ENGINE_API UClass* Z_Construct_UClass_ACharacter_NoRegister();
 ENGINE_API UClass* Z_Construct_UClass_UCurveFloat_NoRegister();
@@ -60,7 +61,13 @@ struct Z_Construct_UClass_UPullAbility_Statics
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_PullTarget_MetaData[] = {
 		{ "Category", "Pull" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "//Straight line character-metal (Normalized) and if input from player, blended with input vector \n" },
+#endif
 		{ "ModuleRelativePath", "PullAbility.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "Straight line character-metal (Normalized) and if input from player, blended with input vector" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_PullForce_MetaData[] = {
 		{ "Category", "Pull" },
@@ -74,6 +81,26 @@ struct Z_Construct_UClass_UPullAbility_Statics
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_DesiredPullForce_MetaData[] = {
 		{ "Category", "Pull" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "//Force deviated from DesiredPullForce caused by: Inertia and player direction input\n" },
+#endif
+		{ "ModuleRelativePath", "PullAbility.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "Force deviated from DesiredPullForce caused by: Inertia and player direction input" },
+#endif
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_AirControlInputVector_MetaData[] = {
+		{ "Category", "Pull" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "//Straight line force character-metal\n" },
+#endif
+		{ "ModuleRelativePath", "PullAbility.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "Straight line force character-metal" },
+#endif
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_AirControlMultiplyer_MetaData[] = {
+		{ "Category", "Pull Ability" },
 		{ "ModuleRelativePath", "PullAbility.h" },
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_Drag_MetaData[] = {
@@ -93,9 +120,18 @@ struct Z_Construct_UClass_UPullAbility_Statics
 		{ "ModuleRelativePath", "PullAbility.h" },
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_bIsTriggered_MetaData[] = {
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "//distance traveled\n" },
+#endif
 		{ "ModuleRelativePath", "PullAbility.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "distance traveled" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_TriggerValue_MetaData[] = {
+		{ "ModuleRelativePath", "PullAbility.h" },
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_JoystickValue_MetaData[] = {
 		{ "ModuleRelativePath", "PullAbility.h" },
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_bCanPull_MetaData[] = {
@@ -103,7 +139,23 @@ struct Z_Construct_UClass_UPullAbility_Statics
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_InitialLaunchForce_MetaData[] = {
 		{ "Category", "Pull Ability" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "//Pull after InitialLaunchForce\n//jump before bCanPull\n" },
+#endif
 		{ "ModuleRelativePath", "PullAbility.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "Pull after InitialLaunchForce\njump before bCanPull" },
+#endif
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_EndLaunchForceMultiplyer_MetaData[] = {
+		{ "Category", "Pull Ability" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "//LauchforceMultiplyer*PullForce the las frame of the Ability\n" },
+#endif
+		{ "ModuleRelativePath", "PullAbility.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "LauchforceMultiplyer*PullForce the las frame of the Ability" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_InitialLaunchDirAngle_MetaData[] = {
 		{ "Category", "Pull Ability" },
@@ -117,7 +169,13 @@ struct Z_Construct_UClass_UPullAbility_Statics
 		{ "ModuleRelativePath", "PullAbility.h" },
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_AbilityCurrentDuration_MetaData[] = {
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "//time in world seconds when ability was called\n" },
+#endif
 		{ "ModuleRelativePath", "PullAbility.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "time in world seconds when ability was called" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_PullForceCurve_MetaData[] = {
 		{ "Category", "Pull Ability" },
@@ -163,15 +221,19 @@ struct Z_Construct_UClass_UPullAbility_Statics
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_PullTarget;
 	static const UECodeGen_Private::FStructPropertyParams NewProp_PullForce;
 	static const UECodeGen_Private::FStructPropertyParams NewProp_DesiredPullForce;
+	static const UECodeGen_Private::FStructPropertyParams NewProp_AirControlInputVector;
+	static const UECodeGen_Private::FFloatPropertyParams NewProp_AirControlMultiplyer;
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_Drag;
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_initialDistance;
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_currDistance;
 	static void NewProp_bIsTriggered_SetBit(void* Obj);
 	static const UECodeGen_Private::FBoolPropertyParams NewProp_bIsTriggered;
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_TriggerValue;
+	static const UECodeGen_Private::FStructPropertyParams NewProp_JoystickValue;
 	static void NewProp_bCanPull_SetBit(void* Obj);
 	static const UECodeGen_Private::FBoolPropertyParams NewProp_bCanPull;
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_InitialLaunchForce;
+	static const UECodeGen_Private::FFloatPropertyParams NewProp_EndLaunchForceMultiplyer;
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_InitialLaunchDirAngle;
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_InitialLaunchTimeDuration;
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_AbilityStartTime;
@@ -196,6 +258,8 @@ const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_UPullAbility_S
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UPullAbility_Statics::NewProp_PullTarget = { "PullTarget", nullptr, (EPropertyFlags)0x0010000000000014, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UPullAbility, PullTarget), Z_Construct_UClass_AActor_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_PullTarget_MetaData), NewProp_PullTarget_MetaData) };
 const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_UPullAbility_Statics::NewProp_PullForce = { "PullForce", nullptr, (EPropertyFlags)0x0010000000000014, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UPullAbility, PullForce), Z_Construct_UScriptStruct_FVector, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_PullForce_MetaData), NewProp_PullForce_MetaData) };
 const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_UPullAbility_Statics::NewProp_DesiredPullForce = { "DesiredPullForce", nullptr, (EPropertyFlags)0x0010000000000014, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UPullAbility, DesiredPullForce), Z_Construct_UScriptStruct_FVector, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_DesiredPullForce_MetaData), NewProp_DesiredPullForce_MetaData) };
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_UPullAbility_Statics::NewProp_AirControlInputVector = { "AirControlInputVector", nullptr, (EPropertyFlags)0x0010000000000014, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UPullAbility, AirControlInputVector), Z_Construct_UScriptStruct_FVector, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_AirControlInputVector_MetaData), NewProp_AirControlInputVector_MetaData) };
+const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_UPullAbility_Statics::NewProp_AirControlMultiplyer = { "AirControlMultiplyer", nullptr, (EPropertyFlags)0x0010000000000015, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UPullAbility, AirControlMultiplyer), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_AirControlMultiplyer_MetaData), NewProp_AirControlMultiplyer_MetaData) };
 const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_UPullAbility_Statics::NewProp_Drag = { "Drag", nullptr, (EPropertyFlags)0x0010000000000015, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UPullAbility, Drag), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_Drag_MetaData), NewProp_Drag_MetaData) };
 const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_UPullAbility_Statics::NewProp_initialDistance = { "initialDistance", nullptr, (EPropertyFlags)0x0010000000000000, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UPullAbility, initialDistance), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_initialDistance_MetaData), NewProp_initialDistance_MetaData) };
 const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_UPullAbility_Statics::NewProp_currDistance = { "currDistance", nullptr, (EPropertyFlags)0x0010000000000000, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UPullAbility, currDistance), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_currDistance_MetaData), NewProp_currDistance_MetaData) };
@@ -205,12 +269,14 @@ void Z_Construct_UClass_UPullAbility_Statics::NewProp_bIsTriggered_SetBit(void* 
 }
 const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_UPullAbility_Statics::NewProp_bIsTriggered = { "bIsTriggered", nullptr, (EPropertyFlags)0x0010000000000000, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(UPullAbility), &Z_Construct_UClass_UPullAbility_Statics::NewProp_bIsTriggered_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_bIsTriggered_MetaData), NewProp_bIsTriggered_MetaData) };
 const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_UPullAbility_Statics::NewProp_TriggerValue = { "TriggerValue", nullptr, (EPropertyFlags)0x0010000000000000, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UPullAbility, TriggerValue), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_TriggerValue_MetaData), NewProp_TriggerValue_MetaData) };
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_UPullAbility_Statics::NewProp_JoystickValue = { "JoystickValue", nullptr, (EPropertyFlags)0x0010000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UPullAbility, JoystickValue), Z_Construct_UScriptStruct_FVector2D, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_JoystickValue_MetaData), NewProp_JoystickValue_MetaData) };
 void Z_Construct_UClass_UPullAbility_Statics::NewProp_bCanPull_SetBit(void* Obj)
 {
 	((UPullAbility*)Obj)->bCanPull = 1;
 }
 const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_UPullAbility_Statics::NewProp_bCanPull = { "bCanPull", nullptr, (EPropertyFlags)0x0010000000000000, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(UPullAbility), &Z_Construct_UClass_UPullAbility_Statics::NewProp_bCanPull_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_bCanPull_MetaData), NewProp_bCanPull_MetaData) };
 const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_UPullAbility_Statics::NewProp_InitialLaunchForce = { "InitialLaunchForce", nullptr, (EPropertyFlags)0x0010000000000015, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UPullAbility, InitialLaunchForce), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_InitialLaunchForce_MetaData), NewProp_InitialLaunchForce_MetaData) };
+const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_UPullAbility_Statics::NewProp_EndLaunchForceMultiplyer = { "EndLaunchForceMultiplyer", nullptr, (EPropertyFlags)0x0010000000000015, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UPullAbility, EndLaunchForceMultiplyer), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_EndLaunchForceMultiplyer_MetaData), NewProp_EndLaunchForceMultiplyer_MetaData) };
 const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_UPullAbility_Statics::NewProp_InitialLaunchDirAngle = { "InitialLaunchDirAngle", nullptr, (EPropertyFlags)0x0010000000000015, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UPullAbility, InitialLaunchDirAngle), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_InitialLaunchDirAngle_MetaData), NewProp_InitialLaunchDirAngle_MetaData) };
 const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_UPullAbility_Statics::NewProp_InitialLaunchTimeDuration = { "InitialLaunchTimeDuration", nullptr, (EPropertyFlags)0x0010000000000015, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UPullAbility, InitialLaunchTimeDuration), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_InitialLaunchTimeDuration_MetaData), NewProp_InitialLaunchTimeDuration_MetaData) };
 const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_UPullAbility_Statics::NewProp_AbilityStartTime = { "AbilityStartTime", nullptr, (EPropertyFlags)0x0010000000000000, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UPullAbility, AbilityStartTime), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_AbilityStartTime_MetaData), NewProp_AbilityStartTime_MetaData) };
@@ -229,13 +295,17 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UPullAbil
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UPullAbility_Statics::NewProp_PullTarget,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UPullAbility_Statics::NewProp_PullForce,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UPullAbility_Statics::NewProp_DesiredPullForce,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UPullAbility_Statics::NewProp_AirControlInputVector,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UPullAbility_Statics::NewProp_AirControlMultiplyer,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UPullAbility_Statics::NewProp_Drag,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UPullAbility_Statics::NewProp_initialDistance,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UPullAbility_Statics::NewProp_currDistance,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UPullAbility_Statics::NewProp_bIsTriggered,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UPullAbility_Statics::NewProp_TriggerValue,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UPullAbility_Statics::NewProp_JoystickValue,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UPullAbility_Statics::NewProp_bCanPull,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UPullAbility_Statics::NewProp_InitialLaunchForce,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UPullAbility_Statics::NewProp_EndLaunchForceMultiplyer,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UPullAbility_Statics::NewProp_InitialLaunchDirAngle,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UPullAbility_Statics::NewProp_InitialLaunchTimeDuration,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UPullAbility_Statics::NewProp_AbilityStartTime,
@@ -289,10 +359,10 @@ UPullAbility::~UPullAbility() {}
 struct Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_PullAbility_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UPullAbility, UPullAbility::StaticClass, TEXT("UPullAbility"), &Z_Registration_Info_UClass_UPullAbility, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UPullAbility), 800133418U) },
+		{ Z_Construct_UClass_UPullAbility, UPullAbility::StaticClass, TEXT("UPullAbility"), &Z_Registration_Info_UClass_UPullAbility, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UPullAbility), 1758634194U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_PullAbility_h_2359292361(TEXT("/Script/MB_Project"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_PullAbility_h_815705872(TEXT("/Script/MB_Project"),
 	Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_PullAbility_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_PullAbility_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

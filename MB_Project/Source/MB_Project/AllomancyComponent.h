@@ -11,8 +11,18 @@
 #include "Camera/CameraComponent.h"
 #include "AllomancyComponent.generated.h"
 
-
-
+USTRUCT(BlueprintType)
+struct FGameplayInput
+{
+	GENERATED_BODY()
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool bIsTriggered; //if button is pressed
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float TriggerValue; //Press float value
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FVector2D JoystickValue;
+};
 
 class UAllomanticMetal;
 
@@ -89,7 +99,7 @@ protected:
 
 	//ABILITY INPUT HANDLING
 	UFUNCTION(BlueprintCallable, Category = "Pull")
-	void PullTriggerInput(bool triggered, float value);
+	void PullTriggerInput(FGameplayInput GInput);
 	
 	//ALLOMANTIC COMPONENT INTERNAL FUNCTIONS
 	
