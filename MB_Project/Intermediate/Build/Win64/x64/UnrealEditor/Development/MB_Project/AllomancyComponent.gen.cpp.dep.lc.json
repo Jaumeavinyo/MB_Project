@@ -7,8 +7,8 @@
         "Includes": [
             "c:\\users\\jauma\\documents\\github\\mistbornue5\\misborn_prototype\\mb_project\\mb_project\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\mb_project\\definitions.mb_project.h",
             "c:\\users\\jauma\\documents\\github\\mistbornue5\\misborn_prototype\\mb_project\\mb_project\\source\\mb_project\\allomancycomponent.h",
-            "c:\\users\\jauma\\documents\\github\\mistbornue5\\misborn_prototype\\mb_project\\mb_project\\source\\mb_project\\uallomanticability.h",
-            "c:\\users\\jauma\\documents\\github\\mistbornue5\\misborn_prototype\\mb_project\\mb_project\\intermediate\\build\\win64\\unrealeditor\\inc\\mb_project\\uht\\uallomanticability.generated.h",
+            "c:\\users\\jauma\\documents\\github\\mistbornue5\\misborn_prototype\\mb_project\\mb_project\\source\\mb_project\\uallomanticabilitybase.h",
+            "c:\\users\\jauma\\documents\\github\\mistbornue5\\misborn_prototype\\mb_project\\mb_project\\intermediate\\build\\win64\\unrealeditor\\inc\\mb_project\\uht\\uallomanticabilitybase.generated.h",
             "c:\\users\\jauma\\documents\\github\\mistbornue5\\misborn_prototype\\mb_project\\mb_project\\source\\mb_project\\uallomanticmetal.h",
             "c:\\users\\jauma\\documents\\github\\mistbornue5\\misborn_prototype\\mb_project\\mb_project\\intermediate\\build\\win64\\unrealeditor\\inc\\mb_project\\uht\\uallomanticmetal.generated.h",
             "c:\\users\\jauma\\documents\\github\\mistbornue5\\misborn_prototype\\mb_project\\mb_project\\source\\mb_project\\metal.h",

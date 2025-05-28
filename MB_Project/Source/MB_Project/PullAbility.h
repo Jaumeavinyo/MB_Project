@@ -22,6 +22,9 @@ public:
 	virtual void Update(float DeltaTime) override;
 	virtual void PostUpdate(float DeltaTime) override;
 	virtual void Stop() override;
+
+	FVector calculateAirControlVector();
+	void DebugLines();
 	
 	UPROPERTY()
     ACharacter* OwnerCharacter = nullptr;
@@ -34,26 +37,31 @@ public:
     FVector CharPos;
 	
 	UPROPERTY(BlueprintReadOnly, Category = "Pull")
-	FVector PullDir;
+	FVector PullDir; //Straight line character-metal (Normalized) and if input from player, blended with input vector 
 
 	UPROPERTY(BlueprintReadOnly, Category = "Pull")
 	AActor* PullTarget;
 
 	//AIR DRIFTING AND MOVEMENT
 	UPROPERTY(BlueprintReadOnly,Category = "Pull" )
-	FVector PullForce;
+	FVector PullForce;//Force deviated from DesiredPullForce caused by: Inertia and player direction input
+	
 	UPROPERTY(BlueprintReadOnly,Category = "Pull" )
-	FVector DesiredPullForce;
+	FVector DesiredPullForce; //Straight line force character-metal
+
+	UPROPERTY(BlueprintReadOnly,Category = "Pull")
+	FVector AirControlInputVector;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Pull Ability")
+	float AirControlMultiplyer;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Pull Ability")
 	float Drag; //0.98 or less than 1 this would slow speed and give inertia feel
 	
-	
-	
 	UPROPERTY()
 	float initialDistance;
 	UPROPERTY()
-	float currDistance;
+	float currDistance; //distance traveled
 
 
 	UPROPERTY()
@@ -61,11 +69,14 @@ public:
 	
 	UPROPERTY()
 	float TriggerValue;
+
+	UPROPERTY()
+	FVector2D JoystickValue;
 	
 	UPROPERTY()
-	bool bCanPull;
+	bool bCanPull;//Pull after InitialLaunchForce
 	
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Pull Ability")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Pull Ability")//jump before bCanPull
 	float InitialLaunchForce;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Pull Ability")
@@ -75,9 +86,9 @@ public:
 	float InitialLaunchTimeDuration = 1.0f;
 
 	UPROPERTY()
-	float AbilityStartTime;
+	float AbilityStartTime; //time in world seconds when ability was called
 	UPROPERTY()
-	float AbilityCurrentDuration;
+	float AbilityCurrentDuration;//Time in seconds 
 
 	
 	int32 FrameCounter = 0;//debug purposes
@@ -94,14 +105,14 @@ public:
 
 	
 	UPROPERTY(EditDefaultsOnly, Category="Pull")
-	float MaxPullForce = 100000.f;
+	float MaxPullForce ;
 
 	UPROPERTY(EditDefaultsOnly, Category="Pull")
 	float CurrPullForce;
 	
 	UPROPERTY(EditDefaultsOnly, Category="Pull")
-	float MinDistance = 100.f;
+	float MinDistance;
 
 	UPROPERTY(EditDefaultsOnly, Category="Pull")
-	float MaxDistance = 4000.f;
+	float MaxDistance;
 };

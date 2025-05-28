@@ -11,6 +11,7 @@ void EmptyLinkFunctionForGeneratedCodeAllomancyComponent() {}
 
 // Begin Cross Module References
 COREUOBJECT_API UClass* Z_Construct_UClass_UClass();
+COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FVector2D();
 ENGINE_API UClass* Z_Construct_UClass_AActor_NoRegister();
 ENGINE_API UClass* Z_Construct_UClass_ACharacter_NoRegister();
 ENGINE_API UClass* Z_Construct_UClass_UActorComponent();
@@ -20,8 +21,102 @@ MB_PROJECT_API UClass* Z_Construct_UClass_UAllomancyComponent_NoRegister();
 MB_PROJECT_API UClass* Z_Construct_UClass_UAllomanticAbilityBase_NoRegister();
 MB_PROJECT_API UClass* Z_Construct_UClass_UAllomanticMetal_NoRegister();
 MB_PROJECT_API UEnum* Z_Construct_UEnum_MB_Project_EMetalType();
+MB_PROJECT_API UScriptStruct* Z_Construct_UScriptStruct_FGameplayInput();
 UPackage* Z_Construct_UPackage__Script_MB_Project();
 // End Cross Module References
+
+// Begin ScriptStruct FGameplayInput
+static FStructRegistrationInfo Z_Registration_Info_UScriptStruct_GameplayInput;
+class UScriptStruct* FGameplayInput::StaticStruct()
+{
+	if (!Z_Registration_Info_UScriptStruct_GameplayInput.OuterSingleton)
+	{
+		Z_Registration_Info_UScriptStruct_GameplayInput.OuterSingleton = GetStaticStruct(Z_Construct_UScriptStruct_FGameplayInput, (UObject*)Z_Construct_UPackage__Script_MB_Project(), TEXT("GameplayInput"));
+	}
+	return Z_Registration_Info_UScriptStruct_GameplayInput.OuterSingleton;
+}
+template<> MB_PROJECT_API UScriptStruct* StaticStruct<FGameplayInput>()
+{
+	return FGameplayInput::StaticStruct();
+}
+struct Z_Construct_UScriptStruct_FGameplayInput_Statics
+{
+#if WITH_METADATA
+	static constexpr UECodeGen_Private::FMetaDataPairParam Struct_MetaDataParams[] = {
+		{ "BlueprintType", "true" },
+		{ "ModuleRelativePath", "AllomancyComponent.h" },
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_bIsTriggered_MetaData[] = {
+		{ "Category", "GameplayInput" },
+		{ "ModuleRelativePath", "AllomancyComponent.h" },
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_TriggerValue_MetaData[] = {
+		{ "Category", "GameplayInput" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "//if button is pressed\n" },
+#endif
+		{ "ModuleRelativePath", "AllomancyComponent.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "if button is pressed" },
+#endif
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_JoystickValue_MetaData[] = {
+		{ "Category", "GameplayInput" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "//Press float value\n" },
+#endif
+		{ "ModuleRelativePath", "AllomancyComponent.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "Press float value" },
+#endif
+	};
+#endif // WITH_METADATA
+	static void NewProp_bIsTriggered_SetBit(void* Obj);
+	static const UECodeGen_Private::FBoolPropertyParams NewProp_bIsTriggered;
+	static const UECodeGen_Private::FFloatPropertyParams NewProp_TriggerValue;
+	static const UECodeGen_Private::FStructPropertyParams NewProp_JoystickValue;
+	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+	static void* NewStructOps()
+	{
+		return (UScriptStruct::ICppStructOps*)new UScriptStruct::TCppStructOps<FGameplayInput>();
+	}
+	static const UECodeGen_Private::FStructParams StructParams;
+};
+void Z_Construct_UScriptStruct_FGameplayInput_Statics::NewProp_bIsTriggered_SetBit(void* Obj)
+{
+	((FGameplayInput*)Obj)->bIsTriggered = 1;
+}
+const UECodeGen_Private::FBoolPropertyParams Z_Construct_UScriptStruct_FGameplayInput_Statics::NewProp_bIsTriggered = { "bIsTriggered", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(FGameplayInput), &Z_Construct_UScriptStruct_FGameplayInput_Statics::NewProp_bIsTriggered_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_bIsTriggered_MetaData), NewProp_bIsTriggered_MetaData) };
+const UECodeGen_Private::FFloatPropertyParams Z_Construct_UScriptStruct_FGameplayInput_Statics::NewProp_TriggerValue = { "TriggerValue", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FGameplayInput, TriggerValue), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_TriggerValue_MetaData), NewProp_TriggerValue_MetaData) };
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UScriptStruct_FGameplayInput_Statics::NewProp_JoystickValue = { "JoystickValue", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FGameplayInput, JoystickValue), Z_Construct_UScriptStruct_FVector2D, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_JoystickValue_MetaData), NewProp_JoystickValue_MetaData) };
+const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UScriptStruct_FGameplayInput_Statics::PropPointers[] = {
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FGameplayInput_Statics::NewProp_bIsTriggered,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FGameplayInput_Statics::NewProp_TriggerValue,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FGameplayInput_Statics::NewProp_JoystickValue,
+};
+static_assert(UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FGameplayInput_Statics::PropPointers) < 2048);
+const UECodeGen_Private::FStructParams Z_Construct_UScriptStruct_FGameplayInput_Statics::StructParams = {
+	(UObject* (*)())Z_Construct_UPackage__Script_MB_Project,
+	nullptr,
+	&NewStructOps,
+	"GameplayInput",
+	Z_Construct_UScriptStruct_FGameplayInput_Statics::PropPointers,
+	UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FGameplayInput_Statics::PropPointers),
+	sizeof(FGameplayInput),
+	alignof(FGameplayInput),
+	RF_Public|RF_Transient|RF_MarkAsNative,
+	EStructFlags(0x00000001),
+	METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FGameplayInput_Statics::Struct_MetaDataParams), Z_Construct_UScriptStruct_FGameplayInput_Statics::Struct_MetaDataParams)
+};
+UScriptStruct* Z_Construct_UScriptStruct_FGameplayInput()
+{
+	if (!Z_Registration_Info_UScriptStruct_GameplayInput.InnerSingleton)
+	{
+		UECodeGen_Private::ConstructUScriptStruct(Z_Registration_Info_UScriptStruct_GameplayInput.InnerSingleton, Z_Construct_UScriptStruct_FGameplayInput_Statics::StructParams);
+	}
+	return Z_Registration_Info_UScriptStruct_GameplayInput.InnerSingleton;
+}
+// End ScriptStruct FGameplayInput
 
 // Begin Class UAllomancyComponent Function ActivateAbility
 struct Z_Construct_UFunction_UAllomancyComponent_ActivateAbility_Statics
@@ -145,8 +240,7 @@ struct Z_Construct_UFunction_UAllomancyComponent_PullTriggerInput_Statics
 {
 	struct AllomancyComponent_eventPullTriggerInput_Parms
 	{
-		bool triggered;
-		float value;
+		FGameplayInput GInput;
 	};
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
@@ -160,21 +254,13 @@ struct Z_Construct_UFunction_UAllomancyComponent_PullTriggerInput_Statics
 #endif
 	};
 #endif // WITH_METADATA
-	static void NewProp_triggered_SetBit(void* Obj);
-	static const UECodeGen_Private::FBoolPropertyParams NewProp_triggered;
-	static const UECodeGen_Private::FFloatPropertyParams NewProp_value;
+	static const UECodeGen_Private::FStructPropertyParams NewProp_GInput;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static const UECodeGen_Private::FFunctionParams FuncParams;
 };
-void Z_Construct_UFunction_UAllomancyComponent_PullTriggerInput_Statics::NewProp_triggered_SetBit(void* Obj)
-{
-	((AllomancyComponent_eventPullTriggerInput_Parms*)Obj)->triggered = 1;
-}
-const UECodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_UAllomancyComponent_PullTriggerInput_Statics::NewProp_triggered = { "triggered", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(AllomancyComponent_eventPullTriggerInput_Parms), &Z_Construct_UFunction_UAllomancyComponent_PullTriggerInput_Statics::NewProp_triggered_SetBit, METADATA_PARAMS(0, nullptr) };
-const UECodeGen_Private::FFloatPropertyParams Z_Construct_UFunction_UAllomancyComponent_PullTriggerInput_Statics::NewProp_value = { "value", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AllomancyComponent_eventPullTriggerInput_Parms, value), METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAllomancyComponent_PullTriggerInput_Statics::NewProp_GInput = { "GInput", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AllomancyComponent_eventPullTriggerInput_Parms, GInput), Z_Construct_UScriptStruct_FGameplayInput, METADATA_PARAMS(0, nullptr) }; // 3277624820
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAllomancyComponent_PullTriggerInput_Statics::PropPointers[] = {
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAllomancyComponent_PullTriggerInput_Statics::NewProp_triggered,
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAllomancyComponent_PullTriggerInput_Statics::NewProp_value,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAllomancyComponent_PullTriggerInput_Statics::NewProp_GInput,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAllomancyComponent_PullTriggerInput_Statics::PropPointers) < 2048);
 const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAllomancyComponent_PullTriggerInput_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAllomancyComponent, nullptr, "PullTriggerInput", nullptr, nullptr, Z_Construct_UFunction_UAllomancyComponent_PullTriggerInput_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAllomancyComponent_PullTriggerInput_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAllomancyComponent_PullTriggerInput_Statics::AllomancyComponent_eventPullTriggerInput_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04080401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAllomancyComponent_PullTriggerInput_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAllomancyComponent_PullTriggerInput_Statics::Function_MetaDataParams) };
@@ -190,11 +276,10 @@ UFunction* Z_Construct_UFunction_UAllomancyComponent_PullTriggerInput()
 }
 DEFINE_FUNCTION(UAllomancyComponent::execPullTriggerInput)
 {
-	P_GET_UBOOL(Z_Param_triggered);
-	P_GET_PROPERTY(FFloatProperty,Z_Param_value);
+	P_GET_STRUCT(FGameplayInput,Z_Param_GInput);
 	P_FINISH;
 	P_NATIVE_BEGIN;
-	P_THIS->PullTriggerInput(Z_Param_triggered,Z_Param_value);
+	P_THIS->PullTriggerInput(Z_Param_GInput);
 	P_NATIVE_END;
 }
 // End Class UAllomancyComponent Function PullTriggerInput
@@ -394,7 +479,7 @@ struct Z_Construct_UClass_UAllomancyComponent_Statics
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
 		{ &Z_Construct_UFunction_UAllomancyComponent_ActivateAbility, "ActivateAbility" }, // 4069059661
 		{ &Z_Construct_UFunction_UAllomancyComponent_getAllomanticMetal, "getAllomanticMetal" }, // 863019672
-		{ &Z_Construct_UFunction_UAllomancyComponent_PullTriggerInput, "PullTriggerInput" }, // 1161360026
+		{ &Z_Construct_UFunction_UAllomancyComponent_PullTriggerInput, "PullTriggerInput" }, // 4265356845
 		{ &Z_Construct_UFunction_UAllomancyComponent_SelectMetal, "SelectMetal" }, // 2173922290
 		{ &Z_Construct_UFunction_UAllomancyComponent_sortSceneMetals, "sortSceneMetals" }, // 3250050832
 	};
@@ -468,13 +553,16 @@ UAllomancyComponent::~UAllomancyComponent() {}
 // Begin Registration
 struct Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_AllomancyComponent_h_Statics
 {
+	static constexpr FStructRegisterCompiledInInfo ScriptStructInfo[] = {
+		{ FGameplayInput::StaticStruct, Z_Construct_UScriptStruct_FGameplayInput_Statics::NewStructOps, TEXT("GameplayInput"), &Z_Registration_Info_UScriptStruct_GameplayInput, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FGameplayInput), 3277624820U) },
+	};
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UAllomancyComponent, UAllomancyComponent::StaticClass, TEXT("UAllomancyComponent"), &Z_Registration_Info_UClass_UAllomancyComponent, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAllomancyComponent), 3067717883U) },
+		{ Z_Construct_UClass_UAllomancyComponent, UAllomancyComponent::StaticClass, TEXT("UAllomancyComponent"), &Z_Registration_Info_UClass_UAllomancyComponent, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAllomancyComponent), 907792947U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_AllomancyComponent_h_2593446975(TEXT("/Script/MB_Project"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_AllomancyComponent_h_2276229509(TEXT("/Script/MB_Project"),
 	Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_AllomancyComponent_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_AllomancyComponent_h_Statics::ClassInfo),
-	nullptr, 0,
+	Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_AllomancyComponent_h_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_AllomancyComponent_h_Statics::ScriptStructInfo),
 	nullptr, 0);
 // End Registration
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

@@ -50,11 +50,10 @@ void UPullAbility::Start()
 		FVector RotationAxis = FVector::CrossProduct(Forward, FVector::UpVector); // Character's local right
 		RotationAxis.Normalize();
 		
-		FVector LaunchDirection = Forward.RotateAngleAxis(InitialLaunchDirAngle, RotationAxis); // Negative to pitch upward
+		FVector LaunchDirection = Forward.RotateAngleAxis(InitialLaunchDirAngle, RotationAxis); 
 		FVector LaunchVelocity = LaunchDirection * InitialLaunchForce;
 		OwnerCharacter->LaunchCharacter(LaunchVelocity, true, true);
 	}
-	
 }
 
 void UPullAbility::PreUpdate(float DeltaTime)
@@ -63,7 +62,7 @@ void UPullAbility::PreUpdate(float DeltaTime)
 	
 	if (bCanPull)
 	{
-		if (FVector::Dist(MetalPos,CharPos)<=150.0f)
+		if (FVector::Dist(MetalPos,CharPos) <= MinDistance)
 		{
 			OwnerCharacter->GetCharacterMovement()->Velocity = FVector::ZeroVector;
 			OwnerCharacter->GetCharacterMovement()->StopMovementImmediately();
@@ -77,16 +76,25 @@ void UPullAbility::PreUpdate(float DeltaTime)
 			CharPos = OwnerCharacter->GetActorLocation();
 			PullDir = (MetalPos - CharPos).GetSafeNormal();
 
+			//Player control in Air modifies PullDir
+			if (!JoystickValue.IsNearlyZero())
+			{
+				AirControlInputVector = calculateAirControlVector();
+				PullDir = FMath::VInterpTo(PullDir,AirControlInputVector,DeltaTime,JoystickValue.Length()*AirControlMultiplyer);
+			}
 			//Force calculation based on distance
 			currDistance = initialDistance - (FVector::Dist(MetalPos, CharPos));
 			float PullForceCurvePoint = currDistance/initialDistance;
-			DesiredPullForce = MaxPullForce * PullForceCurve->GetFloatValue(PullForceCurvePoint) * PullDir /** DeltaTime*/;
-
+			DesiredPullForce = MaxPullForce * PullForceCurve->GetFloatValue(PullForceCurvePoint) * PullDir;
+			
 			//Curve of inertia depending on dir vs desiredDir angle
 			float TurnrateCurvePoint = FVector::DotProduct(PullDir,OwnerCharacter->GetVelocity().GetSafeNormal());
 			float TurnRateValue = TurnRateCurve->GetFloatValue(TurnrateCurvePoint);
 			PullForce = FMath::VInterpTo(OwnerCharacter->GetVelocity(), DesiredPullForce, DeltaTime, TurnRateValue);
 			PullForce *= Drag;
+
+			
+			
 		}else
 		{
 			Stop();
@@ -101,13 +109,7 @@ void UPullAbility::Update(float DeltaTime)
 	Super::Update(DeltaTime);
 	if (bCanPull)
 	{
-		FrameCounter++;
-		OwnerCharacter->SetActorRotation(FRotator(0.f,PullDir.Rotation().Yaw,0.f));
-		if (FrameCounter % 2 == 0)
-		{
-			DrawDebugDirectionalArrow(GetWorld(), OwnerCharacter->GetActorLocation(), OwnerCharacter->GetActorLocation()+PullForce, 200.0f, FColor::Red, false, 20.0f, 0, 3.0f);
-			DrawDebugDirectionalArrow(GetWorld(), OwnerCharacter->GetActorLocation(), OwnerCharacter->GetActorLocation()+OwnerCharacter->GetVelocity().GetSafeNormal(), 20.0f, FColor::Green, false, 50.0f, 0, 3.0f);
-		}
+		DebugLines();
 		if (OwnerCharacter->GetCharacterMovement()->MovementMode == MOVE_Walking)
 		{
 			OwnerCharacter->GetCharacterMovement()->SetMovementMode(MOVE_Falling);
@@ -130,7 +132,6 @@ void UPullAbility::PostUpdate(float DeltaTime)
 			bCanPull = true;
 		}
 	}
-	
 }
 
 void UPullAbility::Stop()
@@ -138,4 +139,31 @@ void UPullAbility::Stop()
 	Super::Stop();
 	bCanPull = false;
 	DeActivate();
+}
+
+FVector UPullAbility::calculateAirControlVector()
+{
+	float ForwardInput = JoystickValue.Y;
+	float RightInput = JoystickValue.X;
+
+	FVector CharacterForward = OwnerCharacter->GetActorForwardVector();
+	FVector CharacterRight = OwnerCharacter->GetActorRightVector();
+	CharacterForward.Z = 0.0f;
+	CharacterRight.Z = 0.0f;
+
+	CharacterForward.Normalize();
+	CharacterRight.Normalize();
+
+	return (CharacterForward * ForwardInput + CharacterRight * RightInput).GetSafeNormal();
+}
+
+void UPullAbility::DebugLines()
+{
+	FrameCounter++;
+	OwnerCharacter->SetActorRotation(FRotator(0.f,PullDir.Rotation().Yaw,0.f));
+	if (FrameCounter % 2 == 0)
+	{
+		DrawDebugDirectionalArrow(GetWorld(), OwnerCharacter->GetActorLocation(), OwnerCharacter->GetActorLocation()+PullForce, 200.0f, FColor::Red, false, 20.0f, 0, 3.0f);
+		DrawDebugDirectionalArrow(GetWorld(), OwnerCharacter->GetActorLocation(), OwnerCharacter->GetActorLocation()+OwnerCharacter->GetVelocity().GetSafeNormal(), 20.0f, FColor::Green, false, 50.0f, 0, 3.0f);
+	}
 }
