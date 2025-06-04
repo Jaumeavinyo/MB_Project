@@ -1,6 +1,8 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "MB_ProjectCharacter.h"
+
+#include "AllomancyComponent.h"
 #include "Engine/LocalPlayer.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
@@ -12,11 +14,14 @@
 #include "InputActionValue.h"
 #include "Kismet/GameplayStatics.h"
 #include "Metal.h"
+#include "SkeletalMeshAttributes.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
 //////////////////////////////////////////////////////////////////////////
 // AMB_ProjectCharacter
+
+class UNiagaraComponent;
 
 AMB_ProjectCharacter::AMB_ProjectCharacter()
 {
@@ -55,6 +60,28 @@ AMB_ProjectCharacter::AMB_ProjectCharacter()
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
 }
+
+void AMB_ProjectCharacter::BeginPlay()
+{
+	Super::BeginPlay();
+	//NiagaraComp1 = this->FindComponentByClass<UNiagaraComponent>();
+	//if (WindTrailsVFX)
+	//{
+	//	NiagaraComp1 = UNiagaraFunctionLibrary::SpawnSystemAttached(
+	//					WindTrailsVFX,                             // UNiagaraSystem*
+	//					GetMesh(),                                // USceneComponent*
+	//					BoneA,                                    // FName
+	//					FVector::ZeroVector,                      // Location
+	//					FRotator::ZeroRotator,                    // Rotation
+	//					EAttachLocation::SnapToTargetIncludingScale, // Attach location type
+	//					true,                                     // bAutoDestroy
+	//					true,                                     // bAutoActivate
+	//					ENCPoolMethod::None,                      // PoolingMethod
+	//					true                                      // bPreCullCheck
+	//	);
+	//}
+}
+
 
 //////////////////////////////////////////////////////////////////////////
 // Input
@@ -96,6 +123,25 @@ void AMB_ProjectCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInpu
 	{
 		UE_LOG(LogTemplateCharacter, Error, TEXT("'%s' Failed to find an Enhanced Input component! This template is built to use the Enhanced Input system. If you intend to use the legacy system, then you will need to update this C++ file."), *GetNameSafe(this));
 	}
+}
+
+void AMB_ProjectCharacter::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+	//if (this->GetVelocity().Length() >= GetMovementComponent()->GetMaxSpeed()/2)//TODO this should be a public controllable variable
+	UpdateWindTrailsVFX(DeltaTime);
+	
+	
+}
+
+void AMB_ProjectCharacter::UpdateWindTrailsVFX(float DeltaTime)
+{
+	
+}
+
+void AMB_ProjectCharacter::SetWindTrailsActive(bool bActive)
+{
+	
 }
 
 void AMB_ProjectCharacter::Move(const FInputActionValue& Value)
@@ -154,6 +200,5 @@ void AMB_ProjectCharacter::SortMetals() {
 	if (SceneMetals.Num() == 0) {
 		SceneMetals = GetSceneMetals();
 	}
-
-
+	
 }

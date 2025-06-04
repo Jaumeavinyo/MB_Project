@@ -32,31 +32,27 @@ public:
 	//CHARACTER AND METAL WORLD POS AND DIRECTION
 	UPROPERTY()
     FVector MetalPos;
-    	
     UPROPERTY()
     FVector CharPos;
 	
 	UPROPERTY(BlueprintReadOnly, Category = "Pull")
-	FVector PullDir; //Straight line character-metal (Normalized) and if input from player, blended with input vector 
-
-	UPROPERTY(BlueprintReadOnly, Category = "Pull")
 	AActor* PullTarget;
 
 	//AIR DRIFTING AND MOVEMENT
-	UPROPERTY(BlueprintReadOnly,Category = "Pull" )
-	FVector PullForce;//Force deviated from DesiredPullForce caused by: Inertia and player direction input
 	
+	//Straight line character-metal (Normalized) and if input from player, blended with input vector 
+	UPROPERTY(BlueprintReadOnly, Category = "Pull")
+	FVector PullDir;
+	//Force deviated from DesiredPullForce caused by: Inertia and player direction input
 	UPROPERTY(BlueprintReadOnly,Category = "Pull" )
-	FVector DesiredPullForce; //Straight line force character-metal
+	FVector PullForce;
+	//Straight line force character-metal
+	UPROPERTY(BlueprintReadOnly,Category = "Pull" )
+	FVector DesiredPullForce; 
 
 	UPROPERTY(BlueprintReadOnly,Category = "Pull")
 	FVector AirControlInputVector;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Pull Ability")
-	float AirControlMultiplyer;
-	
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Pull Ability")
-	float Drag; //0.98 or less than 1 this would slow speed and give inertia feel
 	
 	UPROPERTY()
 	float initialDistance;
@@ -76,26 +72,37 @@ public:
 	UPROPERTY()
 	bool bCanPull;//Pull after InitialLaunchForce
 	
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Pull Ability")//jump before bCanPull
-	float InitialLaunchForce;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Pull Ability")//LauchforceMultiplyer*PullForce the las frame of the Ability
+	//GAMEPLAY - BLUEPRINT EDITABLE
+	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Pull Ability")
+    float AirControlMultiplyer;
+	//0.98 or less than 1 this would slow speed and give inertia feel	
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Pull Ability")
+    float Drag;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Pull Ability")
+	//LauchforceMultiplyer*PullForce the las frame of the Ability
 	float EndLaunchForceMultiplyer;
+	//jump before bCanPull
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Pull Ability")
+    float InitialLaunchForce;	
 	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Pull Ability")
 	float InitialLaunchDirAngle;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Pull Ability")
-	float InitialLaunchTimeDuration = 1.0f;
+	float InitialLaunchTimeDuration;
 
-	UPROPERTY()
-	float AbilityStartTime; //time in world seconds when ability was called
-	UPROPERTY()
-	float AbilityCurrentDuration;//Time in seconds 
+	UPROPERTY(EditDefaultsOnly, Category="Pull Ability")
+	float MaxPullForce ;
 
+	UPROPERTY(EditDefaultsOnly, Category="Pull Ability")
+	float CurrPullForce;
 	
-	int32 FrameCounter = 0;//debug purposes
-	
+	UPROPERTY(EditDefaultsOnly, Category="Pull Ability")
+	float MinDistance;
+
+	UPROPERTY(EditDefaultsOnly, Category="Pull")
+	float MaxDistance;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Pull Ability")
 	UCurveFloat* PullForceCurve;
@@ -105,17 +112,14 @@ public:
 	UCurveFloat* TurnRateCurve;
 
 
+	UPROPERTY()
+	float AbilityStartTime; //time in world seconds when ability was called
+	UPROPERTY()
+	float AbilityCurrentDuration;//Time in seconds 
 
 	
-	UPROPERTY(EditDefaultsOnly, Category="Pull")
-	float MaxPullForce ;
+	int32 FrameCounter = 0;//debug purposes
 
-	UPROPERTY(EditDefaultsOnly, Category="Pull")
-	float CurrPullForce;
 	
-	UPROPERTY(EditDefaultsOnly, Category="Pull")
-	float MinDistance;
 
-	UPROPERTY(EditDefaultsOnly, Category="Pull")
-	float MaxDistance;
 };

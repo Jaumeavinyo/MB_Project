@@ -1,5 +1,4 @@
 /I "."
-/I "C:\Users\jauma\Documents\GitHub\MistBornUE5\Misborn_Prototype\MB_Project\MB_Project\Source\MB_Project\Private"
 /I "..\Intermediate\Build\Win64\UnrealEditor\Inc\Engine\UHT"
 /I "Runtime\Engine\Classes"
 /I "Runtime\Engine\Public"

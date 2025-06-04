@@ -40,7 +40,7 @@ void UPullAbility::Start()
 	
 	MetalPos = PullTarget->GetActorLocation();
 	CharPos = OwnerCharacter->GetActorLocation();
-
+	
 	initialDistance = FVector::Dist(MetalPos, CharPos);
 	currDistance = initialDistance;
 
@@ -66,7 +66,7 @@ void UPullAbility::PreUpdate(float DeltaTime)
 		{
 			OwnerCharacter->GetCharacterMovement()->Velocity = FVector::ZeroVector;
 			OwnerCharacter->GetCharacterMovement()->StopMovementImmediately();
-			Stop();
+			//Stop();
 		}
 	
 		if (bIsTriggered && TriggerValue > 0)
@@ -89,13 +89,26 @@ void UPullAbility::PreUpdate(float DeltaTime)
 			
 			//Curve of inertia depending on dir vs desiredDir angle
 			float TurnrateCurvePoint = FVector::DotProduct(PullDir,OwnerCharacter->GetVelocity().GetSafeNormal());
-			float TurnRateValue = TurnRateCurve->GetFloatValue(TurnrateCurvePoint);
+			//get inertia force and multiply by user input force
+			float TurnRateValue = TurnRateCurve->GetFloatValue(TurnrateCurvePoint)*TriggerValue;
 			PullForce = FMath::VInterpTo(OwnerCharacter->GetVelocity(), DesiredPullForce, DeltaTime, TurnRateValue);
-			PullForce *= Drag;
+			PullForce *= Drag/* 0.90 - 1+- */;
+			float Gravity = -9.0f;
+			float GravityMultiplyer = 1-TriggerValue;
+			//PullForce+= FVector(0.0f,0.0f,Gravity*GravityMultiplyer);
 			
 		}else
 		{
-			OwnerCharacter->LaunchCharacter(PullForce*EndLaunchForceMultiplyer, true, true);
+			FVector NCharacterFwd = OwnerCharacter->GetActorForwardVector().GetSafeNormal();
+			NCharacterFwd.Z = 0;
+			float Dot = FVector::DotProduct(NCharacterFwd,FVector(1.0f, 0.0f, 0.0f));
+			Dot = FMath::Clamp(Dot,-1.0f,1.0f);
+			
+			if ( Dot>0.2/*avobe horizontal++*/)
+			{
+				//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("LAUNCH BABY!!!!!!!!!!"));
+				OwnerCharacter->LaunchCharacter(PullForce*EndLaunchForceMultiplyer, true, true);
+			}
 			Stop();
 		}
 	}
@@ -113,7 +126,8 @@ void UPullAbility::Update(float DeltaTime)
 		{
 			OwnerCharacter->GetCharacterMovement()->SetMovementMode(MOVE_Falling);
 		}
-	
+		
+		
 		OwnerCharacter->GetCharacterMovement()->Velocity = PullForce;
 		//OwnerCharacter->LaunchCharacter(PullForce, true, true);
 	}

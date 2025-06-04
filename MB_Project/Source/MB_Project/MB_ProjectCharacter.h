@@ -5,6 +5,8 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Logging/LogMacros.h"
+#include "NiagaraFunctionLibrary.h"
+#include "NiagaraSystem.h"
 #include "MB_ProjectCharacter.generated.h"
 
 class USpringArmComponent;
@@ -51,7 +53,9 @@ public:
 
 
 protected:
-
+	virtual void BeginPlay() override;
+	virtual void Tick(float DeltaTime) override;
+	
 	/** Called for movement input */
 	void Move(const FInputActionValue& Value);
 
@@ -84,5 +88,19 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Gameplay Logic")
 	void SortMetals();
+
+	//NIAGARA SYSTEMS
+	
+	UPROPERTY(EditAnywhere, Category = "VFX")
+	UNiagaraSystem* WindTrailsVFX;
+
+	UPROPERTY(EditAnywhere, Category = "VFX")
+	FName BoneA = "spine_03";
+
+	UPROPERTY()
+	UNiagaraComponent* NiagaraComp1;
+
+	void UpdateWindTrailsVFX(float DeltaTime);
+	void SetWindTrailsActive(bool bActive);
 };
 
