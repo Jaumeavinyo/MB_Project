@@ -6,6 +6,7 @@
 #include "GameFramework/PlayerController.h"
 #include "Engine/World.h"
 #include "PullAbility.h"
+#include "UPendulumPullAbility.h"
 
 // Sets default values for this component's properties
 UAllomancyComponent::UAllomancyComponent()
@@ -48,7 +49,7 @@ void UAllomancyComponent::TickComponent(float DeltaTime, ELevelTick TickType, FA
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 	float FPS = 1.0f / GetWorld()->GetDeltaSeconds();
 	FString FPSString = FString::Printf(TEXT("FPS: %.1f"), FPS);
-	GEngine->AddOnScreenDebugMessage(1, 0.f, FColor::Green, FPSString);
+	//GEngine->AddOnScreenDebugMessage(1, 0.f, FColor::Green, FPSString);
 	// ...
 	if (bMetalToBeConsumed) {
 		if (CurrentConsumptionCurve) {
@@ -124,6 +125,17 @@ void UAllomancyComponent::PullTriggerInput(FGameplayInput GInput)
 				PullAbility->bIsTriggered = GInput.bIsTriggered;
 				PullAbility->TriggerValue = GInput.TriggerValue;
 				PullAbility->JoystickValue = GInput.JoystickValue.GetSafeNormal();
+				if (GInput.bIsTriggered == false)
+				{
+					UnSelectMetal();
+				}
+			}
+			UUPendulumPullAbility* PendulumPullAbility = Cast<UUPendulumPullAbility>(Ability);
+			if (PendulumPullAbility)
+			{
+				PendulumPullAbility->bIsTriggered = GInput.bIsTriggered;
+				PendulumPullAbility->TriggerValue = GInput.TriggerValue;
+				//PendulumPullAbility->JoystickValue = GInput.JoystickValue.GetSafeNormal();
 				if (GInput.bIsTriggered == false)
 				{
 					UnSelectMetal();
@@ -228,40 +240,7 @@ TArray<AMetal*> UAllomancyComponent::sortSceneMetals(const TArray<AMetal*>& Meta
 				float distanceToPlayer = FVector::Dist(MetalWorldPosition, playerPosition);
 
 				if (distanceToPlayer <= metalInteractDistance) {
-					/*
-					Metal->ChangeMaterial(Metal->M_InteractuableMat);
-
-					//Is inside selectable angle of camera view?
-					AMB_ProjectCharacter* player = Cast<AMB_ProjectCharacter>(GetOwner());
-
-					FVector Player_Metal_Vec = MetalWorldPosition - playerPosition;
-					Player_Metal_Vec.Normalize();
-
-					FVector cameraForwardVec = player->GetFollowCamera()->GetForwardVector();
-					//float angleWithCameraView = FMath::RadiansToDegrees(acos(Player_Metal_Vec.Dot(cameraForwardVec)));
-
-					float dot = FVector::DotProduct(Player_Metal_Vec, cameraForwardVec);
-					dot = FMath::Clamp(dot, -1.0f, 1.0f); // Prevent acos from crashing
-
-					float angleWithCameraView = FMath::RadiansToDegrees(acos(dot));
-				
-					//Dot product order matters, this order is vec metal-player projection on cameraforward vec (all normalized)
-					if (angleWithCameraView <= MetalSelectionCameraAngle) {
-
-						Metal->ChangeMaterial(Metal->M_SelectableMat);
-						Metal->AngleFromCameraViewCenter = angleWithCameraView;//FMath::RadiansToDegrees(acos(Player_Metal_Vec.Dot(cameraForwardVec)));
-
-						if (!selectableMetals.Contains(Metal)) {
-							selectableMetals.Add(Metal);
-						}
-					}
-					else {
-
-						Metal->ChangeMaterial(Metal->M_InteractuableMat);
-						if (selectableMetals.Contains(Metal)) {
-							selectableMetals.Remove(Metal);
-						}
-					}*/
+					
 					APlayerController* PC = UGameplayStatics::GetPlayerController(GetWorld(), 0);
 					int32 ScreenWidth, ScreenHeight;
 					PC->GetViewportSize(ScreenWidth, ScreenHeight);

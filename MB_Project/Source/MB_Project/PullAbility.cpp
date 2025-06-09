@@ -14,8 +14,11 @@ void UPullAbility::Activate(AActor* target,ACharacter* AbilityOwner)
 	{
 		PullTarget = target;
 	}
-
-	OwnerCharacter = AbilityOwner;
+	if (AbilityOwner)
+	{
+		OwnerCharacter = AbilityOwner;
+	}
+	
 	if (OwnerCharacter->GetCharacterMovement()->MovementMode == MOVE_Walking)
 	{
 		bCanPull = false;
