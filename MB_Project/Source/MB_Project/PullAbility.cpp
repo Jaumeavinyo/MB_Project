@@ -69,6 +69,7 @@ void UPullAbility::PreUpdate(float DeltaTime)
 		{
 			OwnerCharacter->GetCharacterMovement()->Velocity = FVector::ZeroVector;
 			OwnerCharacter->GetCharacterMovement()->StopMovementImmediately();
+			PullForce = FVector::ZeroVector;
 			//Stop();
 		}
 	
@@ -93,11 +94,26 @@ void UPullAbility::PreUpdate(float DeltaTime)
 			//Curve of inertia depending on dir vs desiredDir angle
 			float TurnrateCurvePoint = FVector::DotProduct(PullDir,OwnerCharacter->GetVelocity().GetSafeNormal());
 			//get inertia force and multiply by user input force
-			float TurnRateValue = TurnRateCurve->GetFloatValue(TurnrateCurvePoint)*TriggerValue;
+			float TurnRateValue = TurnRateCurve->GetFloatValue(TurnrateCurvePoint);//*triggervalue deleted
+			GEngine->AddOnScreenDebugMessage(-1, 0.1f, FColor::Cyan, FString::Printf(TEXT("TURN RATE: %f"), TurnRateValue));
+			if (TriggerValue>0.3)
+			{	
+				TurnRateValue *= (1 + TriggerValue);
+			}
+			
+			//Interpolate character direction
+			FVector currentVelocity = OwnerCharacter->GetVelocity();
+			FVector currentDir = currentVelocity.GetSafeNormal();
+			FVector InterpDir = FMath::VInterpTo(currentDir, PullDir, DeltaTime, TurnRateValue).GetSafeNormal();
+			float desiredMagnitude = DesiredPullForce.Size();
+			PullForce = InterpDir * desiredMagnitude;
+
+
+
+			/*
 			PullForce = FMath::VInterpTo(OwnerCharacter->GetVelocity(), DesiredPullForce, DeltaTime, TurnRateValue);
-			PullForce *= Drag/* 0.90 - 1+- */;
-			float Gravity = -9.0f;
-			float GravityMultiplyer = 1-TriggerValue;
+			PullForce *= Drag 0.90;*/
+			
 			//PullForce+= FVector(0.0f,0.0f,Gravity*GravityMultiplyer);
 			
 		}else
@@ -132,6 +148,9 @@ void UPullAbility::Update(float DeltaTime)
 		
 		
 		OwnerCharacter->GetCharacterMovement()->Velocity = PullForce;
+		
+		
+		
 		//OwnerCharacter->LaunchCharacter(PullForce, true, true);
 	}
 	
