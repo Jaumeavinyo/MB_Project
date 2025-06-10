@@ -111,7 +111,9 @@
             "c:\\program files\\epic games\\ue_5.5\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\gameplaystaticstypes.generated.h",
             "c:\\program files\\epic games\\ue_5.5\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\gameplaystatics.generated.h",
             "c:\\users\\jauma\\documents\\github\\mistbornue5\\misborn_prototype\\mb_project\\mb_project\\source\\mb_project\\pullability.h",
-            "c:\\users\\jauma\\documents\\github\\mistbornue5\\misborn_prototype\\mb_project\\mb_project\\intermediate\\build\\win64\\unrealeditor\\inc\\mb_project\\uht\\pullability.generated.h"
+            "c:\\users\\jauma\\documents\\github\\mistbornue5\\misborn_prototype\\mb_project\\mb_project\\intermediate\\build\\win64\\unrealeditor\\inc\\mb_project\\uht\\pullability.generated.h",
+            "c:\\users\\jauma\\documents\\github\\mistbornue5\\misborn_prototype\\mb_project\\mb_project\\source\\mb_project\\upendulumpullability.h",
+            "c:\\users\\jauma\\documents\\github\\mistbornue5\\misborn_prototype\\mb_project\\mb_project\\intermediate\\build\\win64\\unrealeditor\\inc\\mb_project\\uht\\upendulumpullability.generated.h"
         ],
         "ImportedModules": [],
         "ImportedHeaderUnits": []

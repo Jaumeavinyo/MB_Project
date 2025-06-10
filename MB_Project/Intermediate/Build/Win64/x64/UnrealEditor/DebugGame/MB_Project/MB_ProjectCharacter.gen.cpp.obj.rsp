@@ -1,12 +1,12 @@
-"D:\GitHub\MB_Project\MB_Project\Intermediate\Build\Win64\UnrealEditor\Inc\MB_Project\UHT\MB_ProjectCharacter.gen.cpp"
-/FI"D:\GitHub\MB_Project\MB_Project\Intermediate\Build\Win64\x64\MB_ProjectEditor\DebugGame\UnrealEd\SharedPCH.UnrealEd.Project.NonOptimized.ValApi.Cpp20.h"
-/FI"D:\GitHub\MB_Project\MB_Project\Intermediate\Build\Win64\x64\UnrealEditor\DebugGame\MB_Project\Definitions.MB_Project.h"
-/Yu"D:\GitHub\MB_Project\MB_Project\Intermediate\Build\Win64\x64\MB_ProjectEditor\DebugGame\UnrealEd\SharedPCH.UnrealEd.Project.NonOptimized.ValApi.Cpp20.h"
-/Fp"D:\GitHub\MB_Project\MB_Project\Intermediate\Build\Win64\x64\MB_ProjectEditor\DebugGame\UnrealEd\SharedPCH.UnrealEd.Project.NonOptimized.ValApi.Cpp20.h.pch"
-/Fo"D:\GitHub\MB_Project\MB_Project\Intermediate\Build\Win64\x64\UnrealEditor\DebugGame\MB_Project\MB_ProjectCharacter.gen.cpp.obj"
-/experimental:log "D:\GitHub\MB_Project\MB_Project\Intermediate\Build\Win64\x64\UnrealEditor\DebugGame\MB_Project\MB_ProjectCharacter.gen.cpp.sarif"
-/sourceDependencies "D:\GitHub\MB_Project\MB_Project\Intermediate\Build\Win64\x64\UnrealEditor\DebugGame\MB_Project\MB_ProjectCharacter.gen.cpp.dep.json"
-@"D:\GitHub\MB_Project\MB_Project\Intermediate\Build\Win64\x64\UnrealEditor\DebugGame\MB_Project\MB_Project.Shared.rsp"
+"C:\Users\jauma\Documents\GitHub\MistBornUE5\Misborn_Prototype\MB_Project\MB_Project\Intermediate\Build\Win64\UnrealEditor\Inc\MB_Project\UHT\MB_ProjectCharacter.gen.cpp"
+/FI"C:\Users\jauma\Documents\GitHub\MistBornUE5\Misborn_Prototype\MB_Project\MB_Project\Intermediate\Build\Win64\x64\MB_ProjectEditor\DebugGame\UnrealEd\SharedPCH.UnrealEd.Project.NonOptimized.ValApi.Cpp20.h"
+/FI"C:\Users\jauma\Documents\GitHub\MistBornUE5\Misborn_Prototype\MB_Project\MB_Project\Intermediate\Build\Win64\x64\UnrealEditor\DebugGame\MB_Project\Definitions.MB_Project.h"
+/Yu"C:\Users\jauma\Documents\GitHub\MistBornUE5\Misborn_Prototype\MB_Project\MB_Project\Intermediate\Build\Win64\x64\MB_ProjectEditor\DebugGame\UnrealEd\SharedPCH.UnrealEd.Project.NonOptimized.ValApi.Cpp20.h"
+/Fp"C:\Users\jauma\Documents\GitHub\MistBornUE5\Misborn_Prototype\MB_Project\MB_Project\Intermediate\Build\Win64\x64\MB_ProjectEditor\DebugGame\UnrealEd\SharedPCH.UnrealEd.Project.NonOptimized.ValApi.Cpp20.h.pch"
+/Fo"C:\Users\jauma\Documents\GitHub\MistBornUE5\Misborn_Prototype\MB_Project\MB_Project\Intermediate\Build\Win64\x64\UnrealEditor\DebugGame\MB_Project\MB_ProjectCharacter.gen.cpp.obj"
+/experimental:log "C:\Users\jauma\Documents\GitHub\MistBornUE5\Misborn_Prototype\MB_Project\MB_Project\Intermediate\Build\Win64\x64\UnrealEditor\DebugGame\MB_Project\MB_ProjectCharacter.gen.cpp.sarif"
+/sourceDependencies "C:\Users\jauma\Documents\GitHub\MistBornUE5\Misborn_Prototype\MB_Project\MB_Project\Intermediate\Build\Win64\x64\UnrealEditor\DebugGame\MB_Project\MB_ProjectCharacter.gen.cpp.dep.json"
+@"C:\Users\jauma\Documents\GitHub\MistBornUE5\Misborn_Prototype\MB_Project\MB_Project\Intermediate\Build\Win64\x64\UnrealEditor\DebugGame\MB_Project\MB_Project.Shared.rsp"
 /d2ssa-cfg-question-
 /Zc:inline
 /nologo

@@ -11,6 +11,7 @@
     <None Include="..\..\Source\MB_ProjectEditor.Target.cs">
       <Filter>Source</Filter>
     </None>
+    <None Include="..\..\.gitignore" />
     <None Include="..\..\.vsconfig" />
     <Filter Include="Config">
       <UniqueIdentifier>{FA535FFB-25E1-3D20-B416-52F9BE21E06E}</UniqueIdentifier>
@@ -78,6 +79,12 @@
     <ClCompile Include="..\..\Source\MB_Project\Pewter.h">
       <Filter>Source\MB_Project</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\MB_Project\PullAbility.cpp">
+      <Filter>Source\MB_Project</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\MB_Project\PullAbility.h">
+      <Filter>Source\MB_Project</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\MB_Project\UAllomanticAbilityBase.cpp">
       <Filter>Source\MB_Project</Filter>
     </ClCompile>
@@ -93,13 +100,13 @@
     <Filter Include="Source\MB_Project\Private">
       <UniqueIdentifier>{F059C620-3511-3183-9591-8F0507A1CD69}</UniqueIdentifier>
     </Filter>
-    <ClCompile Include="..\..\Source\MB_Project\Private\PullAbility.cpp">
+    <ClCompile Include="..\..\Source\MB_Project\Private\UPendulumPullAbility.cpp">
       <Filter>Source\MB_Project\Private</Filter>
     </ClCompile>
     <Filter Include="Source\MB_Project\Public">
       <UniqueIdentifier>{E20E41EC-3EFA-370C-8E3E-3B2A7227CDC5}</UniqueIdentifier>
     </Filter>
-    <ClCompile Include="..\..\Source\MB_Project\Public\PullAbility.h">
+    <ClCompile Include="..\..\Source\MB_Project\Public\UPendulumPullAbility.h">
       <Filter>Source\MB_Project\Public</Filter>
     </ClCompile>
   </ItemGroup>
