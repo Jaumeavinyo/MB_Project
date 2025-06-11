@@ -42,13 +42,13 @@ public:
 	
 	//Straight line character-metal (Normalized) and if input from player, blended with input vector 
 	UPROPERTY(BlueprintReadOnly, Category = "Pull")
-	FVector PullDir;
+	FVector VPlayerMetalDir;
 	//Force deviated from DesiredPullForce caused by: Inertia and player direction input
 	UPROPERTY(BlueprintReadOnly,Category = "Pull" )
-	FVector PullForce;
+	FVector VFinalVelocity;
 	//Straight line force character-metal
 	UPROPERTY(BlueprintReadOnly,Category = "Pull" )
-	FVector DesiredPullForce; 
+	FVector VPullForce; 
 
 	UPROPERTY(BlueprintReadOnly,Category = "Pull")
 	FVector AirControlInputVector;

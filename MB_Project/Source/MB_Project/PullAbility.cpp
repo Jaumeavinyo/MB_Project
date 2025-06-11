@@ -69,7 +69,7 @@ void UPullAbility::PreUpdate(float DeltaTime)
 		{
 			OwnerCharacter->GetCharacterMovement()->Velocity = FVector::ZeroVector;
 			OwnerCharacter->GetCharacterMovement()->StopMovementImmediately();
-			PullForce = FVector::ZeroVector;
+			VFinalVelocity = FVector::ZeroVector;
 			//Stop();
 		}
 	
@@ -78,71 +78,59 @@ void UPullAbility::PreUpdate(float DeltaTime)
 			//target Direction
 			MetalPos = PullTarget->GetActorLocation();
 			CharPos = OwnerCharacter->GetActorLocation();
-			PullDir = (MetalPos - CharPos).GetSafeNormal();
-			GEngine->AddOnScreenDebugMessage(-1, 0.1f, FColor::Cyan, FString::Printf(TEXT("Joystick value: %f"), JoystickValue.Length()));
+			VPlayerMetalDir = (MetalPos - CharPos).GetSafeNormal();
 			
-			//Player control in Air modifies PullDir
-			if (JoystickValue.Length()>0.25f)
+			//Player control in Air modifies VPlayerMetalDir
+			if (JoystickValue.Length()>0.05f)
 			{
-				//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("AIR CONTROL"));
 				AirControlInputVector = calculateAirControlVector();
-				PullDir = FMath::VInterpTo(PullDir,AirControlInputVector,DeltaTime,JoystickValue.Length()*AirControlMultiplyer);
+				VPlayerMetalDir = FMath::VInterpTo(VPlayerMetalDir,AirControlInputVector,DeltaTime,JoystickValue.Length()*AirControlMultiplyer);
 			}
 			
-			//Force calculation based on distance
+			//Force to apply based on curve float graph measuring totaldistance as 1 
 			currDistance = initialDistance - (FVector::Dist(MetalPos, CharPos));
-			float PullForceCurvePoint = currDistance/initialDistance;
-			DesiredPullForce = MaxPullForce * PullForceCurve->GetFloatValue(PullForceCurvePoint) * PullDir;
+			VPullForce = MaxPullForce * PullForceCurve->GetFloatValue(currDistance/initialDistance) * VPlayerMetalDir;
 			
-
 			//Interpolate character direction
-			FVector currentVelocity = OwnerCharacter->GetVelocity();
-			FVector currentDir = currentVelocity.GetSafeNormal();
+			FVector VPlayerVelocity = OwnerCharacter->GetVelocity();
+			FVector VPlayerVelocityDir = VPlayerVelocity.GetSafeNormal();
 
-			float Alingment = FVector::DotProduct(currentDir,PullDir);
+			float Alingment = FVector::DotProduct(VPlayerVelocityDir,VPlayerMetalDir);
 			float TurnRateValue = TurnRateCurve->GetFloatValue(Alingment);
 			
-			if (TriggerValue > 0.3f)
-			{	
+			if (TriggerValue > 0.2f)
+			{
+				//Trigger value affects how much the player turns direction in air
 				TurnRateValue *= (1.0f + TriggerValue);
 			}
 			
-			//180 degrees aligment handling
+			//180 degrees aligment handling <--|--> causes interpolation problems
 			if (Alingment < -0.8f)
 			{
-				FVector DampedVelocity = FMath::VInterpTo(currentVelocity, FVector::ZeroVector, DeltaTime, TurnRateValue);
-
-				if (DampedVelocity.Size() < 400.0f) // Small threshold — ready to redirect
-				{
-					PullForce = PullDir * DesiredPullForce.Size();
-				}
-				else
-				{
-					PullForce = DampedVelocity;
-				}
+				VFinalVelocity = VPlayerVelocity + (VPullForce*DeltaTime);
 			}
 			else
 			{
-				if (OwnerCharacter->GetVelocity().Size() <= 1500)//no big arc when character speed is to small
+				if (VPlayerVelocity.Size() <= 1500)//no big arc when character speed is too small
 				{
-					PullForce = FMath::VInterpTo(OwnerCharacter->GetVelocity(), DesiredPullForce, DeltaTime, TurnRateValue);
+					VFinalVelocity = FMath::VInterpTo(OwnerCharacter->GetVelocity(), VPullForce, DeltaTime, TurnRateValue);//VPlayerVelocity + (VPullForce);
 				}
 				else //Normal arcs
 				{
-					float SpeedFactor = FMath::Clamp(currentVelocity.Size()/MaxPullForce,0.f,1.f);
+					float SpeedFactor = FMath::Clamp(VPlayerVelocity.Size()/MaxPullForce,0.f,1.f);
 					float InterpolationWeight = FMath::Lerp(1.0f,TurnRateValue,SpeedFactor);
 				
-					FVector InterpDir = FMath::VInterpTo(currentDir, PullDir, DeltaTime, InterpolationWeight).GetSafeNormal();
+					FVector InterpDir = FMath::VInterpTo(VPlayerVelocityDir, VPlayerMetalDir, DeltaTime, InterpolationWeight).GetSafeNormal();
 
-					float desiredMagnitude = DesiredPullForce.Size();
-					PullForce = InterpDir * desiredMagnitude;
+					float desiredMagnitude = VPullForce.Size();
+					VFinalVelocity = InterpDir * desiredMagnitude;
 				}
 				
 			}
 			
 		}else
 		{
-			OwnerCharacter->LaunchCharacter(PullForce * EndLaunchForceMultiplyer, true, true);
+			OwnerCharacter->LaunchCharacter(VFinalVelocity * EndLaunchForceMultiplyer, true, true);
 			Stop();
 		}
 	}
@@ -162,7 +150,7 @@ void UPullAbility::Update(float DeltaTime)
 		}
 		
 		
-		OwnerCharacter->GetCharacterMovement()->Velocity = PullForce;
+		OwnerCharacter->GetCharacterMovement()->Velocity = VFinalVelocity;
 		
 		
 		
@@ -199,7 +187,6 @@ FVector UPullAbility::calculateAirControlVector()
 	FVector CharacterUp = OwnerCharacter->GetActorUpVector();
 	FVector CharacterRight = OwnerCharacter->GetActorRightVector();
 	
-
 	CharacterUp.Normalize();
 	CharacterRight.Normalize();
 
@@ -209,11 +196,11 @@ FVector UPullAbility::calculateAirControlVector()
 void UPullAbility::DebugLines()
 {
 	FrameCounter++;
-	OwnerCharacter->SetActorRotation(FRotator(0.f,PullDir.Rotation().Yaw,0.f));
+	OwnerCharacter->SetActorRotation(FRotator(0.f,VPlayerMetalDir.Rotation().Yaw,0.f));
 	if (FrameCounter % 2 == 0)
 	{
-		//DrawDebugDirectionalArrow(GetWorld(), OwnerCharacter->GetActorLocation(), OwnerCharacter->GetActorLocation()+PullForce, 200.0f, FColor::Red, false, 20.0f, 0, 3.0f);
-		//DrawDebugDirectionalArrow(GetWorld(), OwnerCharacter->GetActorLocation(), OwnerCharacter->GetActorLocation()+OwnerCharacter->GetVelocity().GetSafeNormal(), 20.0f, FColor::Green, false, 50.0f, 0, 3.0f);
+		//DrawDebugDirectionalArrow(GetWorld(), OwnerCharacter->GetActorLocation(), OwnerCharacter->GetActorLocation()+VFinalVelocity, 200.0f, FColor::Red, false, 20.0f, 0, 3.0f);
+		//DrawDebugDirectionalArrow(GetWorld(), OwnerCharacter->GetActorLocation(), OwnerCharacter->GetActorLocation()+VPlayerMetalDir, 20.0f, FColor::Green, false, 0.1f, 0, 3.0f);
 		//DrawDebugDirectionalArrow(GetWorld(), OwnerCharacter->GetActorLocation(), OwnerCharacter->GetActorLocation()+JoystickValue.Length()*AirControlMultiplyer*10, 20.0f, FColor::Yellow, false, 50.0f, 0, 3.0f);
 	}
 }

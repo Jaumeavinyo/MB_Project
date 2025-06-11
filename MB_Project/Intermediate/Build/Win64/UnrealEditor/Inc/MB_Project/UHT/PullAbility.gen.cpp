@@ -59,7 +59,7 @@ struct Z_Construct_UClass_UPullAbility_Statics
 		{ "Category", "Pull" },
 		{ "ModuleRelativePath", "PullAbility.h" },
 	};
-	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_PullDir_MetaData[] = {
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_VPlayerMetalDir_MetaData[] = {
 		{ "Category", "Pull" },
 #if !UE_BUILD_SHIPPING
 		{ "Comment", "//Straight line character-metal (Normalized) and if input from player, blended with input vector \n" },
@@ -69,7 +69,7 @@ struct Z_Construct_UClass_UPullAbility_Statics
 		{ "ToolTip", "Straight line character-metal (Normalized) and if input from player, blended with input vector" },
 #endif
 	};
-	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_PullForce_MetaData[] = {
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_VFinalVelocity_MetaData[] = {
 		{ "Category", "Pull" },
 #if !UE_BUILD_SHIPPING
 		{ "Comment", "//Force deviated from DesiredPullForce caused by: Inertia and player direction input\n" },
@@ -79,7 +79,7 @@ struct Z_Construct_UClass_UPullAbility_Statics
 		{ "ToolTip", "Force deviated from DesiredPullForce caused by: Inertia and player direction input" },
 #endif
 	};
-	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_DesiredPullForce_MetaData[] = {
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_VPullForce_MetaData[] = {
 		{ "Category", "Pull" },
 #if !UE_BUILD_SHIPPING
 		{ "Comment", "//Straight line force character-metal\n" },
@@ -212,9 +212,9 @@ struct Z_Construct_UClass_UPullAbility_Statics
 	static const UECodeGen_Private::FStructPropertyParams NewProp_MetalPos;
 	static const UECodeGen_Private::FStructPropertyParams NewProp_CharPos;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_PullTarget;
-	static const UECodeGen_Private::FStructPropertyParams NewProp_PullDir;
-	static const UECodeGen_Private::FStructPropertyParams NewProp_PullForce;
-	static const UECodeGen_Private::FStructPropertyParams NewProp_DesiredPullForce;
+	static const UECodeGen_Private::FStructPropertyParams NewProp_VPlayerMetalDir;
+	static const UECodeGen_Private::FStructPropertyParams NewProp_VFinalVelocity;
+	static const UECodeGen_Private::FStructPropertyParams NewProp_VPullForce;
 	static const UECodeGen_Private::FStructPropertyParams NewProp_AirControlInputVector;
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_initialDistance;
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_currDistance;
@@ -249,9 +249,9 @@ const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UPullAbility_S
 const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_UPullAbility_Statics::NewProp_MetalPos = { "MetalPos", nullptr, (EPropertyFlags)0x0010000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UPullAbility, MetalPos), Z_Construct_UScriptStruct_FVector, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_MetalPos_MetaData), NewProp_MetalPos_MetaData) };
 const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_UPullAbility_Statics::NewProp_CharPos = { "CharPos", nullptr, (EPropertyFlags)0x0010000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UPullAbility, CharPos), Z_Construct_UScriptStruct_FVector, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_CharPos_MetaData), NewProp_CharPos_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UPullAbility_Statics::NewProp_PullTarget = { "PullTarget", nullptr, (EPropertyFlags)0x0010000000000014, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UPullAbility, PullTarget), Z_Construct_UClass_AActor_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_PullTarget_MetaData), NewProp_PullTarget_MetaData) };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_UPullAbility_Statics::NewProp_PullDir = { "PullDir", nullptr, (EPropertyFlags)0x0010000000000014, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UPullAbility, PullDir), Z_Construct_UScriptStruct_FVector, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_PullDir_MetaData), NewProp_PullDir_MetaData) };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_UPullAbility_Statics::NewProp_PullForce = { "PullForce", nullptr, (EPropertyFlags)0x0010000000000014, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UPullAbility, PullForce), Z_Construct_UScriptStruct_FVector, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_PullForce_MetaData), NewProp_PullForce_MetaData) };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_UPullAbility_Statics::NewProp_DesiredPullForce = { "DesiredPullForce", nullptr, (EPropertyFlags)0x0010000000000014, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UPullAbility, DesiredPullForce), Z_Construct_UScriptStruct_FVector, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_DesiredPullForce_MetaData), NewProp_DesiredPullForce_MetaData) };
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_UPullAbility_Statics::NewProp_VPlayerMetalDir = { "VPlayerMetalDir", nullptr, (EPropertyFlags)0x0010000000000014, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UPullAbility, VPlayerMetalDir), Z_Construct_UScriptStruct_FVector, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_VPlayerMetalDir_MetaData), NewProp_VPlayerMetalDir_MetaData) };
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_UPullAbility_Statics::NewProp_VFinalVelocity = { "VFinalVelocity", nullptr, (EPropertyFlags)0x0010000000000014, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UPullAbility, VFinalVelocity), Z_Construct_UScriptStruct_FVector, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_VFinalVelocity_MetaData), NewProp_VFinalVelocity_MetaData) };
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_UPullAbility_Statics::NewProp_VPullForce = { "VPullForce", nullptr, (EPropertyFlags)0x0010000000000014, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UPullAbility, VPullForce), Z_Construct_UScriptStruct_FVector, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_VPullForce_MetaData), NewProp_VPullForce_MetaData) };
 const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_UPullAbility_Statics::NewProp_AirControlInputVector = { "AirControlInputVector", nullptr, (EPropertyFlags)0x0010000000000014, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UPullAbility, AirControlInputVector), Z_Construct_UScriptStruct_FVector, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_AirControlInputVector_MetaData), NewProp_AirControlInputVector_MetaData) };
 const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_UPullAbility_Statics::NewProp_initialDistance = { "initialDistance", nullptr, (EPropertyFlags)0x0010000000000000, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UPullAbility, initialDistance), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_initialDistance_MetaData), NewProp_initialDistance_MetaData) };
 const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_UPullAbility_Statics::NewProp_currDistance = { "currDistance", nullptr, (EPropertyFlags)0x0010000000000000, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UPullAbility, currDistance), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_currDistance_MetaData), NewProp_currDistance_MetaData) };
@@ -286,9 +286,9 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UPullAbil
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UPullAbility_Statics::NewProp_MetalPos,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UPullAbility_Statics::NewProp_CharPos,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UPullAbility_Statics::NewProp_PullTarget,
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UPullAbility_Statics::NewProp_PullDir,
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UPullAbility_Statics::NewProp_PullForce,
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UPullAbility_Statics::NewProp_DesiredPullForce,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UPullAbility_Statics::NewProp_VPlayerMetalDir,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UPullAbility_Statics::NewProp_VFinalVelocity,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UPullAbility_Statics::NewProp_VPullForce,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UPullAbility_Statics::NewProp_AirControlInputVector,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UPullAbility_Statics::NewProp_initialDistance,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UPullAbility_Statics::NewProp_currDistance,
@@ -353,10 +353,10 @@ UPullAbility::~UPullAbility() {}
 struct Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_PullAbility_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UPullAbility, UPullAbility::StaticClass, TEXT("UPullAbility"), &Z_Registration_Info_UClass_UPullAbility, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UPullAbility), 2604150273U) },
+		{ Z_Construct_UClass_UPullAbility, UPullAbility::StaticClass, TEXT("UPullAbility"), &Z_Registration_Info_UClass_UPullAbility, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UPullAbility), 562771942U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_PullAbility_h_1346523264(TEXT("/Script/MB_Project"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_PullAbility_h_2771968959(TEXT("/Script/MB_Project"),
 	Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_PullAbility_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_PullAbility_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);
