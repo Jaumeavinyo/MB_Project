@@ -79,55 +79,70 @@ void UPullAbility::PreUpdate(float DeltaTime)
 			MetalPos = PullTarget->GetActorLocation();
 			CharPos = OwnerCharacter->GetActorLocation();
 			PullDir = (MetalPos - CharPos).GetSafeNormal();
-
+			GEngine->AddOnScreenDebugMessage(-1, 0.1f, FColor::Cyan, FString::Printf(TEXT("Joystick value: %f"), JoystickValue.Length()));
+			
 			//Player control in Air modifies PullDir
-			if (!JoystickValue.IsNearlyZero())
+			if (JoystickValue.Length()>0.25f)
 			{
+				//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("AIR CONTROL"));
 				AirControlInputVector = calculateAirControlVector();
 				PullDir = FMath::VInterpTo(PullDir,AirControlInputVector,DeltaTime,JoystickValue.Length()*AirControlMultiplyer);
 			}
+			
 			//Force calculation based on distance
 			currDistance = initialDistance - (FVector::Dist(MetalPos, CharPos));
 			float PullForceCurvePoint = currDistance/initialDistance;
 			DesiredPullForce = MaxPullForce * PullForceCurve->GetFloatValue(PullForceCurvePoint) * PullDir;
 			
-			//Curve of inertia depending on dir vs desiredDir angle
-			float TurnrateCurvePoint = FVector::DotProduct(PullDir,OwnerCharacter->GetVelocity().GetSafeNormal());
-			//get inertia force and multiply by user input force
-			float TurnRateValue = TurnRateCurve->GetFloatValue(TurnrateCurvePoint);//*triggervalue deleted
-			GEngine->AddOnScreenDebugMessage(-1, 0.1f, FColor::Cyan, FString::Printf(TEXT("TURN RATE: %f"), TurnRateValue));
-			if (TriggerValue>0.3)
-			{	
-				TurnRateValue *= (1 + TriggerValue);
-			}
-			
+
 			//Interpolate character direction
 			FVector currentVelocity = OwnerCharacter->GetVelocity();
 			FVector currentDir = currentVelocity.GetSafeNormal();
-			FVector InterpDir = FMath::VInterpTo(currentDir, PullDir, DeltaTime, TurnRateValue).GetSafeNormal();
-			float desiredMagnitude = DesiredPullForce.Size();
-			PullForce = InterpDir * desiredMagnitude;
 
-
-
-			/*
-			PullForce = FMath::VInterpTo(OwnerCharacter->GetVelocity(), DesiredPullForce, DeltaTime, TurnRateValue);
-			PullForce *= Drag 0.90;*/
+			float Alingment = FVector::DotProduct(currentDir,PullDir);
+			float TurnRateValue = TurnRateCurve->GetFloatValue(Alingment);
 			
-			//PullForce+= FVector(0.0f,0.0f,Gravity*GravityMultiplyer);
+			if (TriggerValue > 0.3f)
+			{	
+				TurnRateValue *= (1.0f + TriggerValue);
+			}
+			
+			//180 degrees aligment handling
+			if (Alingment < -0.8f)
+			{
+				FVector DampedVelocity = FMath::VInterpTo(currentVelocity, FVector::ZeroVector, DeltaTime, TurnRateValue);
+
+				if (DampedVelocity.Size() < 400.0f) // Small threshold — ready to redirect
+				{
+					PullForce = PullDir * DesiredPullForce.Size();
+				}
+				else
+				{
+					PullForce = DampedVelocity;
+				}
+			}
+			else
+			{
+				if (OwnerCharacter->GetVelocity().Size() <= 1500)//no big arc when character speed is to small
+				{
+					PullForce = FMath::VInterpTo(OwnerCharacter->GetVelocity(), DesiredPullForce, DeltaTime, TurnRateValue);
+				}
+				else //Normal arcs
+				{
+					float SpeedFactor = FMath::Clamp(currentVelocity.Size()/MaxPullForce,0.f,1.f);
+					float InterpolationWeight = FMath::Lerp(1.0f,TurnRateValue,SpeedFactor);
+				
+					FVector InterpDir = FMath::VInterpTo(currentDir, PullDir, DeltaTime, InterpolationWeight).GetSafeNormal();
+
+					float desiredMagnitude = DesiredPullForce.Size();
+					PullForce = InterpDir * desiredMagnitude;
+				}
+				
+			}
 			
 		}else
 		{
-			FVector NCharacterFwd = OwnerCharacter->GetActorForwardVector().GetSafeNormal();
-			NCharacterFwd.Z = 0;
-			float Dot = FVector::DotProduct(NCharacterFwd,FVector(1.0f, 0.0f, 0.0f));
-			Dot = FMath::Clamp(Dot,-1.0f,1.0f);
-			
-			if ( Dot>0.2/*avobe horizontal++*/)
-			{
-				//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("LAUNCH BABY!!!!!!!!!!"));
-				OwnerCharacter->LaunchCharacter(PullForce*EndLaunchForceMultiplyer, true, true);
-			}
+			OwnerCharacter->LaunchCharacter(PullForce * EndLaunchForceMultiplyer, true, true);
 			Stop();
 		}
 	}
