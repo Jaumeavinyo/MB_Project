@@ -100,6 +100,9 @@ public:
 	UPROPERTY()
 	UNiagaraComponent* NiagaraComp1;
 
+	//UPROPERTY()
+	//UAllomancyComponent* AllomancyComponent;
+
 	void UpdateWindTrailsVFX(float DeltaTime);
 	void SetWindTrailsActive(bool bActive);
 };

@@ -64,6 +64,7 @@ AMB_ProjectCharacter::AMB_ProjectCharacter()
 void AMB_ProjectCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+	//AllomancyComponent = FindComponentByClass<UAllomancyComponent>();
 	//NiagaraComp1 = this->FindComponentByClass<UNiagaraComponent>();
 	//if (WindTrailsVFX)
 	//{
@@ -130,6 +131,7 @@ void AMB_ProjectCharacter::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 	//if (this->GetVelocity().Length() >= GetMovementComponent()->GetMaxSpeed()/2)//TODO this should be a public controllable variable
 	UpdateWindTrailsVFX(DeltaTime);
+
 	
 	
 }

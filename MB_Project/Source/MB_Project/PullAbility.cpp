@@ -84,7 +84,8 @@ void UPullAbility::PreUpdate(float DeltaTime)
 			if (JoystickValue.Length()>0.05f)
 			{
 				AirControlInputVector = calculateAirControlVector();
-				VPlayerMetalDir = FMath::VInterpTo(VPlayerMetalDir,AirControlInputVector,DeltaTime,JoystickValue.Length()*AirControlMultiplyer);
+				VPlayerMetalDir.X = FMath::FInterpTo(VPlayerMetalDir.X, AirControlInputVector.X, DeltaTime, JoystickValue.Length() * AirControlMultiplyerX);
+				VPlayerMetalDir.Y = FMath::FInterpTo(VPlayerMetalDir.Y, AirControlInputVector.Y, DeltaTime, JoystickValue.Length() * AirControlMultiplyerY);
 			}
 			
 			//Force to apply based on curve float graph measuring totaldistance as 1 
@@ -95,7 +96,7 @@ void UPullAbility::PreUpdate(float DeltaTime)
 			FVector VPlayerVelocity = OwnerCharacter->GetVelocity();
 			FVector VPlayerVelocityDir = VPlayerVelocity.GetSafeNormal();
 
-			float Alingment = FVector::DotProduct(VPlayerVelocityDir,VPlayerMetalDir);
+			Alingment = FVector::DotProduct(VPlayerVelocityDir,VPlayerMetalDir);
 			float TurnRateValue = TurnRateCurve->GetFloatValue(Alingment);
 			
 			if (TriggerValue > 0.2f)
@@ -107,7 +108,7 @@ void UPullAbility::PreUpdate(float DeltaTime)
 			//180 degrees aligment handling <--|--> causes interpolation problems
 			if (Alingment < -0.8f)
 			{
-				VFinalVelocity = VPlayerVelocity + (VPullForce*DeltaTime);
+				VFinalVelocity = VPlayerVelocity + (VPullForce * DeltaTime);
 			}
 			else
 			{
@@ -117,7 +118,7 @@ void UPullAbility::PreUpdate(float DeltaTime)
 				}
 				else //Normal arcs
 				{
-					float SpeedFactor = FMath::Clamp(VPlayerVelocity.Size()/MaxPullForce,0.f,1.f);
+					SpeedFactor = FMath::Clamp(VPlayerVelocity.Size()/MaxPullForce,0.f,1.f);
 					float InterpolationWeight = FMath::Lerp(1.0f,TurnRateValue,SpeedFactor);
 				
 					FVector InterpDir = FMath::VInterpTo(VPlayerVelocityDir, VPlayerMetalDir, DeltaTime, InterpolationWeight).GetSafeNormal();
@@ -128,7 +129,8 @@ void UPullAbility::PreUpdate(float DeltaTime)
 				
 			}
 			
-		}else
+		}
+		else
 		{
 			OwnerCharacter->LaunchCharacter(VFinalVelocity * EndLaunchForceMultiplyer, true, true);
 			Stop();

@@ -75,7 +75,9 @@ public:
 	//GAMEPLAY - BLUEPRINT EDITABLE
 	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Pull Ability")
-    float AirControlMultiplyer;
+    float AirControlMultiplyerX;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Pull Ability")
+	float AirControlMultiplyerY;
 	//0.98 or less than 1 this would slow speed and give inertia feel	
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Pull Ability")
     float Drag;
@@ -120,6 +122,10 @@ public:
 	
 	int32 FrameCounter = 0;//debug purposes
 
-	
+	//CAMERA USEFUL VARIABLES
+	UPROPERTY(BlueprintReadOnly,Category="Pull state")
+	float Alingment;
+	UPROPERTY(BlueprintReadOnly,Category="Pull state")
+	float SpeedFactor;
 
 };
