@@ -69,7 +69,7 @@ void UPullAbility::PreUpdate(float DeltaTime)
 		{
 			OwnerCharacter->GetCharacterMovement()->Velocity = FVector::ZeroVector;
 			OwnerCharacter->GetCharacterMovement()->StopMovementImmediately();
-			PullForce = FVector::ZeroVector;
+			VFinalVelocity = FVector::ZeroVector;
 			//Stop();
 		}
 	
@@ -78,56 +78,61 @@ void UPullAbility::PreUpdate(float DeltaTime)
 			//target Direction
 			MetalPos = PullTarget->GetActorLocation();
 			CharPos = OwnerCharacter->GetActorLocation();
-			PullDir = (MetalPos - CharPos).GetSafeNormal();
-
-			//Player control in Air modifies PullDir
-			if (!JoystickValue.IsNearlyZero())
+			VPlayerMetalDir = (MetalPos - CharPos).GetSafeNormal();
+			
+			//Player control in Air modifies VPlayerMetalDir
+			if (JoystickValue.Length()>0.05f)
 			{
 				AirControlInputVector = calculateAirControlVector();
-				PullDir = FMath::VInterpTo(PullDir,AirControlInputVector,DeltaTime,JoystickValue.Length()*AirControlMultiplyer);
+				VPlayerMetalDir.X = FMath::FInterpTo(VPlayerMetalDir.X, AirControlInputVector.X, DeltaTime, JoystickValue.Length() * AirControlMultiplyerX);
+				VPlayerMetalDir.Y = FMath::FInterpTo(VPlayerMetalDir.Y, AirControlInputVector.Y, DeltaTime, JoystickValue.Length() * AirControlMultiplyerY);
 			}
-			//Force calculation based on distance
-			currDistance = initialDistance - (FVector::Dist(MetalPos, CharPos));
-			float PullForceCurvePoint = currDistance/initialDistance;
-			DesiredPullForce = MaxPullForce * PullForceCurve->GetFloatValue(PullForceCurvePoint) * PullDir;
 			
-			//Curve of inertia depending on dir vs desiredDir angle
-			float TurnrateCurvePoint = FVector::DotProduct(PullDir,OwnerCharacter->GetVelocity().GetSafeNormal());
-			//get inertia force and multiply by user input force
-			float TurnRateValue = TurnRateCurve->GetFloatValue(TurnrateCurvePoint);//*triggervalue deleted
-			GEngine->AddOnScreenDebugMessage(-1, 0.1f, FColor::Cyan, FString::Printf(TEXT("TURN RATE: %f"), TurnRateValue));
-			if (TriggerValue>0.3)
-			{	
-				TurnRateValue *= (1 + TriggerValue);
-			}
+			//Force to apply based on curve float graph measuring totaldistance as 1 
+			currDistance = initialDistance - (FVector::Dist(MetalPos, CharPos));
+			VPullForce = MaxPullForce * PullForceCurve->GetFloatValue(currDistance/initialDistance) * VPlayerMetalDir;
 			
 			//Interpolate character direction
-			FVector currentVelocity = OwnerCharacter->GetVelocity();
-			FVector currentDir = currentVelocity.GetSafeNormal();
-			FVector InterpDir = FMath::VInterpTo(currentDir, PullDir, DeltaTime, TurnRateValue).GetSafeNormal();
-			float desiredMagnitude = DesiredPullForce.Size();
-			PullForce = InterpDir * desiredMagnitude;
+			FVector VPlayerVelocity = OwnerCharacter->GetVelocity();
+			FVector VPlayerVelocityDir = VPlayerVelocity.GetSafeNormal();
 
-
-
-			/*
-			PullForce = FMath::VInterpTo(OwnerCharacter->GetVelocity(), DesiredPullForce, DeltaTime, TurnRateValue);
-			PullForce *= Drag 0.90;*/
+			Alingment = FVector::DotProduct(VPlayerVelocityDir,VPlayerMetalDir);
+			float TurnRateValue = TurnRateCurve->GetFloatValue(Alingment);
 			
-			//PullForce+= FVector(0.0f,0.0f,Gravity*GravityMultiplyer);
-			
-		}else
-		{
-			FVector NCharacterFwd = OwnerCharacter->GetActorForwardVector().GetSafeNormal();
-			NCharacterFwd.Z = 0;
-			float Dot = FVector::DotProduct(NCharacterFwd,FVector(1.0f, 0.0f, 0.0f));
-			Dot = FMath::Clamp(Dot,-1.0f,1.0f);
-			
-			if ( Dot>0.2/*avobe horizontal++*/)
+			if (TriggerValue > 0.2f)
 			{
-				//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("LAUNCH BABY!!!!!!!!!!"));
-				OwnerCharacter->LaunchCharacter(PullForce*EndLaunchForceMultiplyer, true, true);
+				//Trigger value affects how much the player turns direction in air
+				TurnRateValue *= (1.0f + TriggerValue);
 			}
+			
+			//180 degrees aligment handling <--|--> causes interpolation problems
+			if (Alingment < -0.8f)
+			{
+				VFinalVelocity = VPlayerVelocity + (VPullForce * DeltaTime);
+			}
+			else
+			{
+				if (VPlayerVelocity.Size() <= 1500)//no big arc when character speed is too small
+				{
+					VFinalVelocity = FMath::VInterpTo(OwnerCharacter->GetVelocity(), VPullForce, DeltaTime, TurnRateValue);//VPlayerVelocity + (VPullForce);
+				}
+				else //Normal arcs
+				{
+					SpeedFactor = FMath::Clamp(VPlayerVelocity.Size()/MaxPullForce,0.f,1.f);
+					float InterpolationWeight = FMath::Lerp(1.0f,TurnRateValue,SpeedFactor);
+				
+					FVector InterpDir = FMath::VInterpTo(VPlayerVelocityDir, VPlayerMetalDir, DeltaTime, InterpolationWeight).GetSafeNormal();
+
+					float desiredMagnitude = VPullForce.Size();
+					VFinalVelocity = InterpDir * desiredMagnitude;
+				}
+				
+			}
+			
+		}
+		else
+		{
+			OwnerCharacter->LaunchCharacter(VFinalVelocity * EndLaunchForceMultiplyer, true, true);
 			Stop();
 		}
 	}
@@ -147,7 +152,7 @@ void UPullAbility::Update(float DeltaTime)
 		}
 		
 		
-		OwnerCharacter->GetCharacterMovement()->Velocity = PullForce;
+		OwnerCharacter->GetCharacterMovement()->Velocity = VFinalVelocity;
 		
 		
 		
@@ -184,7 +189,6 @@ FVector UPullAbility::calculateAirControlVector()
 	FVector CharacterUp = OwnerCharacter->GetActorUpVector();
 	FVector CharacterRight = OwnerCharacter->GetActorRightVector();
 	
-
 	CharacterUp.Normalize();
 	CharacterRight.Normalize();
 
@@ -194,11 +198,11 @@ FVector UPullAbility::calculateAirControlVector()
 void UPullAbility::DebugLines()
 {
 	FrameCounter++;
-	OwnerCharacter->SetActorRotation(FRotator(0.f,PullDir.Rotation().Yaw,0.f));
+	OwnerCharacter->SetActorRotation(FRotator(0.f,VPlayerMetalDir.Rotation().Yaw,0.f));
 	if (FrameCounter % 2 == 0)
 	{
-		//DrawDebugDirectionalArrow(GetWorld(), OwnerCharacter->GetActorLocation(), OwnerCharacter->GetActorLocation()+PullForce, 200.0f, FColor::Red, false, 20.0f, 0, 3.0f);
-		//DrawDebugDirectionalArrow(GetWorld(), OwnerCharacter->GetActorLocation(), OwnerCharacter->GetActorLocation()+OwnerCharacter->GetVelocity().GetSafeNormal(), 20.0f, FColor::Green, false, 50.0f, 0, 3.0f);
+		//DrawDebugDirectionalArrow(GetWorld(), OwnerCharacter->GetActorLocation(), OwnerCharacter->GetActorLocation()+VFinalVelocity, 200.0f, FColor::Red, false, 20.0f, 0, 3.0f);
+		//DrawDebugDirectionalArrow(GetWorld(), OwnerCharacter->GetActorLocation(), OwnerCharacter->GetActorLocation()+VPlayerMetalDir, 20.0f, FColor::Green, false, 0.1f, 0, 3.0f);
 		//DrawDebugDirectionalArrow(GetWorld(), OwnerCharacter->GetActorLocation(), OwnerCharacter->GetActorLocation()+JoystickValue.Length()*AirControlMultiplyer*10, 20.0f, FColor::Yellow, false, 50.0f, 0, 3.0f);
 	}
 }
