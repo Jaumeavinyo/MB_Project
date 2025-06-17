@@ -22,8 +22,78 @@ MB_PROJECT_API UClass* Z_Construct_UClass_UAllomanticAbilityBase_NoRegister();
 MB_PROJECT_API UClass* Z_Construct_UClass_UAllomanticMetal_NoRegister();
 MB_PROJECT_API UEnum* Z_Construct_UEnum_MB_Project_EMetalType();
 MB_PROJECT_API UScriptStruct* Z_Construct_UScriptStruct_FGameplayInput();
+MB_PROJECT_API UScriptStruct* Z_Construct_UScriptStruct_FLineTraceTarget();
+NIAGARA_API UClass* Z_Construct_UClass_UNiagaraComponent_NoRegister();
+NIAGARA_API UClass* Z_Construct_UClass_UNiagaraSystem_NoRegister();
 UPackage* Z_Construct_UPackage__Script_MB_Project();
 // End Cross Module References
+
+// Begin ScriptStruct FLineTraceTarget
+static FStructRegistrationInfo Z_Registration_Info_UScriptStruct_LineTraceTarget;
+class UScriptStruct* FLineTraceTarget::StaticStruct()
+{
+	if (!Z_Registration_Info_UScriptStruct_LineTraceTarget.OuterSingleton)
+	{
+		Z_Registration_Info_UScriptStruct_LineTraceTarget.OuterSingleton = GetStaticStruct(Z_Construct_UScriptStruct_FLineTraceTarget, (UObject*)Z_Construct_UPackage__Script_MB_Project(), TEXT("LineTraceTarget"));
+	}
+	return Z_Registration_Info_UScriptStruct_LineTraceTarget.OuterSingleton;
+}
+template<> MB_PROJECT_API UScriptStruct* StaticStruct<FLineTraceTarget>()
+{
+	return FLineTraceTarget::StaticStruct();
+}
+struct Z_Construct_UScriptStruct_FLineTraceTarget_Statics
+{
+#if WITH_METADATA
+	static constexpr UECodeGen_Private::FMetaDataPairParam Struct_MetaDataParams[] = {
+		{ "ModuleRelativePath", "AllomancyComponent.h" },
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_TargetActor_MetaData[] = {
+		{ "ModuleRelativePath", "AllomancyComponent.h" },
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_NiagaraComponent_MetaData[] = {
+		{ "EditInline", "true" },
+		{ "ModuleRelativePath", "AllomancyComponent.h" },
+	};
+#endif // WITH_METADATA
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_TargetActor;
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_NiagaraComponent;
+	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+	static void* NewStructOps()
+	{
+		return (UScriptStruct::ICppStructOps*)new UScriptStruct::TCppStructOps<FLineTraceTarget>();
+	}
+	static const UECodeGen_Private::FStructParams StructParams;
+};
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UScriptStruct_FLineTraceTarget_Statics::NewProp_TargetActor = { "TargetActor", nullptr, (EPropertyFlags)0x0010000000000000, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FLineTraceTarget, TargetActor), Z_Construct_UClass_AActor_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_TargetActor_MetaData), NewProp_TargetActor_MetaData) };
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UScriptStruct_FLineTraceTarget_Statics::NewProp_NiagaraComponent = { "NiagaraComponent", nullptr, (EPropertyFlags)0x0010000000080008, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FLineTraceTarget, NiagaraComponent), Z_Construct_UClass_UNiagaraComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_NiagaraComponent_MetaData), NewProp_NiagaraComponent_MetaData) };
+const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UScriptStruct_FLineTraceTarget_Statics::PropPointers[] = {
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FLineTraceTarget_Statics::NewProp_TargetActor,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FLineTraceTarget_Statics::NewProp_NiagaraComponent,
+};
+static_assert(UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FLineTraceTarget_Statics::PropPointers) < 2048);
+const UECodeGen_Private::FStructParams Z_Construct_UScriptStruct_FLineTraceTarget_Statics::StructParams = {
+	(UObject* (*)())Z_Construct_UPackage__Script_MB_Project,
+	nullptr,
+	&NewStructOps,
+	"LineTraceTarget",
+	Z_Construct_UScriptStruct_FLineTraceTarget_Statics::PropPointers,
+	UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FLineTraceTarget_Statics::PropPointers),
+	sizeof(FLineTraceTarget),
+	alignof(FLineTraceTarget),
+	RF_Public|RF_Transient|RF_MarkAsNative,
+	EStructFlags(0x00000005),
+	METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FLineTraceTarget_Statics::Struct_MetaDataParams), Z_Construct_UScriptStruct_FLineTraceTarget_Statics::Struct_MetaDataParams)
+};
+UScriptStruct* Z_Construct_UScriptStruct_FLineTraceTarget()
+{
+	if (!Z_Registration_Info_UScriptStruct_LineTraceTarget.InnerSingleton)
+	{
+		UECodeGen_Private::ConstructUScriptStruct(Z_Registration_Info_UScriptStruct_LineTraceTarget.InnerSingleton, Z_Construct_UScriptStruct_FLineTraceTarget_Statics::StructParams);
+	}
+	return Z_Registration_Info_UScriptStruct_LineTraceTarget.InnerSingleton;
+}
+// End ScriptStruct FLineTraceTarget
 
 // Begin ScriptStruct FGameplayInput
 static FStructRegistrationInfo Z_Registration_Info_UScriptStruct_GameplayInput;
@@ -179,6 +249,54 @@ DEFINE_FUNCTION(UAllomancyComponent::execActivateAbility)
 }
 // End Class UAllomancyComponent Function ActivateAbility
 
+// Begin Class UAllomancyComponent Function AddLineTrace
+struct Z_Construct_UFunction_UAllomancyComponent_AddLineTrace_Statics
+{
+	struct AllomancyComponent_eventAddLineTrace_Parms
+	{
+		AActor* Target;
+	};
+#if WITH_METADATA
+	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "//ALLOMANTIC COMPONENT INTERNAL FUNCTIONS\n" },
+#endif
+		{ "ModuleRelativePath", "AllomancyComponent.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "ALLOMANTIC COMPONENT INTERNAL FUNCTIONS" },
+#endif
+	};
+#endif // WITH_METADATA
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_Target;
+	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+	static const UECodeGen_Private::FFunctionParams FuncParams;
+};
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UAllomancyComponent_AddLineTrace_Statics::NewProp_Target = { "Target", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AllomancyComponent_eventAddLineTrace_Parms, Target), Z_Construct_UClass_AActor_NoRegister, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAllomancyComponent_AddLineTrace_Statics::PropPointers[] = {
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAllomancyComponent_AddLineTrace_Statics::NewProp_Target,
+};
+static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAllomancyComponent_AddLineTrace_Statics::PropPointers) < 2048);
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAllomancyComponent_AddLineTrace_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAllomancyComponent, nullptr, "AddLineTrace", nullptr, nullptr, Z_Construct_UFunction_UAllomancyComponent_AddLineTrace_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAllomancyComponent_AddLineTrace_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAllomancyComponent_AddLineTrace_Statics::AllomancyComponent_eventAddLineTrace_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00080401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAllomancyComponent_AddLineTrace_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAllomancyComponent_AddLineTrace_Statics::Function_MetaDataParams) };
+static_assert(sizeof(Z_Construct_UFunction_UAllomancyComponent_AddLineTrace_Statics::AllomancyComponent_eventAddLineTrace_Parms) < MAX_uint16);
+UFunction* Z_Construct_UFunction_UAllomancyComponent_AddLineTrace()
+{
+	static UFunction* ReturnFunction = nullptr;
+	if (!ReturnFunction)
+	{
+		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UAllomancyComponent_AddLineTrace_Statics::FuncParams);
+	}
+	return ReturnFunction;
+}
+DEFINE_FUNCTION(UAllomancyComponent::execAddLineTrace)
+{
+	P_GET_OBJECT(AActor,Z_Param_Target);
+	P_FINISH;
+	P_NATIVE_BEGIN;
+	P_THIS->AddLineTrace(Z_Param_Target);
+	P_NATIVE_END;
+}
+// End Class UAllomancyComponent Function AddLineTrace
+
 // Begin Class UAllomancyComponent Function getAllomanticMetal
 struct Z_Construct_UFunction_UAllomancyComponent_getAllomanticMetal_Statics
 {
@@ -283,6 +401,48 @@ DEFINE_FUNCTION(UAllomancyComponent::execPullTriggerInput)
 	P_NATIVE_END;
 }
 // End Class UAllomancyComponent Function PullTriggerInput
+
+// Begin Class UAllomancyComponent Function RemoveLineTrace
+struct Z_Construct_UFunction_UAllomancyComponent_RemoveLineTrace_Statics
+{
+	struct AllomancyComponent_eventRemoveLineTrace_Parms
+	{
+		AActor* Target;
+	};
+#if WITH_METADATA
+	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "AllomancyComponent.h" },
+	};
+#endif // WITH_METADATA
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_Target;
+	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+	static const UECodeGen_Private::FFunctionParams FuncParams;
+};
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UAllomancyComponent_RemoveLineTrace_Statics::NewProp_Target = { "Target", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AllomancyComponent_eventRemoveLineTrace_Parms, Target), Z_Construct_UClass_AActor_NoRegister, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAllomancyComponent_RemoveLineTrace_Statics::PropPointers[] = {
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAllomancyComponent_RemoveLineTrace_Statics::NewProp_Target,
+};
+static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAllomancyComponent_RemoveLineTrace_Statics::PropPointers) < 2048);
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAllomancyComponent_RemoveLineTrace_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAllomancyComponent, nullptr, "RemoveLineTrace", nullptr, nullptr, Z_Construct_UFunction_UAllomancyComponent_RemoveLineTrace_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAllomancyComponent_RemoveLineTrace_Statics::PropPointers), sizeof(Z_Construct_UFunction_UAllomancyComponent_RemoveLineTrace_Statics::AllomancyComponent_eventRemoveLineTrace_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00080401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAllomancyComponent_RemoveLineTrace_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAllomancyComponent_RemoveLineTrace_Statics::Function_MetaDataParams) };
+static_assert(sizeof(Z_Construct_UFunction_UAllomancyComponent_RemoveLineTrace_Statics::AllomancyComponent_eventRemoveLineTrace_Parms) < MAX_uint16);
+UFunction* Z_Construct_UFunction_UAllomancyComponent_RemoveLineTrace()
+{
+	static UFunction* ReturnFunction = nullptr;
+	if (!ReturnFunction)
+	{
+		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UAllomancyComponent_RemoveLineTrace_Statics::FuncParams);
+	}
+	return ReturnFunction;
+}
+DEFINE_FUNCTION(UAllomancyComponent::execRemoveLineTrace)
+{
+	P_GET_OBJECT(AActor,Z_Param_Target);
+	P_FINISH;
+	P_NATIVE_BEGIN;
+	P_THIS->RemoveLineTrace(Z_Param_Target);
+	P_NATIVE_END;
+}
+// End Class UAllomancyComponent Function RemoveLineTrace
 
 // Begin Class UAllomancyComponent Function SelectMetal
 struct Z_Construct_UFunction_UAllomancyComponent_SelectMetal_Statics
@@ -393,8 +553,10 @@ void UAllomancyComponent::StaticRegisterNativesUAllomancyComponent()
 	UClass* Class = UAllomancyComponent::StaticClass();
 	static const FNameNativePtrPair Funcs[] = {
 		{ "ActivateAbility", &UAllomancyComponent::execActivateAbility },
+		{ "AddLineTrace", &UAllomancyComponent::execAddLineTrace },
 		{ "getAllomanticMetal", &UAllomancyComponent::execgetAllomanticMetal },
 		{ "PullTriggerInput", &UAllomancyComponent::execPullTriggerInput },
+		{ "RemoveLineTrace", &UAllomancyComponent::execRemoveLineTrace },
 		{ "SelectMetal", &UAllomancyComponent::execSelectMetal },
 		{ "sortSceneMetals", &UAllomancyComponent::execsortSceneMetals },
 	};
@@ -462,6 +624,19 @@ struct Z_Construct_UClass_UAllomancyComponent_Statics
 		{ "ToolTip", "the valid most centered metal that is selected by player input" },
 #endif
 	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_NS_LineTrace_MetaData[] = {
+		{ "Category", "VFX" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "//Niagara system for lines between player and metal\n" },
+#endif
+		{ "ModuleRelativePath", "AllomancyComponent.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "Niagara system for lines between player and metal" },
+#endif
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_ActiveLineTraces_MetaData[] = {
+		{ "ModuleRelativePath", "AllomancyComponent.h" },
+	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_MetalSelectionCameraAngle;
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_metalInteractDistance;
@@ -474,12 +649,17 @@ struct Z_Construct_UClass_UAllomancyComponent_Statics
 	static const UECodeGen_Private::FArrayPropertyParams NewProp_SelectableMetals;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_CenteredMetal;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_SelectedMetal;
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_NS_LineTrace;
+	static const UECodeGen_Private::FStructPropertyParams NewProp_ActiveLineTraces_Inner;
+	static const UECodeGen_Private::FArrayPropertyParams NewProp_ActiveLineTraces;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
 		{ &Z_Construct_UFunction_UAllomancyComponent_ActivateAbility, "ActivateAbility" }, // 4069059661
+		{ &Z_Construct_UFunction_UAllomancyComponent_AddLineTrace, "AddLineTrace" }, // 585630001
 		{ &Z_Construct_UFunction_UAllomancyComponent_getAllomanticMetal, "getAllomanticMetal" }, // 863019672
 		{ &Z_Construct_UFunction_UAllomancyComponent_PullTriggerInput, "PullTriggerInput" }, // 4265356845
+		{ &Z_Construct_UFunction_UAllomancyComponent_RemoveLineTrace, "RemoveLineTrace" }, // 2537728039
 		{ &Z_Construct_UFunction_UAllomancyComponent_SelectMetal, "SelectMetal" }, // 2173922290
 		{ &Z_Construct_UFunction_UAllomancyComponent_sortSceneMetals, "sortSceneMetals" }, // 3250050832
 	};
@@ -500,6 +680,9 @@ const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UAllomancyComp
 const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_UAllomancyComponent_Statics::NewProp_SelectableMetals = { "SelectableMetals", nullptr, (EPropertyFlags)0x0020080000000004, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UAllomancyComponent, SelectableMetals), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_SelectableMetals_MetaData), NewProp_SelectableMetals_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UAllomancyComponent_Statics::NewProp_CenteredMetal = { "CenteredMetal", nullptr, (EPropertyFlags)0x0020080000000004, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UAllomancyComponent, CenteredMetal), Z_Construct_UClass_AMetal_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_CenteredMetal_MetaData), NewProp_CenteredMetal_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UAllomancyComponent_Statics::NewProp_SelectedMetal = { "SelectedMetal", nullptr, (EPropertyFlags)0x0020080000000004, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UAllomancyComponent, SelectedMetal), Z_Construct_UClass_AMetal_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_SelectedMetal_MetaData), NewProp_SelectedMetal_MetaData) };
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UAllomancyComponent_Statics::NewProp_NS_LineTrace = { "NS_LineTrace", nullptr, (EPropertyFlags)0x0020080000000001, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UAllomancyComponent, NS_LineTrace), Z_Construct_UClass_UNiagaraSystem_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_NS_LineTrace_MetaData), NewProp_NS_LineTrace_MetaData) };
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_UAllomancyComponent_Statics::NewProp_ActiveLineTraces_Inner = { "ActiveLineTraces", nullptr, (EPropertyFlags)0x0000008000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FLineTraceTarget, METADATA_PARAMS(0, nullptr) }; // 3103293550
+const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_UAllomancyComponent_Statics::NewProp_ActiveLineTraces = { "ActiveLineTraces", nullptr, (EPropertyFlags)0x0020088000000000, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UAllomancyComponent, ActiveLineTraces), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_ActiveLineTraces_MetaData), NewProp_ActiveLineTraces_MetaData) }; // 3103293550
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UAllomancyComponent_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAllomancyComponent_Statics::NewProp_MetalSelectionCameraAngle,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAllomancyComponent_Statics::NewProp_metalInteractDistance,
@@ -512,6 +695,9 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UAllomanc
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAllomancyComponent_Statics::NewProp_SelectableMetals,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAllomancyComponent_Statics::NewProp_CenteredMetal,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAllomancyComponent_Statics::NewProp_SelectedMetal,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAllomancyComponent_Statics::NewProp_NS_LineTrace,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAllomancyComponent_Statics::NewProp_ActiveLineTraces_Inner,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAllomancyComponent_Statics::NewProp_ActiveLineTraces,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_UAllomancyComponent_Statics::PropPointers) < 2048);
 UObject* (*const Z_Construct_UClass_UAllomancyComponent_Statics::DependentSingletons[])() = {
@@ -554,13 +740,14 @@ UAllomancyComponent::~UAllomancyComponent() {}
 struct Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_AllomancyComponent_h_Statics
 {
 	static constexpr FStructRegisterCompiledInInfo ScriptStructInfo[] = {
+		{ FLineTraceTarget::StaticStruct, Z_Construct_UScriptStruct_FLineTraceTarget_Statics::NewStructOps, TEXT("LineTraceTarget"), &Z_Registration_Info_UScriptStruct_LineTraceTarget, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FLineTraceTarget), 3103293550U) },
 		{ FGameplayInput::StaticStruct, Z_Construct_UScriptStruct_FGameplayInput_Statics::NewStructOps, TEXT("GameplayInput"), &Z_Registration_Info_UScriptStruct_GameplayInput, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FGameplayInput), 3277624820U) },
 	};
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UAllomancyComponent, UAllomancyComponent::StaticClass, TEXT("UAllomancyComponent"), &Z_Registration_Info_UClass_UAllomancyComponent, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAllomancyComponent), 907792947U) },
+		{ Z_Construct_UClass_UAllomancyComponent, UAllomancyComponent::StaticClass, TEXT("UAllomancyComponent"), &Z_Registration_Info_UClass_UAllomancyComponent, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAllomancyComponent), 1668739004U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_AllomancyComponent_h_2276229509(TEXT("/Script/MB_Project"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_AllomancyComponent_h_1812581003(TEXT("/Script/MB_Project"),
 	Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_AllomancyComponent_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_AllomancyComponent_h_Statics::ClassInfo),
 	Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_AllomancyComponent_h_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_AllomancyComponent_h_Statics::ScriptStructInfo),
 	nullptr, 0);
