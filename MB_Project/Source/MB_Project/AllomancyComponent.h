@@ -9,7 +9,22 @@
 #include "Metal.h"
 #include "MB_ProjectCharacter.h"
 #include "Camera/CameraComponent.h"
+#include "NiagaraComponent.h"
+#include "NiagaraFunctionLibrary.h"
+#include "NiagaraSystem.h"
 #include "AllomancyComponent.generated.h"
+
+USTRUCT()
+struct FLineTraceTarget
+{
+	GENERATED_BODY()
+
+	UPROPERTY()
+	AActor* TargetActor;
+
+	UPROPERTY()
+	UNiagaraComponent* NiagaraComponent;
+};
 
 USTRUCT(BlueprintType)
 struct FGameplayInput
@@ -90,6 +105,12 @@ protected:
 	UPROPERTY(BlueprintReadWrite, Category = "Allomancy")
 	AMetal* SelectedMetal;
 
+	//Niagara system for lines between player and metal
+	UPROPERTY(EditAnywhere, Category = "VFX")
+	UNiagaraSystem* NS_LineTrace;
+
+	UPROPERTY()
+	TArray<FLineTraceTarget> ActiveLineTraces;
 	
 	//GAMEPLAY FUNCTIONS
 	
@@ -102,7 +123,11 @@ protected:
 	void PullTriggerInput(FGameplayInput GInput);
 	
 	//ALLOMANTIC COMPONENT INTERNAL FUNCTIONS
-	
+	UFUNCTION()
+	void AddLineTrace(AActor* Target);
+	UFUNCTION()
+	void RemoveLineTrace(AActor* Target);
+
 	//Only for internal use, not for gameplay programming
 	void initAllomanticMetals();
 

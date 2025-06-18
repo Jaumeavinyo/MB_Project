@@ -8,6 +8,10 @@
 #include "PullAbility.h"
 #include "UPendulumPullAbility.h"
 
+
+
+
+
 // Sets default values for this component's properties
 UAllomancyComponent::UAllomancyComponent()
 {
@@ -82,6 +86,27 @@ void UAllomancyComponent::TickComponent(float DeltaTime, ELevelTick TickType, FA
 			Ability->PostUpdate(DeltaTime);
 		}
 	}
+
+
+	for (int i = 0;i<ActiveLineTraces.Num();i++)
+	{
+		AActor* Target = ActiveLineTraces[i].TargetActor;
+		UNiagaraComponent* LineTrace = ActiveLineTraces[i].NiagaraComponent;
+		if (!Target || !LineTrace)
+		{
+			if (LineTrace)//The only thing we need to make sure we destroy
+			{
+				LineTrace->DestroyComponent();
+			}
+			ActiveLineTraces.RemoveAt(i);
+			continue;
+		}
+		FVector EndWorldPos = Target->GetActorLocation();
+		FVector EndLocalPos = LineTrace->GetComponentTransform().InverseTransformPosition(EndWorldPos);
+		LineTrace->SetVariableVec3(TEXT("User.Beam End"), EndLocalPos);
+
+		
+	}
 }
 
 
@@ -146,6 +171,46 @@ void UAllomancyComponent::PullTriggerInput(FGameplayInput GInput)
 			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, TEXT("PullTriggerIput function called without activating PullAbility"));
 		}
 	}
+}
+
+void UAllomancyComponent::AddLineTrace(AActor* Target)
+{
+	if (!Target || !NS_LineTrace) return;
+	UNiagaraComponent* NiagaraComp = UNiagaraFunctionLibrary::SpawnSystemAttached(
+		NS_LineTrace,
+		ComponentOwner->GetMesh(), // Or another component to attach to
+		NAME_None,
+		FVector(0.f,0.f,100.0f),
+		FRotator::ZeroRotator,
+		EAttachLocation::KeepRelativeOffset,
+		true
+	);
+	/*FVector EndWorldPos = Target->GetActorLocation();
+	FVector EndLocalPos = NiagaraComp->GetComponentTransform().InverseTransformPosition(EndWorldPos);
+	NiagaraComp->SetVariableVec3(FName("User.Beam End"), Target->GetActorLocation());*/
+
+	FLineTraceTarget newLineTrace;
+	newLineTrace.TargetActor = Target;
+	newLineTrace.NiagaraComponent = NiagaraComp;
+	ActiveLineTraces.Add(newLineTrace);
+	
+}
+
+void UAllomancyComponent::RemoveLineTrace(AActor* Target)
+{
+	for (int32 i = 0; i < ActiveLineTraces.Num(); ++i)
+	{
+		if (ActiveLineTraces[i].TargetActor == Target)
+		{
+			if (ActiveLineTraces[i].NiagaraComponent)
+			{
+				ActiveLineTraces[i].NiagaraComponent->DestroyComponent();
+			}
+			ActiveLineTraces.RemoveAt(i);
+			break;
+		}
+	}
+	
 }
 
 void UAllomancyComponent::initAllomanticMetals() //DONE
@@ -238,7 +303,7 @@ TArray<AMetal*> UAllomancyComponent::sortSceneMetals(const TArray<AMetal*>& Meta
 				FVector MetalWorldPosition = Metal->GetActorTransform().GetLocation();
 				FVector playerPosition = GetOwner()->GetActorLocation();
 				float distanceToPlayer = FVector::Dist(MetalWorldPosition, playerPosition);
-
+			
 				if (distanceToPlayer <= metalInteractDistance) {
 					
 					APlayerController* PC = UGameplayStatics::GetPlayerController(GetWorld(), 0);
@@ -249,6 +314,7 @@ TArray<AMetal*> UAllomancyComponent::sortSceneMetals(const TArray<AMetal*>& Meta
 					FVector ScreenWorldOrigin, ScreenWorldDirection;
 					if (PC->DeprojectScreenPositionToWorld(ScreenWidth / 2.0f, ScreenHeight / 2.0f, ScreenWorldOrigin, ScreenWorldDirection))
 					{
+						AddLineTrace(Metal);
 						ScreenWorldDirection.Normalize();
 
 						FVector ToMetal = MetalWorldPosition - ScreenWorldOrigin;
@@ -292,6 +358,7 @@ TArray<AMetal*> UAllomancyComponent::sortSceneMetals(const TArray<AMetal*>& Meta
 				{
 					selectableMetals.Remove(Metal);
 				}
+				RemoveLineTrace(Metal);
 			}
 		}
 	}
