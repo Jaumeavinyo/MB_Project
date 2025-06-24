@@ -53,7 +53,7 @@ void UAllomancyComponent::TickComponent(float DeltaTime, ELevelTick TickType, FA
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 	float FPS = 1.0f / GetWorld()->GetDeltaSeconds();
 	FString FPSString = FString::Printf(TEXT("FPS: %.1f"), FPS);
-	//GEngine->AddOnScreenDebugMessage(1, 0.f, FColor::Green, FPSString);
+	GEngine->AddOnScreenDebugMessage(1, 0.f, FColor::Green, FPSString);
 	// ...
 	if (bMetalToBeConsumed) {
 		if (CurrentConsumptionCurve) {
@@ -104,7 +104,8 @@ void UAllomancyComponent::TickComponent(float DeltaTime, ELevelTick TickType, FA
 		FVector EndWorldPos = Target->GetActorLocation();
 		FVector EndLocalPos = LineTrace->GetComponentTransform().InverseTransformPosition(EndWorldPos);
 		LineTrace->SetVariableVec3(TEXT("User.Beam End"), EndLocalPos);
-
+		//segun el input acia abajo cambiar el rate de turn de la grafica de cambio de vector de direccion
+		//braking factor afecta a velocidad del pull pq estoy en falling mode y no en custom movement
 		
 	}
 }
@@ -297,7 +298,7 @@ TArray<AMetal*> UAllomancyComponent::sortSceneMetals(const TArray<AMetal*>& Meta
 		if (Metal != SelectedMetal)
 		{
 			//Check if metal object is visible (being rendered)
-			if (Metal && Metal->WasRecentlyRendered()) {
+			if (Metal && Metal->WasRecentlyRendered() && Metal->WasRecentlyRendered()/*GetWorld()->TimeSeconds - Metal->GetLastRenderTime() > 1.0f*/) {
 
 				//Check if metal is within interaction distance
 				FVector MetalWorldPosition = Metal->GetActorTransform().GetLocation();
@@ -314,7 +315,11 @@ TArray<AMetal*> UAllomancyComponent::sortSceneMetals(const TArray<AMetal*>& Meta
 					FVector ScreenWorldOrigin, ScreenWorldDirection;
 					if (PC->DeprojectScreenPositionToWorld(ScreenWidth / 2.0f, ScreenHeight / 2.0f, ScreenWorldOrigin, ScreenWorldDirection))
 					{
-						AddLineTrace(Metal);
+						if (SelectedMetal  != nullptr && Metal != SelectedMetal)
+						{
+							AddLineTrace(Metal);
+						}
+						
 						ScreenWorldDirection.Normalize();
 
 						FVector ToMetal = MetalWorldPosition - ScreenWorldOrigin;
@@ -385,8 +390,16 @@ bool UAllomancyComponent::SelectMetal()
 			}		
 		}
 		SelectedMetal = CenteredMetal;
+		for (int i = 0;i<ActiveLineTraces.Num();i++)
+		{
+			if (ActiveLineTraces[i].TargetActor == SelectedMetal)
+			{
+				ActiveLineTraces[i].NiagaraComponent->SetVariableLinearColor(TEXT("User.Color"), FLinearColor(1.0f,1.0f,0.0f,1.0f));
+			}
+		}
 		SelectedMetal->ChangeMaterial(SelectedMetal->M_SelectedMat);
 		return true;
+		
 	}
 	return false;
 	

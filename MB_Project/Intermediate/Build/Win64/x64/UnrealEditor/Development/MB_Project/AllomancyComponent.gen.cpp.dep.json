@@ -100,6 +100,10 @@
             "c:\\users\\jauma\\documents\\github\\mistbornue5\\misborn_prototype\\mb_project\\mb_project\\intermediate\\build\\win64\\unrealeditor\\inc\\mb_project\\uht\\mb_projectcharacter.generated.h",
             "c:\\program files\\epic games\\ue_5.5\\engine\\source\\runtime\\engine\\classes\\camera\\cameracomponent.h",
             "c:\\program files\\epic games\\ue_5.5\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\cameracomponent.generated.h",
+            "c:\\program files\\epic games\\ue_5.5\\engine\\plugins\\fx\\niagara\\source\\niagara\\public\\niagaracomponent.h",
+            "c:\\program files\\epic games\\ue_5.5\\engine\\plugins\\fx\\niagara\\source\\niagara\\public\\niagaravariant.h",
+            "c:\\program files\\epic games\\ue_5.5\\engine\\plugins\\fx\\niagara\\intermediate\\build\\win64\\unrealeditor\\inc\\niagara\\uht\\niagaravariant.generated.h",
+            "c:\\program files\\epic games\\ue_5.5\\engine\\plugins\\fx\\niagara\\intermediate\\build\\win64\\unrealeditor\\inc\\niagara\\uht\\niagaracomponent.generated.h",
             "c:\\users\\jauma\\documents\\github\\mistbornue5\\misborn_prototype\\mb_project\\mb_project\\intermediate\\build\\win64\\unrealeditor\\inc\\mb_project\\uht\\allomancycomponent.generated.h"
         ],
         "ImportedModules": [],
