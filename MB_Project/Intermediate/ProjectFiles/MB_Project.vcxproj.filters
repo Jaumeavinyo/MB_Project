@@ -13,6 +13,7 @@
     </None>
     <None Include="..\..\.gitignore" />
     <None Include="..\..\.vsconfig" />
+    <None Include="..\..\MB_Project.sln.DotSettings.user" />
     <Filter Include="Config">
       <UniqueIdentifier>{FA535FFB-25E1-3D20-B416-52F9BE21E06E}</UniqueIdentifier>
     </Filter>
@@ -97,17 +98,11 @@
     <ClCompile Include="..\..\Source\MB_Project\UAllomanticMetal.h">
       <Filter>Source\MB_Project</Filter>
     </ClCompile>
-    <Filter Include="Source\MB_Project\Private">
-      <UniqueIdentifier>{F059C620-3511-3183-9591-8F0507A1CD69}</UniqueIdentifier>
-    </Filter>
-    <ClCompile Include="..\..\Source\MB_Project\Private\UPendulumPullAbility.cpp">
-      <Filter>Source\MB_Project\Private</Filter>
+    <ClCompile Include="..\..\Source\MB_Project\UPendulumPullAbility.cpp">
+      <Filter>Source\MB_Project</Filter>
     </ClCompile>
-    <Filter Include="Source\MB_Project\Public">
-      <UniqueIdentifier>{E20E41EC-3EFA-370C-8E3E-3B2A7227CDC5}</UniqueIdentifier>
-    </Filter>
-    <ClCompile Include="..\..\Source\MB_Project\Public\UPendulumPullAbility.h">
-      <Filter>Source\MB_Project\Public</Filter>
+    <ClCompile Include="..\..\Source\MB_Project\UPendulumPullAbility.h">
+      <Filter>Source\MB_Project</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

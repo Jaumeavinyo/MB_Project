@@ -298,7 +298,7 @@ TArray<AMetal*> UAllomancyComponent::sortSceneMetals(const TArray<AMetal*>& Meta
 		if (Metal != SelectedMetal)
 		{
 			//Check if metal object is visible (being rendered)
-			if (Metal && Metal->WasRecentlyRendered() && Metal->WasRecentlyRendered()/*GetWorld()->TimeSeconds - Metal->GetLastRenderTime() > 1.0f*/) {
+			if (Metal && Metal->WasRecentlyRendered() && Metal->WasRecentlyRendered()) {
 
 				//Check if metal is within interaction distance
 				FVector MetalWorldPosition = Metal->GetActorTransform().GetLocation();
@@ -315,10 +315,10 @@ TArray<AMetal*> UAllomancyComponent::sortSceneMetals(const TArray<AMetal*>& Meta
 					FVector ScreenWorldOrigin, ScreenWorldDirection;
 					if (PC->DeprojectScreenPositionToWorld(ScreenWidth / 2.0f, ScreenHeight / 2.0f, ScreenWorldOrigin, ScreenWorldDirection))
 					{
-						if (SelectedMetal  != nullptr && Metal != SelectedMetal)
-						{
-							AddLineTrace(Metal);
-						}
+						//if (SelectedMetal  != nullptr && Metal != SelectedMetal)
+						//{
+						AddLineTrace(Metal);
+						//}
 						
 						ScreenWorldDirection.Normalize();
 
@@ -368,7 +368,10 @@ TArray<AMetal*> UAllomancyComponent::sortSceneMetals(const TArray<AMetal*>& Meta
 		}
 	}
 	return selectableMetals;
+
+	
 }
+//}
 
 bool UAllomancyComponent::SelectMetal()
 {
@@ -407,9 +410,32 @@ bool UAllomancyComponent::SelectMetal()
 
 void UAllomancyComponent::UnSelectMetal()
 {
-	FString MetalName = SelectedMetal->GetName(); // Or a custom method like GetMetalName()
-	CenteredMetal = nullptr;
-	SelectedMetal = nullptr;
+
+	if (SelectedMetal)
+	{
+		// Reset its line trace back to blue
+		for (auto& Trace : ActiveLineTraces)
+		{
+			if (Trace.TargetActor == SelectedMetal)
+			{
+				Trace.NiagaraComponent->SetVariableLinearColor(
+					TEXT("User.Color"),
+					FLinearColor(0.0f, 0.0f, 1.0f, 1.0f) // blue
+				);
+			}
+		}
+
+		// Reset material if you want
+		//SelectedMetal->ChangeMaterial(SelectedMetal->M_SelectableMat);
+
+		// Clear selection
+		FString MetalName = SelectedMetal->GetName(); // Or a custom method like GetMetalName()
+		SelectedMetal = nullptr;
+		CenteredMetal = nullptr;
+	}
+	
+	//CenteredMetal = nullptr;
+	//SelectedMetal = nullptr;
 	
 }
 
