@@ -201,8 +201,8 @@ void UPullAbility::DebugLines()
 	OwnerCharacter->SetActorRotation(FRotator(0.f,VPlayerMetalDir.Rotation().Yaw,0.f));
 	if (FrameCounter % 2 == 0)
 	{
-		//DrawDebugDirectionalArrow(GetWorld(), OwnerCharacter->GetActorLocation(), OwnerCharacter->GetActorLocation()+VFinalVelocity, 200.0f, FColor::Red, false, 20.0f, 0, 3.0f);
-		//DrawDebugDirectionalArrow(GetWorld(), OwnerCharacter->GetActorLocation(), OwnerCharacter->GetActorLocation()+VPlayerMetalDir, 20.0f, FColor::Green, false, 0.1f, 0, 3.0f);
-		//DrawDebugDirectionalArrow(GetWorld(), OwnerCharacter->GetActorLocation(), OwnerCharacter->GetActorLocation()+JoystickValue.Length()*AirControlMultiplyer*10, 20.0f, FColor::Yellow, false, 50.0f, 0, 3.0f);
+		DrawDebugDirectionalArrow(GetWorld(), OwnerCharacter->GetActorLocation(), OwnerCharacter->GetActorLocation()+VFinalVelocity, 200.0f, FColor::Red, false, 20.0f, 0, 3.0f);
+		DrawDebugDirectionalArrow(GetWorld(), OwnerCharacter->GetActorLocation(), OwnerCharacter->GetActorLocation()+VPlayerMetalDir, 20.0f, FColor::Green, false, 20.0f, 0, 3.0f);
+		//DrawDebugDirectionalArrow(GetWorld(), OwnerCharacter->GetActorLocation(), OwnerCharacter->GetActorLocation()+JoystickValue.Length()*AirControlInputVector*10, 20.0f, FColor::Yellow, false, 50.0f, 0, 3.0f);
 	}
 }

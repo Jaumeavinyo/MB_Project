@@ -138,30 +138,25 @@ void UAllomancyComponent::ActivateAbility(TSubclassOf<UAllomanticAbilityBase> Ab
 		
 	}
 }
-
+//Updates ability input every frame.
+//It is called from BP. It's called After metal selection if "SelectedMetal" var this is valid (condition in BP)
 void UAllomancyComponent::PullTriggerInput(FGameplayInput GInput)
 {
+	//Look existing abilities
 	for (UAllomanticAbilityBase* Ability: Abilities)
 	{
+		//if curr is valid
 		if (Ability)
 		{
+			//if it's the Pull Metal Ability
 			UPullAbility* PullAbility = Cast<UPullAbility>(Ability);
 			if (PullAbility)
 			{
+				//inputs for the ability to work
 				PullAbility->bIsTriggered = GInput.bIsTriggered;
 				PullAbility->TriggerValue = GInput.TriggerValue;
 				PullAbility->JoystickValue = GInput.JoystickValue.GetSafeNormal();
-				if (GInput.bIsTriggered == false)
-				{
-					UnSelectMetal();
-				}
-			}
-			UUPendulumPullAbility* PendulumPullAbility = Cast<UUPendulumPullAbility>(Ability);
-			if (PendulumPullAbility)
-			{
-				PendulumPullAbility->bIsTriggered = GInput.bIsTriggered;
-				PendulumPullAbility->TriggerValue = GInput.TriggerValue;
-				//PendulumPullAbility->JoystickValue = GInput.JoystickValue.GetSafeNormal();
+				//no input means unselect metal
 				if (GInput.bIsTriggered == false)
 				{
 					UnSelectMetal();
@@ -298,7 +293,7 @@ TArray<AMetal*> UAllomancyComponent::sortSceneMetals(const TArray<AMetal*>& Meta
 		if (Metal != SelectedMetal)
 		{
 			//Check if metal object is visible (being rendered)
-			if (Metal && Metal->WasRecentlyRendered() && Metal->WasRecentlyRendered()) {
+			if (Metal && Metal->WasRecentlyRendered()) {
 
 				//Check if metal is within interaction distance
 				FVector MetalWorldPosition = Metal->GetActorTransform().GetLocation();
@@ -315,10 +310,7 @@ TArray<AMetal*> UAllomancyComponent::sortSceneMetals(const TArray<AMetal*>& Meta
 					FVector ScreenWorldOrigin, ScreenWorldDirection;
 					if (PC->DeprojectScreenPositionToWorld(ScreenWidth / 2.0f, ScreenHeight / 2.0f, ScreenWorldOrigin, ScreenWorldDirection))
 					{
-						//if (SelectedMetal  != nullptr && Metal != SelectedMetal)
-						//{
 						AddLineTrace(Metal);
-						//}
 						
 						ScreenWorldDirection.Normalize();
 
@@ -424,19 +416,11 @@ void UAllomancyComponent::UnSelectMetal()
 				);
 			}
 		}
-
-		// Reset material if you want
-		//SelectedMetal->ChangeMaterial(SelectedMetal->M_SelectableMat);
-
 		// Clear selection
 		FString MetalName = SelectedMetal->GetName(); // Or a custom method like GetMetalName()
 		SelectedMetal = nullptr;
 		CenteredMetal = nullptr;
 	}
-	
-	//CenteredMetal = nullptr;
-	//SelectedMetal = nullptr;
-	
 }
 
 
