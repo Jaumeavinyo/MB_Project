@@ -145,16 +145,12 @@ void UPullAbility::Update(float DeltaTime)
 	Super::Update(DeltaTime);
 	if (bCanPull)
 	{
-		DebugLines();
+		//DebugLines();
 		if (OwnerCharacter->GetCharacterMovement()->MovementMode == MOVE_Walking)
 		{
 			OwnerCharacter->GetCharacterMovement()->SetMovementMode(MOVE_Falling);
 		}
-		
-		
 		OwnerCharacter->GetCharacterMovement()->Velocity = VFinalVelocity;
-		
-		
 		
 		//OwnerCharacter->LaunchCharacter(PullForce, true, true);
 	}

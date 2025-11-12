@@ -14,7 +14,7 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #endif
 #define MB_PROJECT_Pewter_generated_h
 
-#define FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_Pewter_h_15_INCLASS_NO_PURE_DECLS \
+#define FID_Users_jauma_Documents_GitHub_MB_Project_MB_Project_Source_MB_Project_Pewter_h_15_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesUPewter(); \
 	friend struct Z_Construct_UClass_UPewter_Statics; \
@@ -23,7 +23,7 @@ public: \
 	DECLARE_SERIALIZER(UPewter)
 
 
-#define FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_Pewter_h_15_ENHANCED_CONSTRUCTORS \
+#define FID_Users_jauma_Documents_GitHub_MB_Project_MB_Project_Source_MB_Project_Pewter_h_15_ENHANCED_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	NO_API UPewter(); \
 private: \
@@ -37,12 +37,12 @@ public: \
 	NO_API virtual ~UPewter();
 
 
-#define FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_Pewter_h_12_PROLOG
-#define FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_Pewter_h_15_GENERATED_BODY \
+#define FID_Users_jauma_Documents_GitHub_MB_Project_MB_Project_Source_MB_Project_Pewter_h_12_PROLOG
+#define FID_Users_jauma_Documents_GitHub_MB_Project_MB_Project_Source_MB_Project_Pewter_h_15_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_Pewter_h_15_INCLASS_NO_PURE_DECLS \
-	FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_Pewter_h_15_ENHANCED_CONSTRUCTORS \
+	FID_Users_jauma_Documents_GitHub_MB_Project_MB_Project_Source_MB_Project_Pewter_h_15_INCLASS_NO_PURE_DECLS \
+	FID_Users_jauma_Documents_GitHub_MB_Project_MB_Project_Source_MB_Project_Pewter_h_15_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
@@ -50,7 +50,7 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 template<> MB_PROJECT_API UClass* StaticClass<class UPewter>();
 
 #undef CURRENT_FILE_ID
-#define CURRENT_FILE_ID FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_Pewter_h
+#define CURRENT_FILE_ID FID_Users_jauma_Documents_GitHub_MB_Project_MB_Project_Source_MB_Project_Pewter_h
 
 
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

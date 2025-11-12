@@ -295,14 +295,14 @@ AMetal::~AMetal() {}
 // End Class AMetal
 
 // Begin Registration
-struct Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_Metal_h_Statics
+struct Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MB_Project_MB_Project_Source_MB_Project_Metal_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
 		{ Z_Construct_UClass_AMetal, AMetal::StaticClass, TEXT("AMetal"), &Z_Registration_Info_UClass_AMetal, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AMetal), 1847109908U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_Metal_h_1524824360(TEXT("/Script/MB_Project"),
-	Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_Metal_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MistBornUE5_Misborn_Prototype_MB_Project_MB_Project_Source_MB_Project_Metal_h_Statics::ClassInfo),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MB_Project_MB_Project_Source_MB_Project_Metal_h_1524824360(TEXT("/Script/MB_Project"),
+	Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MB_Project_MB_Project_Source_MB_Project_Metal_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_jauma_Documents_GitHub_MB_Project_MB_Project_Source_MB_Project_Metal_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);
 // End Registration

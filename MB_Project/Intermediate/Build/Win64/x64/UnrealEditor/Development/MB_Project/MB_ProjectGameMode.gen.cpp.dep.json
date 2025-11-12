@@ -1,17 +1,17 @@
 {
     "Version": "1.2",
     "Data": {
-        "Source": "c:\\users\\jauma\\documents\\github\\mistbornue5\\misborn_prototype\\mb_project\\mb_project\\intermediate\\build\\win64\\unrealeditor\\inc\\mb_project\\uht\\mb_projectgamemode.gen.cpp",
+        "Source": "c:\\users\\jauma\\documents\\github\\mb_project\\mb_project\\intermediate\\build\\win64\\unrealeditor\\inc\\mb_project\\uht\\mb_projectgamemode.gen.cpp",
         "ProvidedModule": "",
-        "PCH": "c:\\users\\jauma\\documents\\github\\mistbornue5\\misborn_prototype\\mb_project\\mb_project\\intermediate\\build\\win64\\x64\\mb_projecteditor\\development\\unrealed\\sharedpch.unrealed.project.valapi.cpp20.h.pch",
+        "PCH": "c:\\users\\jauma\\documents\\github\\mb_project\\mb_project\\intermediate\\build\\win64\\x64\\mb_projecteditor\\development\\unrealed\\sharedpch.unrealed.project.valapi.cpp20.h.pch",
         "Includes": [
-            "c:\\users\\jauma\\documents\\github\\mistbornue5\\misborn_prototype\\mb_project\\mb_project\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\mb_project\\definitions.mb_project.h",
-            "c:\\users\\jauma\\documents\\github\\mistbornue5\\misborn_prototype\\mb_project\\mb_project\\source\\mb_project\\mb_projectgamemode.h",
+            "c:\\users\\jauma\\documents\\github\\mb_project\\mb_project\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\mb_project\\definitions.mb_project.h",
+            "c:\\users\\jauma\\documents\\github\\mb_project\\mb_project\\source\\mb_project\\mb_projectgamemode.h",
             "c:\\program files\\epic games\\ue_5.5\\engine\\source\\runtime\\engine\\classes\\gameframework\\gamemodebase.h",
             "c:\\program files\\epic games\\ue_5.5\\engine\\source\\runtime\\engine\\classes\\engine\\serverstatreplicator.h",
             "c:\\program files\\epic games\\ue_5.5\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\serverstatreplicator.generated.h",
             "c:\\program files\\epic games\\ue_5.5\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\gamemodebase.generated.h",
-            "c:\\users\\jauma\\documents\\github\\mistbornue5\\misborn_prototype\\mb_project\\mb_project\\intermediate\\build\\win64\\unrealeditor\\inc\\mb_project\\uht\\mb_projectgamemode.generated.h"
+            "c:\\users\\jauma\\documents\\github\\mb_project\\mb_project\\intermediate\\build\\win64\\unrealeditor\\inc\\mb_project\\uht\\mb_projectgamemode.generated.h"
         ],
         "ImportedModules": [],
         "ImportedHeaderUnits": []
