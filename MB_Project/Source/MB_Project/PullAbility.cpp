@@ -65,7 +65,7 @@ void UPullAbility::PreUpdate(float DeltaTime)
 	
 	if (bCanPull)
 	{
-		OwnerCharacter->GetCharacterMovement()->bOrientRotationToMovement = false;
+		//OwnerCharacter->GetCharacterMovement()->bOrientRotationToMovement = false;
 		if (FVector::Dist(MetalPos,CharPos) <= MinDistance)
 		{
 			OwnerCharacter->GetCharacterMovement()->Velocity = FVector::ZeroVector;
@@ -155,14 +155,14 @@ void UPullAbility::Update(float DeltaTime)
 		
 		//OwnerCharacter->LaunchCharacter(PullForce, true, true);
 
-		if (!VFinalVelocity.IsNearlyZero())
+		/*if (!VFinalVelocity.IsNearlyZero())
 		{
 			FRotator TargetRotation = VFinalVelocity.Rotation();
 			//smoothed rotation:
 			FRotator CurrentRotation = OwnerCharacter->GetActorRotation();
 			FRotator NewRotation = FMath::RInterpTo(CurrentRotation, TargetRotation, DeltaTime, 8.0f);
 			OwnerCharacter->SetActorRotation(NewRotation);
-		}
+		}*/
 	}
 	
 }
@@ -183,7 +183,7 @@ void UPullAbility::PostUpdate(float DeltaTime)
 void UPullAbility::Stop()
 {
 	Super::Stop();
-	OwnerCharacter->GetCharacterMovement()->bOrientRotationToMovement = true;
+	//OwnerCharacter->GetCharacterMovement()->bOrientRotationToMovement = true;
 	bCanPull = false;
 	DeActivate();
 }
