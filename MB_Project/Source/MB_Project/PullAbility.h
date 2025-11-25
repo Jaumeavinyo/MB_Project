@@ -39,6 +39,8 @@ public:
 	AActor* PullTarget;
 
 	//AIR DRIFTING AND MOVEMENT
+
+	
 	
 	//Straight line character-metal (Normalized) and if input from player, blended with input vector 
 	UPROPERTY(BlueprintReadOnly, Category = "Pull")
