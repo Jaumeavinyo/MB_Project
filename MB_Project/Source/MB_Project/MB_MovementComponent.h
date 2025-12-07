@@ -34,7 +34,7 @@ public:
 	
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Rotation")
-	bool bInstantRotation = false;
+	bool bInstantRotation = true;
 
 	//interpolation speed (degrees per second)
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Rotation", meta = (EditCondition = "!bInstantRotation"))
